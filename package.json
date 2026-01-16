@@ -1,0 +1,71 @@
+{
+  "name": "avana",
+  "version": "1.0.0",
+  "description": "A robust, production-ready CLI tool for detecting secrets and credentials in your codebase",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "avana": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "scan": "node dist/cli.js scan",
+    "scan:verbose": "node dist/cli.js scan --verbose",
+    "prepare": "husky || true",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "security",
+    "secrets",
+    "scanner",
+    "cli",
+    "credentials",
+    "api-keys",
+    "git-hooks",
+    "devops",
+    "security-tools",
+    "secret-detection",
+    "credential-scanning",
+    "pre-commit",
+    "security-scanner"
+  ],
+  "author": "Innocent",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/innookeke/avana.git"
+  },
+  "bugs": {
+    "url": "https://github.com/innookeke/avana/issues"
+  },
+  "homepage": "https://github.com/innookeke/avana#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "husky": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0",
+    "@vitest/coverage-v8": "^2.0.0",
+    "fast-check": "^3.15.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ]
+}
