@@ -3,10 +3,9 @@
  * Distributes file scanning across multiple worker threads for improved performance
  */
 
-import { Worker, isMainThread, parentPort, workerData } from 'worker_threads';
+import { Worker } from 'worker_threads';
 import * as os from 'os';
 import * as path from 'path';
-import { fileURLToPath } from 'url';
 
 export interface ScanResult {
   file: string;
@@ -102,8 +101,16 @@ export class ParallelScanner {
     ignorePatterns: string[]
   ): Promise<void> {
     return new Promise((resolve, reject) => {
-      // Get the current file path for the worker script
-      const workerScript = path.join(__dirname, 'parallel-scanner-worker.js');
+      // Get the worker script path - handle both src and dist directories
+      let workerScript: string;
+      
+      // Check if we're running from dist (compiled) or src (tests)
+      if (__dirname.includes('dist')) {
+        workerScript = path.join(__dirname, 'parallel-scanner-worker.js');
+      } else {
+        // Running from src directory (during tests), use the compiled version
+        workerScript = path.join(__dirname, '../../dist/utils/parallel-scanner-worker.js');
+      }
       
       const worker = new Worker(workerScript, {
         workerData: {
@@ -212,56 +219,6 @@ export class ParallelScanner {
   public static getOptimalWorkerCount(): number {
     return Math.max(1, os.cpus().length - 1);
   }
-}
-
-// Worker thread code
-if (!isMainThread && parentPort) {
-  (async () => {
-    try {
-      const { files, patterns, ignorePatterns } = workerData;
-      
-      // Import the scanner in the worker thread
-      const { SecretScanner } = await import('../scanners/secret-scanner');
-      
-      const scanner = new SecretScanner();
-      
-      // Process each file
-      for (const file of files) {
-        try {
-          // Pass patterns to scanFile method (synchronous)
-          const issues = scanner.scanFile(file, patterns);
-          
-          parentPort!.postMessage({
-            type: 'result',
-            data: {
-              file,
-              issues
-            }
-          } as WorkerMessage);
-        } catch (error) {
-          parentPort!.postMessage({
-            type: 'result',
-            data: {
-              file,
-              issues: [],
-              error: error instanceof Error ? error.message : String(error)
-            }
-          } as WorkerMessage);
-        }
-      }
-      
-      // Signal completion
-      parentPort!.postMessage({
-        type: 'complete'
-      } as WorkerMessage);
-      
-    } catch (error) {
-      parentPort!.postMessage({
-        type: 'error',
-        error: error instanceof Error ? error.message : String(error)
-      } as WorkerMessage);
-    }
-  })();
 }
 
 // Global parallel scanner instance

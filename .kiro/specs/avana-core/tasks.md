@@ -230,7 +230,7 @@ This implementation plan breaks down the Avana Core design into discrete, action
     - Test cache invalidation
     - _Requirements: 2.3_
 
-- [-] 16. Implement Parallel Scanner
+- [x] 16. Implement Parallel Scanner
   - [x] 16.1 Create ParallelScanner class using worker threads
     - Implement `scanFiles()` with worker pool
     - Distribute files evenly across workers
@@ -239,40 +239,40 @@ This implementation plan breaks down the Avana Core design into discrete, action
     - Default to CPU count - 1 workers
     - _Requirements: 2.2_
 
-  - [ ] 16.2 Write property test for parallel equivalence
+  - [x] 16.2 Write property test for parallel equivalence
     - **Property 13: Parallel Scan Equivalence**
     - **Validates: Requirements 2.2**
 
-  - [ ] 16.3 Write unit tests for ParallelScanner
+  - [x] 16.3 Write unit tests for ParallelScanner
     - Test worker pool creation
     - Test file distribution
     - Test result aggregation
     - Test worker error handling
     - _Requirements: 2.2_
 
-- [ ] 17. Checkpoint - Ensure all tests pass
+- [x] 17. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 18. Implement Symbolic Link Handling
-  - [ ] 18.1 Add symbolic link detection to SecretScanner
+- [x] 18. Implement Symbolic Link Handling
+  - [x] 18.1 Add symbolic link detection to SecretScanner
     - Detect symbolic links using fs.lstat()
     - Follow links only if target is within scan directory
     - Detect and skip circular symbolic links
     - Log symbolic link handling in verbose mode
     - _Requirements: 1.5, 1.6_
 
-  - [ ] 18.2 Write property test for symbolic link safety
+  - [x] 18.2 Write property test for symbolic link safety
     - **Property 15: Symbolic Link Safety**
     - **Validates: Requirements 1.5, 1.6**
 
-  - [ ] 18.3 Write unit tests for symbolic link handling
+  - [x] 18.3 Write unit tests for symbolic link handling
     - Test link following within directory
     - Test link rejection outside directory
     - Test circular link detection
     - _Requirements: 1.5, 1.6_
 
-- [ ] 19. Implement Exit Code System
-  - [ ] 19.1 Update CLI to use proper exit codes
+- [x] 19. Implement Exit Code System
+  - [x] 19.1 Update CLI to use proper exit codes
     - Exit 0 for no critical/high issues
     - Exit 1 for critical/high issues (or with --fail-on-high)
     - Exit 2 for invalid arguments
@@ -280,11 +280,11 @@ This implementation plan breaks down the Avana Core design into discrete, action
     - Document exit codes in README
     - _Requirements: 12.1, 12.2, 12.3, 12.4, 12.5_
 
-  - [ ] 19.2 Write property test for exit code correctness
+  - [x] 19.2 Write property test for exit code correctness
     - **Property 12: Exit Code Correctness**
     - **Validates: Requirements 12.1, 12.2, 12.3, 12.4, 12.5**
 
-  - [ ] 19.3 Write unit tests for exit codes
+  - [x] 19.3 Write unit tests for exit codes
     - Test exit code 0 (success)
     - Test exit code 1 (issues found)
     - Test exit code 2 (invalid usage)

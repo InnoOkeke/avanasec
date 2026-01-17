@@ -6,6 +6,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { execSync } from 'child_process';
+import { ExitCode, handleUnexpectedError, handleInvalidArguments } from '../utils/exit-codes';
 
 export async function installCommand(): Promise<void> {
   console.log('🔒 Installing Avana Git hooks...\n');
@@ -15,7 +16,7 @@ export async function installCommand(): Promise<void> {
     if (!fs.existsSync('.git')) {
       console.error('❌ Error: Not a Git repository');
       console.log('   Run this command from the root of your Git repository\n');
-      process.exit(1);
+      process.exit(ExitCode.INVALID_ARGUMENTS);
     }
 
     // Check if Husky is installed
@@ -63,8 +64,10 @@ npx avana scan --staged
     console.log('💡 Tips:');
     console.log('   • To bypass the hook: git commit --no-verify');
     console.log('   • To uninstall: avana uninstall\n');
+    
+    process.exit(ExitCode.SUCCESS);
   } catch (error: any) {
     console.error('❌ Error installing Git hooks:', error.message);
-    process.exit(1);
+    handleUnexpectedError(error instanceof Error ? error : new Error(String(error)));
   }
 }

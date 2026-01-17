@@ -107,7 +107,8 @@ export class SecretScanner {
         });
       });
     } catch (error) {
-      console.error(`Error scanning file ${filePath}:`, error);
+      // Re-throw the error so the worker can handle it
+      throw error;
     }
 
     return issues;
@@ -132,6 +133,7 @@ export class SecretScanner {
    */
   public scanDirectory(dirPath: string, options?: ScanOptions): SecurityIssue[] {
     const issues: SecurityIssue[] = [];
+    const visitedPaths = new Set<string>(); // Track visited paths to prevent circular links
     
     // Initialize ignore patterns
     this.ignoreManager = new IgnorePatternManager(options?.verbose);
@@ -143,7 +145,35 @@ export class SecretScanner {
     }
 
     const scanDir = (currentPath: string) => {
-      const entries = fs.readdirSync(currentPath, { withFileTypes: true });
+      // Get real path to detect circular links
+      let realPath: string;
+      try {
+        realPath = fs.realpathSync(currentPath);
+      } catch (error) {
+        if (options?.verbose) {
+          console.log(`⚠️  Cannot resolve path: ${currentPath}`);
+        }
+        return;
+      }
+
+      // Check for circular symbolic links
+      if (visitedPaths.has(realPath)) {
+        if (options?.verbose) {
+          console.log(`🔄 Circular symbolic link detected, skipping: ${currentPath}`);
+        }
+        return;
+      }
+      visitedPaths.add(realPath);
+
+      let entries: fs.Dirent[];
+      try {
+        entries = fs.readdirSync(currentPath, { withFileTypes: true });
+      } catch (error) {
+        if (options?.verbose) {
+          console.log(`⚠️  Cannot read directory: ${currentPath}`);
+        }
+        return;
+      }
 
       entries.forEach(entry => {
         const fullPath = path.join(currentPath, entry.name);
@@ -154,17 +184,88 @@ export class SecretScanner {
           return;
         }
 
-        if (entry.isDirectory()) {
-          scanDir(fullPath);
-        } else if (entry.isFile()) {
-          const fileIssues = this.scanFile(fullPath);
-          issues.push(...fileIssues);
+        try {
+          // Use lstat to detect symbolic links
+          const stats = fs.lstatSync(fullPath);
+
+          if (stats.isSymbolicLink()) {
+            // Handle symbolic link
+            this.handleSymbolicLink(fullPath, dirPath, options, issues, scanDir);
+          } else if (stats.isDirectory()) {
+            scanDir(fullPath);
+          } else if (stats.isFile()) {
+            const fileIssues = this.scanFile(fullPath);
+            issues.push(...fileIssues);
+          }
+        } catch (error) {
+          if (options?.verbose) {
+            console.log(`⚠️  Cannot access: ${fullPath} - ${error instanceof Error ? error.message : String(error)}`);
+          }
         }
       });
+
+      // Remove from visited paths when done with this directory
+      visitedPaths.delete(realPath);
     };
 
     scanDir(dirPath);
     return issues;
+  }
+
+  /**
+   * Handle symbolic link safely
+   */
+  private handleSymbolicLink(
+    linkPath: string,
+    scanRootPath: string,
+    options?: ScanOptions,
+    issues?: SecurityIssue[],
+    scanDir?: (path: string) => void
+  ): void {
+    try {
+      // Get the target of the symbolic link
+      const linkTarget = fs.readlinkSync(linkPath);
+      const resolvedTarget = path.resolve(path.dirname(linkPath), linkTarget);
+
+      if (options?.verbose) {
+        console.log(`🔗 Symbolic link found: ${linkPath} -> ${resolvedTarget}`);
+      }
+
+      // Check if the target is within the scan directory
+      const scanRootReal = fs.realpathSync(scanRootPath);
+      const targetReal = fs.realpathSync(resolvedTarget);
+
+      if (!targetReal.startsWith(scanRootReal)) {
+        if (options?.verbose) {
+          console.log(`🚫 Symbolic link target outside scan directory, skipping: ${linkPath}`);
+        }
+        return;
+      }
+
+      // Check if target exists and get its stats
+      const targetStats = fs.statSync(resolvedTarget);
+
+      if (targetStats.isDirectory()) {
+        if (options?.verbose) {
+          console.log(`📁 Following symbolic link to directory: ${linkPath}`);
+        }
+        if (scanDir) {
+          scanDir(resolvedTarget);
+        }
+      } else if (targetStats.isFile()) {
+        if (options?.verbose) {
+          console.log(`📄 Following symbolic link to file: ${linkPath}`);
+        }
+        if (issues) {
+          const fileIssues = this.scanFile(resolvedTarget);
+          issues.push(...fileIssues);
+        }
+      }
+    } catch (error) {
+      if (options?.verbose) {
+        console.log(`⚠️  Cannot follow symbolic link: ${linkPath} - ${error instanceof Error ? error.message : String(error)}`);
+      }
+    }
   }
 
   /**

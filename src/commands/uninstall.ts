@@ -5,6 +5,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import { ExitCode, handleUnexpectedError } from '../utils/exit-codes';
 
 export async function uninstallCommand(): Promise<void> {
   console.log('🔓 Uninstalling Avana Git hooks...\n');
@@ -14,6 +15,7 @@ export async function uninstallCommand(): Promise<void> {
     const huskyDir = path.join(process.cwd(), '.husky');
     if (!fs.existsSync(huskyDir)) {
       console.log('ℹ️  No Git hooks found to uninstall\n');
+      process.exit(ExitCode.SUCCESS);
       return;
     }
 
@@ -35,8 +37,10 @@ export async function uninstallCommand(): Promise<void> {
 
     console.log('✅ Avana Git hooks uninstalled successfully!\n');
     console.log('💡 To reinstall: avana install\n');
+    
+    process.exit(ExitCode.SUCCESS);
   } catch (error: any) {
     console.error('❌ Error uninstalling Git hooks:', error.message);
-    process.exit(1);
+    handleUnexpectedError(error instanceof Error ? error : new Error(String(error)));
   }
 }

@@ -7,6 +7,7 @@ import { Avana } from '../index';
 import type { ScanOptions } from '../types';
 import { JSONOutputFormatter } from '../utils/json-output-formatter';
 import { MarkdownOutputFormatter } from '../utils/markdown-output-formatter';
+import { determineExitCode, exitWithCode, ExitCode } from '../utils/exit-codes';
 import { execSync } from 'child_process';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -94,10 +95,16 @@ async function saveResults(
 export async function scanCommand(options: { 
   path?: string; 
   verbose?: boolean; 
+  debug?: boolean;
+  quiet?: boolean;
   staged?: boolean;
   outputJson?: boolean;
   outputMd?: boolean;
   ignorePatterns?: string[];
+  noProgress?: boolean;
+  failOnHigh?: boolean;
+  maxMemory?: number;
+  workers?: number;
 }) {
   const projectPath = options.path || process.cwd();
   const rootPath = process.cwd(); // Always save reports to root directory
@@ -155,6 +162,10 @@ export async function scanCommand(options: {
     
     // Display results for staged files
     displayStagedResults(result, scoreResult.score, savedPaths, options);
+    
+    // Determine and use proper exit code
+    const exitCode = determineExitCode(result, { failOnHigh: options.failOnHigh });
+    process.exit(exitCode);
     return;
   }
   
@@ -217,6 +228,9 @@ export async function scanCommand(options: {
       console.log(`   📝 Markdown: ${savedPaths.mdPath}`);
     }
     console.log('');
+    
+    // Exit with success code
+    process.exit(ExitCode.SUCCESS);
     return;
   }
 
@@ -269,10 +283,9 @@ export async function scanCommand(options: {
   }
   console.log('');
 
-  // Exit with error code if critical, high, or medium severity issues found
-  if (result.summary.critical > 0 || result.summary.high > 0 || result.summary.medium > 0) {
-    process.exit(1);
-  }
+  // Determine and use proper exit code
+  const exitCode = determineExitCode(result, { failOnHigh: options.failOnHigh });
+  process.exit(exitCode);
 }
 
 /**
@@ -282,7 +295,7 @@ function displayStagedResults(
   result: any, 
   score: number, 
   savedPaths: { jsonPath?: string; mdPath?: string },
-  options: { outputJson?: boolean; outputMd?: boolean }
+  options: { outputJson?: boolean; outputMd?: boolean; failOnHigh?: boolean }
 ): void {
   if (result.issues.length === 0) {
     console.log('✅ No security issues found in staged files\n');
@@ -327,7 +340,8 @@ function displayStagedResults(
     console.log('   • Check the detailed security report for more information');
     console.log('   • To bypass (not recommended): git commit --no-verify\n');
     
-    process.exit(1);
+    // Don't exit here - let the caller handle the exit code
+    return;
   } else {
     // Only low issues - allow commit with warning
     console.log('⚠️  Found security issues in staged files:\n');
