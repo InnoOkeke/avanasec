@@ -303,7 +303,7 @@ This implementation plan breaks down the Avana Core design into discrete, action
     - Integrate ErrorHandler
     - _Requirements: All_
 
-  - [ ] 20.2 Write integration tests
+  - [-] 20.2 Write integration tests
     - Test full scan workflow
     - Test large file handling
     - Test binary file exclusion
