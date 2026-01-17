@@ -148,11 +148,6 @@ export class Avana {
           info: allIssues.filter(i => i.severity === 'info').length,
         },
       };
-    } finally {
-      // Clean up progress reporter
-      if (progressReporter) {
-        progressReporter.complete();
-      }
     }
   }
 
@@ -464,7 +459,7 @@ export class Avana {
   /**
    * Cleanup resources
    */
-  public async cleanup(): void {
+  public async cleanup(): Promise<void> {
     // Save cache before cleanup
     this.resultCache.save();
     
