@@ -323,7 +323,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 - **Issues**: [GitHub Issues](https://github.com/yourusername/avana/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/yourusername/avana/discussions)
-- **Email**: support@avana.dev
+- **Email**: inno.okeke@github.com
 
 ---
 

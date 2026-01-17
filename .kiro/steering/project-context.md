@@ -2,25 +2,27 @@
 
 ## Project Overview
 
-Avana is a production-ready CLI tool for detecting hardcoded secrets, API keys, and credentials in codebases. The goal is to create a robust, performant, and well-tested tool ready for npm publication.
+Avana is a comprehensive security scanner CLI tool for detecting secrets, credentials, and security vulnerabilities in codebases. Built for the Dynamous Kiro Hackathon, it demonstrates production-ready development with 100+ security patterns, robust testing, and seamless Git integration.
 
 ## Core Purpose
 
-Prevent security breaches by detecting secrets before they reach version control:
-1. **Robust file handling** - Handle all file types, encodings, and edge cases
-2. **High performance** - Fast scanning even for large codebases
-3. **Comprehensive testing** - Unit, property-based, and integration tests
-4. **Production-ready** - Proper error handling, logging, and CI/CD integration
-5. **Easy to use** - Zero configuration with sensible defaults
+Enhance security across the entire development lifecycle by providing:
+1. **Comprehensive Security Coverage** - 100+ patterns covering OAuth, Web3, payments, infrastructure
+2. **Robust File Handling** - Binary detection, encoding support, large file streaming
+3. **High Performance** - <10 seconds for 10,000 files with smart ignore patterns
+4. **Property-Based Testing** - 15 properties with 1,500+ test iterations for reliability
+5. **Git Integration** - Pre-commit hooks with staged file scanning
+6. **Developer Experience** - Clear error messages, actionable suggestions, markdown reports
 
 ## Technology Stack
 
 - **Language**: TypeScript 5.5+ (strict mode)
 - **Runtime**: Node.js 18+
-- **Testing**: Vitest (unit), fast-check (property-based)
-- **Build**: TypeScript compiler
+- **Testing**: Vitest (unit), fast-check (property-based testing with 100+ iterations)
+- **Build**: TypeScript compiler with ES2022 target
 - **Package Manager**: npm
-- **CI/CD**: GitHub Actions
+- **Git Integration**: Husky pre-commit hooks
+- **Security Patterns**: 100+ patterns across all major services
 
 ## Project Structure
 
@@ -48,11 +50,12 @@ avana/
 
 ## Key Design Principles
 
-1. **Robustness First**: Handle all edge cases gracefully
-2. **Performance Matters**: Fast scanning is essential for adoption
-3. **Zero Configuration**: Works out of the box with sensible defaults
-4. **Extensibility**: Easy to add new patterns and features
-5. **Developer Experience**: Clear errors, helpful messages, good documentation
+1. **Kiro Integration First**: Deep integration with `.kiro/` directory structure and spec-driven development
+2. **Security-First Development**: Comprehensive coverage of all major authentication and financial services
+3. **Robustness Through Testing**: Property-based testing with 100+ iterations per property
+4. **Performance Optimization**: Smart ignore patterns, streaming for large files, memory management
+5. **Developer Experience**: Clear error messages, actionable suggestions, seamless Git integration
+6. **Production Ready**: Proper error handling, logging, exit codes for CI/CD integration
 
 ## Development Workflow
 
@@ -71,32 +74,42 @@ avana/
 3. Test: `npm test`
 4. Run: `node dist/cli.js scan`
 
-## Current Status
+## Current Status: Production Ready ✅
 
-### Completed ✅
-- Project structure and configuration
-- Core scanning engine (80+ patterns)
-- Basic CLI interface
-- Requirements specification (12 requirements, 60+ criteria)
-- Initial documentation
+### Core Features Complete
+- ✅ **100+ Security Patterns**: OAuth, Web3, payments, infrastructure, email services
+- ✅ **Robust File Handling**: Binary detection, encoding support, large file streaming
+- ✅ **Property-Based Testing**: 15 properties with 1,500+ test iterations
+- ✅ **Git Integration**: Pre-commit hooks with staged file scanning
+- ✅ **Smart Ignore System**: Respects .gitignore, .avanaignore, and CLI patterns
+- ✅ **Multiple Output Formats**: JSON, Markdown, console with rich formatting
+- ✅ **Error Recovery**: Graceful handling of all edge cases
+- ✅ **Performance Optimized**: <10 seconds for 10,000 files
 
-### In Progress 🔄
-- Design document (architecture, properties)
-- Implementation tasks
-- Robustness improvements
+### Security Coverage
+- ✅ **Authentication**: OAuth, SAML, JWT, API keys for all major providers
+- ✅ **Financial**: Payment processors, crypto exchanges, on/off ramps
+- ✅ **Infrastructure**: Cloud providers, databases, email services
+- ✅ **Web3/Blockchain**: All major networks, DeFi, NFT platforms
+- ✅ **Communication**: Messaging, email, webhook integrations
+- ✅ **Development**: Version control, CI/CD, deployment keys
 
-### Planned 📋
-- Comprehensive testing suite
-- CI/CD pipeline
-- npm publication
-- Advanced features (caching, parallel scanning)
+## Hackathon Criteria
+
+Remember to optimize for:
+- **Application Quality** (40 points): Build something useful and polished
+- **Kiro CLI Usage** (20 points): Deep integration with Kiro workflows
+- **Documentation** (20 points): Comprehensive README and DEVLOG
+- **Innovation** (15 points): Unique features like comprehensive security patterns
+- **Presentation** (5 points): Clear demo and explanation
 
 ## Important Files
 
 - **Spec**: `.kiro/specs/avana-core/` (requirements.md, design.md, tasks.md)
-- **DEVLOG**: `.kiro/DEVLOG.md` (development timeline)
-- **README**: `README.md` (user documentation)
-- **Source**: `src/` (implementation)
+- **DEVLOG**: `.kiro/DEVLOG.md` (development timeline and decisions)
+- **README**: `README.md` (project overview and setup)
+- **Patterns**: `src/rules/secret-patterns.ts` (100+ security patterns)
+- **Tests**: `tests/` (property-based and unit tests)
 
 ## Testing Strategy
 

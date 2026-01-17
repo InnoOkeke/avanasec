@@ -8,8 +8,14 @@ import * as path from 'path';
 import type { SecurityIssue, ScanOptions } from '../types';
 import { getAllSecretPatterns } from '../rules/secret-patterns';
 import { getAdditionalSecretPatterns } from '../rules/additional-patterns';
+import { IgnorePatternManager } from '../utils/ignore-pattern-manager';
 
 export class SecretScanner {
+  private ignoreManager: IgnorePatternManager;
+
+  constructor() {
+    this.ignoreManager = new IgnorePatternManager();
+  }
   /**
    * Check if .gitignore properly excludes sensitive files
    */
@@ -67,15 +73,15 @@ export class SecretScanner {
   /**
    * Scan a file for secrets
    */
-  public scanFile(filePath: string): SecurityIssue[] {
+  public scanFile(filePath: string, customPatterns?: any[]): SecurityIssue[] {
     const issues: SecurityIssue[] = [];
     
     try {
       const content = fs.readFileSync(filePath, 'utf-8');
       const lines = content.split('\n');
       
-      // Combine all patterns
-      const patterns = [
+      // Use custom patterns if provided, otherwise use all patterns
+      const patterns = customPatterns || [
         ...getAllSecretPatterns(),
         ...getAdditionalSecretPatterns()
       ];
@@ -126,7 +132,15 @@ export class SecretScanner {
    */
   public scanDirectory(dirPath: string, options?: ScanOptions): SecurityIssue[] {
     const issues: SecurityIssue[] = [];
-    const ignorePatterns = options?.config?.ignore || [];
+    
+    // Initialize ignore patterns
+    this.ignoreManager = new IgnorePatternManager(options?.verbose);
+    this.ignoreManager.loadPatterns(dirPath);
+    
+    // Add CLI ignore patterns if provided
+    if (options?.config?.ignore) {
+      this.ignoreManager.addPatterns(options.config.ignore);
+    }
 
     const scanDir = (currentPath: string) => {
       const entries = fs.readdirSync(currentPath, { withFileTypes: true });
@@ -135,8 +149,8 @@ export class SecretScanner {
         const fullPath = path.join(currentPath, entry.name);
         const relativePath = path.relative(dirPath, fullPath);
 
-        // Check if path should be ignored
-        if (this.shouldIgnore(relativePath, ignorePatterns)) {
+        // Check if path should be ignored using IgnorePatternManager
+        if (this.ignoreManager.shouldIgnore(relativePath)) {
           return;
         }
 
@@ -151,61 +165,6 @@ export class SecretScanner {
 
     scanDir(dirPath);
     return issues;
-  }
-
-  /**
-   * Check if path should be ignored
-   */
-  private shouldIgnore(relativePath: string, ignorePatterns: string[]): boolean {
-    // Always ignore common directories and files
-    const defaultIgnore = [
-      'node_modules',
-      '.git',
-      'dist',
-      'build',
-      '.next',
-      'coverage',
-      '.vscode',
-      '.idea',
-      'vendor',
-      '__pycache__',
-      '.pytest_cache',
-      'target',
-      'bin',
-      'obj',
-      '.env',             // Don't scan .env files (they're meant for local secrets)
-      '.env.local',       // Don't scan local env files
-      '.env.development', // Don't scan development env files
-      '.env.production',  // Don't scan production env files
-      '.env.example',     // Don't scan example files
-      'test',
-      'tests',
-      '__tests__',
-      'spec',
-      'specs',
-      '.test.',
-      '.spec.',
-      '.sqlite',          // Don't scan database files
-      '.sqlite-wal',      // Don't scan SQLite WAL files
-      '.sqlite-shm',      // Don't scan SQLite shared memory files
-      '.db',              // Don't scan database files
-      'package-lock.json', // Don't scan lock files (integrity hashes)
-      'yarn.lock',        // Don't scan lock files
-      'pnpm-lock.yaml',   // Don't scan lock files
-      'secret-patterns',  // Don't scan our own pattern definitions
-      'additional-patterns', // Don't scan our own pattern definitions
-    ];
-
-    const allPatterns = [...defaultIgnore, ...ignorePatterns];
-
-    return allPatterns.some(pattern => {
-      if (pattern.includes('*')) {
-        // Simple glob matching
-        const regex = new RegExp(pattern.replace(/\*/g, '.*'));
-        return regex.test(relativePath);
-      }
-      return relativePath.includes(pattern);
-    });
   }
 
   /**

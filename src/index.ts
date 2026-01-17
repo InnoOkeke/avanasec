@@ -9,7 +9,7 @@ export * from './rules/secret-patterns';
 export * from './rules/additional-patterns';
 
 import { SecretScanner } from './scanners/secret-scanner';
-import type { ScanResult, ScanOptions, SecurityIssue } from './types';
+import type { ScanResult, ScanOptions, SecurityIssue, ScoreBreakdown } from './types';
 import { getAllSecretPatterns } from './rules/secret-patterns';
 import { getAdditionalSecretPatterns } from './rules/additional-patterns';
 
@@ -65,7 +65,7 @@ export class Avana {
 
     const duration = Date.now() - startTime;
 
-    return {
+    const result: ScanResult = {
       success: true,
       timestamp: new Date().toISOString(),
       duration,
@@ -73,25 +73,58 @@ export class Avana {
       issues: allIssues,
       summary,
     };
+
+    // Calculate security score and add to result
+    const { score, breakdown } = this.calculateSecurityScore(result);
+    result.securityScore = score;
+    result.scoreBreakdown = breakdown;
+
+    return result;
   }
 
   /**
-   * Calculate security score (0-100)
+   * Calculate security score (0-100) with detailed breakdown
+   * 
+   * Algorithm:
+   * - Start with base score of 100
+   * - Deduct points based on severity:
+   *   - Critical: -20 points each
+   *   - High: -10 points each  
+   *   - Medium: -5 points each
+   *   - Low: -2 points each
+   * - Minimum score is 0
+   * 
+   * This calculation is deterministic - same inputs always produce same output
    */
-  public calculateSecurityScore(result: ScanResult): number {
+  public calculateSecurityScore(result: ScanResult): { score: number; breakdown: ScoreBreakdown } {
     const { critical, high, medium, low } = result.summary;
     
-    // Start with perfect score
-    let score = 100;
-
-    // Deduct points based on severity
-    score -= critical * 20;  // Critical: -20 points each
-    score -= high * 10;      // High: -10 points each
-    score -= medium * 5;     // Medium: -5 points each
-    score -= low * 2;        // Low: -2 points each
-
-    // Ensure score doesn't go below 0
-    return Math.max(0, score);
+    // Base score (perfect security)
+    const baseScore = 100;
+    
+    // Calculate deductions
+    const criticalDeduction = critical * 20;
+    const highDeduction = high * 10;
+    const mediumDeduction = medium * 5;
+    const lowDeduction = low * 2;
+    
+    // Calculate final score
+    const totalDeduction = criticalDeduction + highDeduction + mediumDeduction + lowDeduction;
+    const finalScore = Math.max(0, baseScore - totalDeduction);
+    
+    const breakdown: ScoreBreakdown = {
+      baseScore,
+      criticalDeduction,
+      highDeduction,
+      mediumDeduction,
+      lowDeduction,
+      finalScore
+    };
+    
+    return {
+      score: finalScore,
+      breakdown
+    };
   }
 
   /**

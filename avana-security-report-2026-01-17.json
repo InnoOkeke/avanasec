@@ -1,0 +1,1 @@
+{"success":false,"timestamp":"2026-01-17T01:14:22.703Z","duration":0,"filesScanned":0,"securityScore":0,"issues":[],"summary":{"total":0,"critical":0,"high":0,"medium":0,"low":0,"byType":{},"byFile":{}},"error":{"message":"Failed to format JSON output","details":"Cannot read properties of undefined (reading 'localeCompare')"}}

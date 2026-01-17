@@ -12,6 +12,16 @@ export type IssueType =
   | 'gitignore'
   | 'configuration';
 
+export type FileEncoding = 'utf-8' | 'utf-16' | 'latin-1' | 'ascii' | 'unknown';
+
+export interface FileInfo {
+  path: string;
+  isBinary: boolean;
+  encoding: FileEncoding;
+  size: number;
+  shouldStream: boolean;
+}
+
 export interface SecurityIssue {
   id: string;
   type: IssueType;
@@ -27,6 +37,15 @@ export interface SecurityIssue {
   references?: string[];
 }
 
+export interface ScoreBreakdown {
+  baseScore: number;
+  criticalDeduction: number;
+  highDeduction: number;
+  mediumDeduction: number;
+  lowDeduction: number;
+  finalScore: number;
+}
+
 export interface ScanResult {
   success: boolean;
   timestamp: string;
@@ -40,6 +59,8 @@ export interface ScanResult {
     low: number;
     info: number;
   };
+  securityScore?: number;
+  scoreBreakdown?: ScoreBreakdown;
 }
 
 export interface SecretPattern {
