@@ -92,12 +92,12 @@ function validateBinaryConfiguration() {
     return false;
   }
 
-  if (!packageJson.bin.avana) {
-    logError('No "avana" binary defined in package.json');
+  if (!packageJson.bin.avanasec) {
+    logError('No "avanasec" binary defined in package.json');
     return false;
   }
 
-  const binaryPath = packageJson.bin.avana;
+  const binaryPath = packageJson.bin.avanasec;
   const fullBinaryPath = path.join(process.cwd(), binaryPath);
   
   if (!fs.existsSync(fullBinaryPath)) {
@@ -194,7 +194,7 @@ function validateBinaryExecution() {
       timeout: 10000 
     });
     
-    if (helpOutput.includes('Avana CLI') && helpOutput.includes('Usage:')) {
+    if (helpOutput.includes('Avanasec CLI') && helpOutput.includes('Usage:')) {
       logSuccess('Binary executes and shows help correctly');
     } else {
       logError('Binary help output is incorrect');
@@ -232,7 +232,7 @@ function validateModuleLoading() {
   logInfo('Validating module loading...');
   
   const testModules = [
-    { path: path.join(process.cwd(), 'dist/index.js'), name: 'Main Avana module' },
+    { path: path.join(process.cwd(), 'dist/index.js'), name: 'Main Avanasec module' },
     { path: path.join(process.cwd(), 'dist/utils/file-type-detector.js'), name: 'FileTypeDetector' },
     { path: path.join(process.cwd(), 'dist/scanners/secret-scanner.js'), name: 'SecretScanner' },
     { path: path.join(process.cwd(), 'dist/utils/progress-reporter.js'), name: 'ProgressReporter' },

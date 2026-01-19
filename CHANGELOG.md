@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to Avana will be documented in this file.
+All notable changes to Avanasec will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Initial release of Avana
+- Initial release of Avanasec
 - 80+ secret detection patterns
 - CLI interface with scan command
 - Security score calculation
@@ -28,5 +28,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Error handling and validation
 - Documentation and examples
 
-[Unreleased]: https://github.com/yourusername/avana/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/yourusername/avana/releases/tag/v1.0.0
+[Unreleased]: https://github.com/innookeke/avanasec/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/innookeke/avanasec/releases/tag/v1.0.0

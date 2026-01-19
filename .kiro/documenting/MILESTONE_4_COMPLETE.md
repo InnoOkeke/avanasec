@@ -113,7 +113,7 @@ Task 4: Implement Error Handling Framework
 
 - ✅ `src/utils/file-stream-scanner.ts` (new)
 - ✅ `tests/unit/file-stream-scanner.test.ts` (new)
-- ✅ `.kiro/specs/avana-core/tasks.md` (updated)
+- ✅ `.kiro/specs/avanasec-core/tasks.md` (updated)
 - ✅ `.kiro/DEVLOG.md` (updated)
 
 ## Lessons Learned
@@ -126,3 +126,4 @@ Task 4: Implement Error Handling Framework
 ---
 
 **Ready for Task 4**: Error Handling Framework
+

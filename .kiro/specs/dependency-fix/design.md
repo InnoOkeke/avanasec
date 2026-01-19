@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Avana CLI tool is experiencing a runtime error where the `chardet` module cannot be found despite being listed in package.json dependencies. This issue appears to be related to module resolution in the distributed package, potentially caused by incorrect import statements, missing dependency declarations, or build configuration issues.
+The Avanasec CLI tool is experiencing a runtime error where the `chardet` module cannot be found despite being listed in package.json dependencies. This issue appears to be related to module resolution in the distributed package, potentially caused by incorrect import statements, missing dependency declarations, or build configuration issues.
 
 This design document outlines the architecture and implementation strategy for fixing the dependency resolution issue and ensuring robust package distribution.
 
@@ -12,8 +12,8 @@ This design document outlines the architecture and implementation strategy for f
 
 The user is experiencing multiple critical issues with the published package:
 
-1. **Command Not Found**: The `avana` command is not recognized after installation, indicating the binary is not properly configured
-2. **Missing Dependencies**: Dependencies are not being installed alongside avana-cli, suggesting package.json configuration issues
+1. **Command Not Found**: The `avanasec` command is not recognized after installation, indicating the binary is not properly configured
+2. **Missing Dependencies**: Dependencies are not being installed alongside avanasec, suggesting package.json configuration issues
 3. **Module Resolution**: The `Cannot find module 'chardet'` error occurs because dependencies aren't installed
 4. **Package Distribution**: The published package appears to have fundamental configuration problems
 
@@ -27,7 +27,7 @@ The user is experiencing multiple critical issues with the published package:
 
 ```
 Issue 1: Command not found
-- Binary: "avana": "./dist/cli.js" in package.json
+- Binary: "avanasec": "./dist/cli.js" in package.json
 - Problem: Binary may not be executable or properly configured
 
 Issue 2: Dependencies not installing
@@ -54,7 +54,7 @@ Issue 4: Package distribution
 ```json
 {
   "bin": {
-    "avana": "./dist/cli.js"
+    "avanasec": "./dist/cli.js"
   }
 }
 ```
@@ -77,11 +77,11 @@ Issue 4: Package distribution
 **Fixed Configuration**:
 ```json
 {
-  "name": "avana-cli",
+  "name": "avanasec",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "avana": "./dist/cli.js"
+    "avanasec": "./dist/cli.js"
   },
   "files": [
     "dist/**/*",
@@ -288,12 +288,12 @@ interface ModuleResolutionInfo {
 *A property is a characteristic or behavior that should hold true across all valid executions of a system—essentially, a formal statement about what the system should do. Properties serve as the bridge between human-readable specifications and machine-verifiable correctness guarantees.*
 
 ### Property 1: Binary Accessibility
-*For any* global installation of avana-cli, the `avana` command should be recognized and executable from any directory.
+*For any* global installation of avanasec, the `avanasec` command should be recognized and executable from any directory.
 
 **Validates: Requirements 3.3**
 
 ### Property 2: Dependency Installation
-*For any* npm installation of avana-cli, all dependencies listed in package.json should be installed and available in node_modules.
+*For any* npm installation of avanasec, all dependencies listed in package.json should be installed and available in node_modules.
 
 **Validates: Requirements 1.1, 3.2**
 
@@ -353,10 +353,10 @@ This usually means:
 
 To fix this issue:
 1. Run: npm install chardet
-2. Or reinstall Avana: npm uninstall -g avana-cli && npm install -g avana-cli
-3. If the issue persists, please report it at: https://github.com/innookeke/avana-cli/issues
+2. Or reinstall avanasec: npm uninstall -g avanasec && npm install -g avanasec
+3. If the issue persists, please report it at: https://github.com/innookeke/avanasec/issues
 
-For more help, visit: https://github.com/innookeke/avana-cli#troubleshooting
+For more help, visit: https://github.com/innookeke/avanasec#troubleshooting
     `);
     process.exit(3);
   }
@@ -503,6 +503,7 @@ The fix should not require any new dependencies. The issue is with how existing 
 
 ## Conclusion
 
-The dependency fix addresses a critical runtime error that prevents Avana CLI from functioning. The solution involves fixing the import statement to use CommonJS syntax, enhancing error handling, and improving the build validation process.
+The dependency fix addresses a critical runtime error that prevents Avanasec CLI from functioning. The solution involves fixing the import statement to use CommonJS syntax, enhancing error handling, and improving the build validation process.
 
 The fix is minimal and focused, changing only the import statement while adding robust validation to prevent similar issues in the future. The implementation will be thoroughly tested to ensure reliability across different environments.
+

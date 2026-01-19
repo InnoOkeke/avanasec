@@ -1,8 +1,8 @@
-# Project Context: Avana
+# Project Context: Avanasec
 
 ## Project Overview
 
-Avana is a comprehensive security scanner CLI tool for detecting secrets, credentials, and security vulnerabilities in codebases. Built with production-ready development practices, it demonstrates 100+ security patterns, robust testing, and seamless Git integration.
+Avanasec is a comprehensive security scanner CLI tool for detecting secrets, credentials, and security vulnerabilities in codebases. Built with production-ready development practices, it demonstrates 100+ security patterns, robust testing, and seamless Git integration.
 
 ## Core Purpose
 
@@ -27,10 +27,10 @@ Enhance security across the entire development lifecycle by providing:
 ## Project Structure
 
 ```
-avana/
+avanasec/
 ├── .kiro/                    # Kiro CLI configuration
 │   ├── specs/                # Feature specifications
-│   │   └── avana-core/       # Core robustness spec
+│   │   └── avanasec-core/    # Core robustness spec
 │   ├── steering/             # Development guidelines
 │   └── DEVLOG.md             # Development log
 ├── src/                      # Source code
@@ -63,7 +63,7 @@ avana/
 
 1. Load context: `@prime`
 2. Plan features: `@plan-feature "feature name"`
-3. Execute tasks: `@execute task X from avana-core spec`
+3. Execute tasks: `@execute task X from avanasec-core spec`
 4. Review code: `@code-review`
 5. Update DEVLOG: Document progress and decisions
 
@@ -81,7 +81,7 @@ avana/
 - ✅ **Robust File Handling**: Binary detection, encoding support, large file streaming
 - ✅ **Property-Based Testing**: 15 properties with 1,500+ test iterations
 - ✅ **Git Integration**: Pre-commit hooks with staged file scanning
-- ✅ **Smart Ignore System**: Respects .gitignore, .avanaignore, and CLI patterns
+- ✅ **Smart Ignore System**: Respects .gitignore, .avanasecignore, and CLI patterns
 - ✅ **Multiple Output Formats**: JSON, Markdown, console with rich formatting
 - ✅ **Error Recovery**: Graceful handling of all edge cases
 - ✅ **Performance Optimized**: <10 seconds for 10,000 files
@@ -105,7 +105,7 @@ Focus on delivering:
 
 ## Important Files
 
-- **Spec**: `.kiro/specs/avana-core/` (requirements.md, design.md, tasks.md)
+- **Spec**: `.kiro/specs/avanasec-core/` (requirements.md, design.md, tasks.md)
 - **DEVLOG**: `DEVLOG.md` (development timeline and decisions)
 - **README**: `README.md` (project overview and setup)
 - **SETUP**: `SETUP.md` (quick setup guide for developers)
@@ -164,6 +164,8 @@ See `coding-standards.md` for detailed guidelines on:
 
 ## Contact
 
-- **Repository**: https://github.com/yourusername/avana
-- **Issues**: https://github.com/yourusername/avana/issues
-- **npm**: https://www.npmjs.com/package/avana
+- **Repository**: https://github.com/yourusername/avanasec
+- **Issues**: https://github.com/yourusername/avanasec/issues
+- **npm**: https://www.npmjs.com/package/avanasec
+
+

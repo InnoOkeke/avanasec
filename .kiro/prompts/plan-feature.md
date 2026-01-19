@@ -1,8 +1,8 @@
-# Plan Feature: Avana Enhancement
+# Plan Feature: avanasec Enhancement
 
 ## Feature Planning Instructions
 
-Plan new features for Avana following spec-driven development methodology and professional best practices.
+Plan new features for avanasec following spec-driven development methodology and professional best practices.
 
 ## Planning Process
 
@@ -167,7 +167,7 @@ Allow users to define custom security patterns via configuration files for organ
 - As a developer, I want to configure pattern severity so that I can customize blocking behavior
 
 ## Requirements
-1. **REQ-F1**: THE System SHALL load custom patterns from .avana-patterns.json WHEN scanning
+1. **REQ-F1**: THE System SHALL load custom patterns from .avanasec-patterns.json WHEN scanning
 2. **REQ-F2**: THE System SHALL validate custom patterns WHEN loading configuration
 3. **REQ-NF1**: THE System SHALL load custom patterns in <100ms
 
@@ -229,11 +229,12 @@ Implement worker thread-based parallel processing to utilize multiple CPU cores 
 
 ## Ready for Planning
 
-Use this template to plan new features for Avana. Focus on:
+Use this template to plan new features for avanasec. Focus on:
 
 - **User Value**: Clear benefits for developers and security teams
 - **Technical Excellence**: Well-architected, tested, and maintainable
-- **Integration**: Seamless fit with existing Avana capabilities
+- **Integration**: Seamless fit with existing avanasec capabilities
 - **Quality**: Comprehensive testing and validation strategy
 
-The planning process ensures new features enhance Avana's security capabilities while maintaining production-ready quality standards.
+The planning process ensures new features enhance avanasec's security capabilities while maintaining production-ready quality standards.
+

@@ -1,4 +1,4 @@
-# Avana Core Specification - COMPLETE ✅
+# avanasec Core Specification - COMPLETE ✅
 
 **Date**: January 16, 2026  
 **Status**: ✅ Specification Complete - Ready for Implementation
@@ -7,12 +7,12 @@
 
 ## Summary
 
-The complete specification for Avana Core has been created following the Kiro CLI spec-driven development workflow. All three documents (requirements, design, tasks) are now complete and approved.
+The complete specification for avanasec Core has been created following the Kiro CLI spec-driven development workflow. All three documents (requirements, design, tasks) are now complete and approved.
 
 ## Specification Documents
 
 ### 1. Requirements Document ✅
-**File**: `.kiro/specs/avana-core/requirements.md`
+**File**: `.kiro/specs/avanasec-core/requirements.md`
 
 **Contents**:
 - 14 EARS-compliant requirements
@@ -37,7 +37,7 @@ The complete specification for Avana Core has been created following the Kiro CL
 14. ✅ Git Hook Integration (12 criteria) - IMPLEMENTED
 
 ### 2. Design Document ✅
-**File**: `.kiro/specs/avana-core/design.md`
+**File**: `.kiro/specs/avanasec-core/design.md`
 
 **Contents**:
 - High-level architecture (4 layers)
@@ -79,7 +79,7 @@ The complete specification for Avana Core has been created following the Kiro CL
 15. Symbolic Link Safety
 
 ### 3. Tasks Document ✅
-**File**: `.kiro/specs/avana-core/tasks.md`
+**File**: `.kiro/specs/avanasec-core/tasks.md`
 
 **Contents**:
 - 24 main implementation tasks
@@ -122,7 +122,7 @@ The specification is complete and ready for implementation. You can now:
 
 ```bash
 # In Kiro CLI, say:
-"Execute task 1 from avana-core spec"
+"Execute task 1 from avanasec-core spec"
 
 # Or open the tasks.md file and click "Start task" next to any task
 ```
@@ -155,7 +155,7 @@ The specification is complete and ready for implementation. You can now:
 - Memory management (< 500MB)
 
 **Configuration**:
-- `.avanaignore` file support
+- `.avanasecignore` file support
 - CLI ignore patterns
 - Verbose/debug/quiet logging
 - JSON output for CI/CD
@@ -193,7 +193,7 @@ Each property must:
 
 **Example Tag**:
 ```typescript
-describe('Feature: avana-core, Property 1: Binary File Exclusion', () => {
+describe('Feature: avanasec-core, Property 1: Binary File Exclusion', () => {
   // Test implementation
 });
 ```
@@ -296,7 +296,7 @@ This specification follows the Kiro CLI spec-driven development workflow:
 
 ## Conclusion
 
-The Avana Core specification is complete and comprehensive. All requirements are clearly defined, the design is well-architected, and the implementation plan is detailed and actionable.
+The avanasec Core specification is complete and comprehensive. All requirements are clearly defined, the design is well-architected, and the implementation plan is detailed and actionable.
 
 **The specification provides**:
 - Clear requirements with testable acceptance criteria
@@ -314,3 +314,5 @@ The Avana Core specification is complete and comprehensive. All requirements are
 **Milestone**: 5 of 5 (Core Robustness Implementation)
 
 🎉 **Ready to build a robust, production-ready security scanner!**
+
+

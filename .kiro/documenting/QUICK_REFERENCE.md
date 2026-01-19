@@ -1,28 +1,28 @@
-# Avana Quick Reference Card
+# avanasec Quick Reference Card
 
 ## Installation
 
 ```bash
-npm install -g avana
+npm install -g avanasec
 ```
 
 ## Commands
 
 | Command | Description |
 |---------|-------------|
-| `avana scan` | Scan current directory |
-| `avana scan --path <dir>` | Scan specific directory |
-| `avana scan --verbose` | Scan with detailed output |
-| `avana scan --staged` | Scan only Git staged files |
-| `avana install` | Install Git pre-commit hooks |
-| `avana uninstall` | Remove Git pre-commit hooks |
-| `avana --help` | Show help message |
+| `avanasec scan` | Scan current directory |
+| `avanasec scan --path <dir>` | Scan specific directory |
+| `avanasec scan --verbose` | Scan with detailed output |
+| `avanasec scan --staged` | Scan only Git staged files |
+| `avanasec install` | Install Git pre-commit hooks |
+| `avanasec uninstall` | Remove Git pre-commit hooks |
+| `avanasec --help` | Show help message |
 
 ## Git Hook Workflow
 
 ```bash
 # One-time setup
-avana install
+avanasec install
 
 # Daily usage - just commit normally
 git add .
@@ -36,7 +36,7 @@ git commit -m "feat: add feature"
 git commit --no-verify
 
 # To remove hooks
-avana uninstall
+avanasec uninstall
 ```
 
 ## Exit Codes
@@ -84,28 +84,28 @@ avana uninstall
 
 ### Scan Before Commit
 ```bash
-avana scan
+avanasec scan
 ```
 
 ### Scan Specific Directory
 ```bash
-avana scan --path ./src
+avanasec scan --path ./src
 ```
 
 ### Scan with Details
 ```bash
-avana scan --verbose
+avanasec scan --verbose
 ```
 
 ### Install Git Hooks
 ```bash
-avana install
+avanasec install
 ```
 
 ### Test Staged Files
 ```bash
 git add .
-avana scan --staged
+avanasec scan --staged
 ```
 
 ## Troubleshooting
@@ -122,7 +122,7 @@ chmod +x .husky/pre-commit
 ### Hook running but not blocking?
 ```bash
 # Test exit code
-avana scan --staged
+avanasec scan --staged
 echo $?  # Should be 1 if issues found
 ```
 
@@ -136,7 +136,7 @@ git diff --cached --name-only
 
 ```
 .husky/
-  └── pre-commit    # Git hook that runs avana scan --staged
+  └── pre-commit    # Git hook that runs avanasec scan --staged
 ```
 
 ## Bypass Hook
@@ -148,10 +148,12 @@ git commit --no-verify -m "message"
 
 ## Get Help
 
-- GitHub: https://github.com/yourusername/avana
-- Issues: https://github.com/yourusername/avana/issues
+- GitHub: https://github.com/yourusername/avanasec
+- Issues: https://github.com/yourusername/avanasec/issues
 - Docs: See README.md
 
 ---
 
-**Quick Start**: `avana install` → commit with confidence! 🔒
+**Quick Start**: `avanasec install` → commit with confidence! 🔒
+
+

@@ -1,18 +1,18 @@
-# Development Workflow: Avana
+# Development Workflow: Avanasec
 
 ## Kiro CLI Integration
 
-Avana is built using spec-driven development with Kiro CLI. This steering file defines the optimal workflow for development.
+Avanasec is built using spec-driven development with Kiro CLI. This steering file defines the optimal workflow for development.
 
 ## Core Development Cycle
 
 ### Phase 1: Context & Planning
 1. **Load Context**: Use `@prime` to understand current codebase state
 2. **Plan Features**: Use `@plan-feature` for comprehensive feature planning
-3. **Review Specs**: Check `.kiro/specs/avana-core/` for requirements and tasks
+3. **Review Specs**: Check `.kiro/specs/avanasec-core/` for requirements and tasks
 
 ### Phase 2: Implementation
-1. **Execute Tasks**: Use `@execute task X from avana-core spec`
+1. **Execute Tasks**: Use `@execute task X from avanasec-core spec`
 2. **Run Tests**: Always run tests after implementation: `npm test`
 3. **Check Diagnostics**: Use built-in diagnostics to catch issues early
 4. **Update Progress**: Mark completed tasks in `tasks.md`
@@ -32,7 +32,7 @@ Avana is built using spec-driven development with Kiro CLI. This steering file d
 
 ### Property-Based Testing Requirements
 - **Minimum 100 iterations** per property test
-- **Tag format**: `Feature: avana-core, Property N: [property description]`
+- **Tag format**: `Feature: avanasec-core, Property N: [property description]`
 - **Validation format**: `**Validates: Requirements X.Y**`
 - **15 total properties** covering all robustness aspects
 

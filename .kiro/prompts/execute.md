@@ -1,16 +1,16 @@
-# Execute Task: Avana Implementation
+# Execute Task: avanasec Implementation
 
 ## Task Execution Instructions
 
-Execute implementation tasks from the Avana Core specification following spec-driven development principles.
+Execute implementation tasks from the avanasec Core specification following spec-driven development principles.
 
 ## Pre-Execution Checklist
 
 ### 1. Context Verification
 - [ ] Have you loaded context with `@prime`?
 - [ ] Do you understand the current task requirements?
-- [ ] Have you reviewed the relevant requirements in `.kiro/specs/avana-core/requirements.md`?
-- [ ] Have you checked the task status in `.kiro/specs/avana-core/tasks.md`?
+- [ ] Have you reviewed the relevant requirements in `.kiro/specs/avanasec-core/requirements.md`?
+- [ ] Have you checked the task status in `.kiro/specs/avanasec-core/tasks.md`?
 
 ### 2. Task Identification
 Please specify:
@@ -83,7 +83,7 @@ tests/
 
 ### Test Structure
 ```typescript
-describe('Feature: avana-core, Property N: [Property Description]', () => {
+describe('Feature: avanasec-core, Property N: [Property Description]', () => {
   it('should maintain [property] across all valid inputs', () => {
     fc.assert(
       fc.property(
@@ -233,3 +233,4 @@ After completing a task:
 ## Ready to Execute
 
 Please specify which task you'd like to execute, and I'll implement it following these guidelines with comprehensive testing and documentation.
+

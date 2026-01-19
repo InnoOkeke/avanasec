@@ -1,6 +1,6 @@
 /**
- * Avana CLI - Uninstall Command
- * Removes Git hooks installed by Avana
+ * Avanasec CLI - Uninstall Command
+ * Removes Git hooks installed by Avanasec
  */
 
 import * as fs from 'fs';
@@ -8,7 +8,7 @@ import * as path from 'path';
 import { ExitCode, handleUnexpectedError } from '../utils/exit-codes';
 
 export async function uninstallCommand(): Promise<void> {
-  console.log('🔓 Uninstalling Avana Git hooks...\n');
+  console.log('🔓 Uninstalling Avanasec Git hooks...\n');
 
   try {
     // Check if .husky directory exists
@@ -22,21 +22,21 @@ export async function uninstallCommand(): Promise<void> {
     // Remove pre-commit hook
     const preCommitPath = path.join(huskyDir, 'pre-commit');
     if (fs.existsSync(preCommitPath)) {
-      // Check if it's an Avana hook
+      // Check if it's an Avanasec hook
       const content = fs.readFileSync(preCommitPath, 'utf-8');
-      if (content.includes('avana scan')) {
+      if (content.includes('avanasec scan')) {
         fs.unlinkSync(preCommitPath);
         console.log('✅ Removed pre-commit hook\n');
       } else {
-        console.log('ℹ️  Pre-commit hook exists but was not created by Avana');
+        console.log('ℹ️  Pre-commit hook exists but was not created by Avanasec');
         console.log('   Skipping removal to preserve your custom hook\n');
       }
     } else {
       console.log('ℹ️  No pre-commit hook found\n');
     }
 
-    console.log('✅ Avana Git hooks uninstalled successfully!\n');
-    console.log('💡 To reinstall: avana install\n');
+    console.log('✅ Avanasec Git hooks uninstalled successfully!\n');
+    console.log('💡 To reinstall: avanasec install\n');
     
     process.exit(ExitCode.SUCCESS);
   } catch (error: any) {

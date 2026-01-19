@@ -2,11 +2,11 @@
 
 ## Introduction
 
-The Avana CLI tool is experiencing a runtime error where the `chardet` module cannot be found, despite being listed in package.json dependencies. This specification addresses fixing the dependency resolution issue and ensuring proper package distribution.
+The Avanasec CLI tool is experiencing a runtime error where the `chardet` module cannot be found, despite being listed in package.json dependencies. This specification addresses fixing the dependency resolution issue and ensuring proper package distribution.
 
 ## Glossary
 
-- **Avana**: The complete secret scanning CLI tool
+- **avanasec**: The complete secret scanning CLI tool
 - **chardet**: Node.js library for character encoding detection
 - **npm**: Node Package Manager for JavaScript packages
 - **Distribution**: Built and packaged version of the software ready for publication
@@ -19,12 +19,12 @@ The Avana CLI tool is experiencing a runtime error where the `chardet` module ca
 
 ### Requirement 1: Dependency Resolution Fix
 
-**User Story:** As a user installing Avana CLI, I want all dependencies to be properly resolved, so that the tool runs without module not found errors.
+**User Story:** As a user installing Avanasec CLI, I want all dependencies to be properly resolved, so that the tool runs without module not found errors.
 
 #### Acceptance Criteria
 
-1. WHEN Avana CLI is installed via npm, THE Package_Manager SHALL install all required dependencies including chardet
-2. WHEN Avana CLI is executed, THE Runtime SHALL find and load the chardet module successfully
+1. WHEN Avanasec CLI is installed via npm, THE Package_Manager SHALL install all required dependencies including chardet
+2. WHEN Avanasec CLI is executed, THE Runtime SHALL find and load the chardet module successfully
 3. WHEN the file type detector runs, THE chardet module SHALL be available for encoding detection
 4. WHEN dependencies are missing, THE CLI SHALL provide clear error messages with installation instructions
 5. THE package.json SHALL accurately reflect all runtime dependencies
@@ -96,3 +96,5 @@ The Avana CLI tool is experiencing a runtime error where the `chardet` module ca
 ### Performance
 - No impact on application startup time
 - Minimal package size increase
+
+

@@ -1,5 +1,5 @@
 /**
- * Avana CLI - Install Command
+ * Avanasec CLI - Install Command
  * Installs Git hooks for automatic pre-commit scanning
  */
 
@@ -9,7 +9,7 @@ import { execSync } from 'child_process';
 import { ExitCode, handleUnexpectedError, handleInvalidArguments } from '../utils/exit-codes';
 
 export async function installCommand(): Promise<void> {
-  console.log('🔒 Installing Avana Git hooks...\n');
+  console.log('🔒 Installing Avanasec Git hooks...\n');
 
   try {
     // Check if we're in a Git repository
@@ -42,9 +42,9 @@ export async function installCommand(): Promise<void> {
     const preCommitContent = `#!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# Run Avana security scan
-echo "🔒 Running Avana security scan..."
-npx avana scan --staged
+# Run Avanasec security scan
+echo "🔒 Running Avanasec security scan..."
+npx avanasec scan --staged
 
 # Exit code 1 will block the commit
 `;
@@ -56,14 +56,14 @@ npx avana scan --staged
       fs.chmodSync(preCommitPath, 0o755);
     }
 
-    console.log('\n✅ Avana Git hooks installed successfully!\n');
+    console.log('\n✅ Avanasec Git hooks installed successfully!\n');
     console.log('📋 What happens now:');
-    console.log('   • Before each commit, Avana will scan your staged files');
+    console.log('   • Before each commit, Avanasec will scan your staged files');
     console.log('   • Commits with critical/high severity issues will be blocked');
     console.log('   • You\'ll see clear error messages with fix suggestions\n');
     console.log('💡 Tips:');
     console.log('   • To bypass the hook: git commit --no-verify');
-    console.log('   • To uninstall: avana uninstall\n');
+    console.log('   • To uninstall: avanasec uninstall\n');
     
     process.exit(ExitCode.SUCCESS);
   } catch (error: any) {

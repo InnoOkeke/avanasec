@@ -2,22 +2,22 @@
 
 ## Overview
 
-Avana now includes Git pre-commit hook integration to automatically scan code before commits and prevent secrets from being committed to version control.
+avanasec now includes Git pre-commit hook integration to automatically scan code before commits and prevent secrets from being committed to version control.
 
 ## Features Implemented
 
 ### 1. Install Command
-- **Command**: `avana install`
+- **Command**: `avanasec install`
 - **Function**: Sets up Husky and creates pre-commit hook
 - **Checks**: Verifies Git repository exists
 - **Auto-installs**: Husky if not already installed
-- **Creates**: `.husky/pre-commit` hook that runs `avana scan --staged`
+- **Creates**: `.husky/pre-commit` hook that runs `avanasec scan --staged`
 
 ### 2. Uninstall Command
-- **Command**: `avana uninstall`
-- **Function**: Removes Avana pre-commit hook
-- **Safety**: Only removes hooks created by Avana (checks for `avana scan` in hook)
-- **Preserves**: Custom hooks not created by Avana
+- **Command**: `avanasec uninstall`
+- **Function**: Removes avanasec pre-commit hook
+- **Safety**: Only removes hooks created by avanasec (checks for `avanasec scan` in hook)
+- **Preserves**: Custom hooks not created by avanasec
 
 ### 3. Staged Files Scanning
 - **Flag**: `--staged`
@@ -36,31 +36,31 @@ Avana now includes Git pre-commit hook integration to automatically scan code be
 
 ### Files Modified
 
-1. **avana/src/cli.ts**
+1. **avanasec/src/cli.ts**
    - Added `install` and `uninstall` command handlers
    - Added `--staged` flag support
    - Updated help text
 
-2. **avana/src/commands/scan.ts**
+2. **avanasec/src/commands/scan.ts**
    - Added `getStagedFiles()` function
    - Added `displayStagedResults()` function
    - Added staged file filtering logic
    - Updated exit code logic (critical OR high)
 
-3. **avana/src/commands/install.ts** (new)
+3. **avanasec/src/commands/install.ts** (new)
    - Git repository validation
    - Husky installation
    - Pre-commit hook creation
    - Cross-platform file permissions
 
-4. **avana/src/commands/uninstall.ts** (new)
+4. **avanasec/src/commands/uninstall.ts** (new)
    - Hook detection and removal
    - Safety checks for custom hooks
 
-5. **avana/src/types/index.ts**
+5. **avanasec/src/types/index.ts**
    - Added `includeFiles?: string[]` to `ScanOptions`
 
-6. **avana/src/index.ts**
+6. **avanasec/src/index.ts**
    - Updated `scan()` method to support file filtering
    - Skip .gitignore check when scanning specific files
    - Track files scanned count
@@ -88,7 +88,7 @@ Avana now includes Git pre-commit hook integration to automatically scan code be
 ### Setup (One-time)
 ```bash
 cd my-project
-avana install
+avanasec install
 ```
 
 ### Daily Usage
@@ -101,14 +101,14 @@ git add src/config.ts
 
 # Commit (automatically scanned)
 git commit -m "feat: update config"
-# 🔒 Running Avana security scan...
+# 🔒 Running avanasec security scan...
 # ✅ No security issues found in staged files
 ```
 
 ### If Issues Found
 ```bash
 git commit -m "feat: add API key"
-# 🔒 Running Avana security scan...
+# 🔒 Running avanasec security scan...
 # 🚨 COMMIT BLOCKED - Security Issues Found
 # 
 # Found 1 critical and 0 high severity issue(s):
@@ -132,7 +132,7 @@ git commit --no-verify
 
 1. **Install Hook**
    ```bash
-   cd avana
+   cd avanasec
    node dist/cli.js install
    ```
 
@@ -190,10 +190,10 @@ describe('Git Hook Integration', () => {
 ## Documentation Updates
 
 ### Updated Files
-- `avana/README.md` - Added Git hook section
-- `avana/GET_STARTED.md` - Added installation step
-- `avana/.kiro/specs/avana-core/requirements.md` - Added Requirement 14
-- `avana/.kiro/DEVLOG.md` - Added Milestone 4
+- `avanasec/README.md` - Added Git hook section
+- `avanasec/GET_STARTED.md` - Added installation step
+- `avanasec/.kiro/specs/avanasec-core/requirements.md` - Added Requirement 14
+- `avanasec/.kiro/DEVLOG.md` - Added Milestone 4
 
 ### New Documentation
 - This file (`GIT_HOOK_IMPLEMENTATION.md`)
@@ -222,7 +222,7 @@ describe('Git Hook Integration', () => {
 
 ### Bypass Options
 - `git commit --no-verify` - Skips all Git hooks
-- `avana uninstall` - Removes hook permanently
+- `avanasec uninstall` - Removes hook permanently
 - Edit `.husky/pre-commit` - Customize behavior
 
 ## Known Limitations
@@ -250,7 +250,7 @@ All acceptance criteria met:
 
 1. ✅ `install` command creates pre-commit hook
 2. ✅ `uninstall` command removes hook safely
-3. ✅ Hook runs `avana scan --staged` automatically
+3. ✅ Hook runs `avanasec scan --staged` automatically
 4. ✅ Scans only staged files (< 2s)
 5. ✅ Blocks commits with critical/high issues
 6. ✅ Allows commits with medium/low issues (warning)
@@ -263,7 +263,7 @@ All acceptance criteria met:
 
 ## Conclusion
 
-Git hook integration is complete and ready for use. Users can now prevent secrets from being committed by running `avana install` once in their repository.
+Git hook integration is complete and ready for use. Users can now prevent secrets from being committed by running `avanasec install` once in their repository.
 
 **Next Steps**:
 1. Add automated tests for Git hook functionality
@@ -276,3 +276,6 @@ Git hook integration is complete and ready for use. Users can now prevent secret
 **Status**: ✅ Complete  
 **Date**: January 16, 2026  
 **Milestone**: 4 of 5
+
+
+

@@ -4,10 +4,10 @@
 
 Follow these steps to test the Git hook integration:
 
-### 1. Build Avana
+### 1. Build avanasec
 
 ```bash
-cd avana
+cd avanasec
 npm install
 npm run build
 ```
@@ -27,10 +27,10 @@ cat .husky/pre-commit
 
 Expected output:
 ```
-✅ Avana Git hooks installed successfully!
+✅ avanasec Git hooks installed successfully!
 
 📋 What happens now:
-   • Before each commit, Avana will scan your staged files
+   • Before each commit, avanasec will scan your staged files
    • Commits with critical/high severity issues will be blocked
    • You'll see clear error messages with fix suggestions
 ```
@@ -50,7 +50,7 @@ git commit -m "test: add secret"
 
 Expected output:
 ```
-🔒 Running Avana security scan...
+🔒 Running avanasec security scan...
 🔍 Scanning 1 staged file(s)...
 
 🚨 COMMIT BLOCKED - Security Issues Found
@@ -84,7 +84,7 @@ git commit -m "test: use environment variable"
 
 Expected output:
 ```
-🔒 Running Avana security scan...
+🔒 Running avanasec security scan...
 🔍 Scanning 1 staged file(s)...
 
 ✅ No security issues found in staged files
@@ -107,9 +107,9 @@ Expected output:
 ```
 ✅ Removed pre-commit hook
 
-✅ Avana Git hooks uninstalled successfully!
+✅ avanasec Git hooks uninstalled successfully!
 
-💡 To reinstall: avana install
+💡 To reinstall: avanasec install
 ```
 
 ### 6. Test --staged Flag Directly
@@ -144,7 +144,7 @@ Save this as `test-git-hooks.sh`:
 ```bash
 #!/bin/bash
 
-echo "🧪 Testing Avana Git Hook Integration"
+echo "🧪 Testing avanasec Git Hook Integration"
 echo "======================================"
 echo ""
 
@@ -179,7 +179,7 @@ test_command() {
 }
 
 # Build
-echo "📦 Building Avana..."
+echo "📦 Building avanasec..."
 npm run build > /dev/null 2>&1
 
 # Test 1: Install command
@@ -230,8 +230,8 @@ chmod +x test-git-hooks.sh
 
 ## Manual Verification Checklist
 
-- [ ] `avana install` creates `.husky/pre-commit` file
-- [ ] Pre-commit hook contains `avana scan --staged`
+- [ ] `avanasec install` creates `.husky/pre-commit` file
+- [ ] Pre-commit hook contains `avanasec scan --staged`
 - [ ] Committing file with critical issue blocks commit
 - [ ] Committing file with high severity issue blocks commit
 - [ ] Committing clean file allows commit
@@ -239,7 +239,7 @@ chmod +x test-git-hooks.sh
 - [ ] Error messages show file path and line number
 - [ ] Error messages include fix suggestions
 - [ ] `git commit --no-verify` bypasses the hook
-- [ ] `avana uninstall` removes the hook
+- [ ] `avanasec uninstall` removes the hook
 - [ ] Uninstall preserves custom hooks (if any)
 - [ ] `--staged` flag scans only staged files
 - [ ] Scan completes in under 2 seconds for typical commits
@@ -314,3 +314,5 @@ node dist/cli.js uninstall
 
 **Status**: Ready for testing  
 **Date**: January 16, 2026
+
+

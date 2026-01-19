@@ -1,16 +1,16 @@
-# Avana Setup Complete ✅
+# avanasec Setup Complete ✅
 
 ## What's Been Created
 
-A complete, production-ready workspace for Avana - a robust secret scanning CLI tool.
+A complete, production-ready workspace for avanasec - a robust secret scanning CLI tool.
 
 ### Directory Structure
 
 ```
-avana/
+avanasec/
 ├── .kiro/
 │   ├── specs/
-│   │   └── avana-core/
+│   │   └── avanasec-core/
 │   │       └── requirements.md          ✅ Complete EARS requirements
 │   ├── steering/                        (To be added)
 │   ├── prompts/                         (To be added)
@@ -25,7 +25,7 @@ avana/
 │   │   └── secret-scanner.ts            ✅ File scanning logic
 │   ├── commands/
 │   │   └── scan.ts                      ✅ Scan command
-│   ├── index.ts                         ✅ Main engine (renamed to Avana)
+│   ├── index.ts                         ✅ Main engine (renamed to avanasec)
 │   └── cli.ts                           ✅ CLI entry point
 ├── tests/                               (To be added)
 ├── examples/                            (To be added)
@@ -43,9 +43,9 @@ avana/
 
 ### ✅ Code Refactoring
 - Copied all source code from Security Guardian
-- Renamed `@kiro-studio/security-*` to `avana`
+- Renamed `@kiro-studio/security-*` to `avanasec`
 - Updated all imports and references
-- Renamed `SecurityGuardian` class to `Avana`
+- Renamed `SecurityGuardian` class to `avanasec`
 - Updated CLI help text and branding
 
 ### ✅ Documentation
@@ -65,7 +65,7 @@ Created comprehensive requirements covering:
 1. Robust file handling (binary files, large files, encoding)
 2. Performance optimization (parallel scanning, caching)
 3. Error handling (descriptive messages, graceful failures)
-4. Configurable ignore patterns (.avanaignore support)
+4. Configurable ignore patterns (.avanasecignore support)
 5. Detailed logging (verbose, debug, quiet modes)
 6. JSON output for CI/CD integration
 7. Pattern validation and testing
@@ -99,7 +99,7 @@ Based on requirements, implement:
 - Error handling improvements
 - Progress reporting
 - JSON output format
-- .avanaignore support
+- .avanasecignore support
 
 ### 4. Add Comprehensive Testing
 
@@ -127,7 +127,7 @@ Create in `examples/`:
 ### Option 1: Use Kiro CLI to Continue Development
 
 ```bash
-cd avana
+cd avanasec
 
 # Load context
 @prime
@@ -136,13 +136,13 @@ cd avana
 @plan-feature "Implement robust file handling"
 
 # Execute tasks
-@execute task 1 from avana-core spec
+@execute task 1 from avanasec-core spec
 ```
 
 ### Option 2: Manual Development
 
 ```bash
-cd avana
+cd avanasec
 
 # Install dependencies
 npm install
@@ -162,21 +162,21 @@ node dist/cli.js scan --path ../
 When ready to move to a new GitHub repository:
 
 ```bash
-# 1. Create new repository on GitHub (e.g., yourusername/avana)
+# 1. Create new repository on GitHub (e.g., yourusername/avanasec)
 
-# 2. Initialize git in avana directory
-cd avana
+# 2. Initialize git in avanasec directory
+cd avanasec
 git init
 git add .
-git commit -m "feat: initial commit - avana secret scanner"
+git commit -m "feat: initial commit - avanasec secret scanner"
 
 # 3. Add remote and push
-git remote add origin https://github.com/yourusername/avana.git
+git remote add origin https://github.com/yourusername/avanasec.git
 git branch -M main
 git push -u origin main
 
 # 4. Update package.json with correct repository URL
-# Edit package.json: "repository": "https://github.com/yourusername/avana.git"
+# Edit package.json: "repository": "https://github.com/yourusername/avanasec.git"
 
 # 5. Set up GitHub Actions
 # Workflows are ready in .github/workflows/ (once created)
@@ -202,7 +202,7 @@ npm publish
 - ⏳ File encoding detection
 - ⏳ Progress reporting
 - ⏳ JSON output format
-- ⏳ .avanaignore support
+- ⏳ .avanasecignore support
 - ⏳ Parallel scanning
 - ⏳ Result caching
 - ⏳ Comprehensive error handling
@@ -221,3 +221,6 @@ npm publish
 
 **Status**: Ready for design and implementation phase  
 **Next**: Create design.md and tasks.md to continue with Kiro CLI workflow
+
+
+

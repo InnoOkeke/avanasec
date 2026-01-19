@@ -1,7 +1,7 @@
-# Prime Context: Avana Security Scanner
+# Prime Context: avanasec Security Scanner
 
 ## Project Overview
-Load comprehensive context for Avana, a production-ready CLI security scanner built with modern development practices.
+Load comprehensive context for Avanasec, a production-ready CLI security scanner built with modern development practices.
 
 ## Context Loading Instructions
 
@@ -10,12 +10,12 @@ Please read and understand these key files:
 - `README.md` - Project overview and usage
 - `package.json` - Dependencies and scripts
 - `.kiro/DEVLOG.md` - Development timeline and decisions
-- `.kiro/specs/avana-core/requirements.md` - 14 EARS requirements
-- `.kiro/specs/avana-core/design.md` - Architecture and properties
-- `.kiro/specs/avana-core/tasks.md` - Implementation progress
+- `.kiro/specs/avanasec-core/requirements.md` - 14 EARS requirements
+- `.kiro/specs/avanasec-core/design.md` - Architecture and properties
+- `.kiro/specs/avanasec-core/tasks.md` - Implementation progress
 
 ### 2. Implementation Files
-- `src/index.ts` - Main Avana engine
+- `src/index.ts` - Main avanasec engine
 - `src/cli.ts` - CLI interface
 - `src/rules/secret-patterns.ts` - 100+ security patterns
 - `src/types/index.ts` - TypeScript definitions
@@ -106,19 +106,19 @@ Please read and understand these key files:
 ### Basic Scanning
 ```bash
 # Scan current directory
-avana scan
+avanasec scan
 
 # Scan with markdown output
-avana scan --output-md
+avanasec scan --output-md
 
 # Scan staged files only
-avana scan --staged
+avanasec scan --staged
 ```
 
 ### Git Integration
 ```bash
 # Install pre-commit hooks
-avana install
+avanasec install
 
 # Test hooks
 git add . && git commit -m "test"
@@ -126,7 +126,7 @@ git add . && git commit -m "test"
 
 ## Ready for Development
 
-You now have comprehensive context about Avana. The project is production-ready with:
+You now have comprehensive context about Avanasec. The project is production-ready with:
 - 100+ security patterns implemented
 - Robust testing infrastructure (1,500+ test iterations)
 - Git integration with pre-commit hooks
@@ -134,3 +134,4 @@ You now have comprehensive context about Avana. The project is production-ready 
 - Clear documentation and development workflow
 
 Use this context to assist with any development tasks, code reviews, or feature enhancements.
+

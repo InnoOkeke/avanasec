@@ -1,8 +1,8 @@
-# Security Patterns: Avana
+# Security Patterns: Avanasec
 
 ## Pattern Development Guidelines
 
-This steering file provides context for developing and maintaining Avana's comprehensive security pattern database.
+This steering file provides context for developing and maintaining Avanasec's comprehensive security pattern database.
 
 ## Pattern Categories
 

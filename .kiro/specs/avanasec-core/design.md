@@ -1,8 +1,8 @@
-# Design Document: Avana Core
+# Design Document: avanasec Core
 
 ## Overview
 
-Avana is a production-ready CLI tool for detecting hardcoded secrets, API keys, credentials, and insecure code patterns in codebases. This design document outlines the architecture, components, and implementation strategy for making Avana robust, performant, and ready for npm publication.
+avanasec is a production-ready CLI tool for detecting hardcoded secrets, API keys, credentials, and insecure code patterns in codebases. This design document outlines the architecture, components, and implementation strategy for making avanasec robust, performant, and ready for npm publication.
 
 The design focuses on implementing Requirements 1-12 (robustness features) while maintaining the existing functionality from Requirements 13-14 (insecure code patterns and Git hooks).
 
@@ -125,13 +125,13 @@ interface IgnorePatternManager {
 
 interface IgnoreConfig {
   defaultPatterns: string[];
-  avanaIgnorePatterns: string[];
+  avanasecIgnorePatterns: string[];
   cliPatterns: string[];
 }
 ```
 
 **Implementation Strategy**:
-- Load `.avanaignore` file if exists
+- Load `.avanasecignore` file if exists
 - Merge with default patterns
 - Support glob patterns (*, **, ?)
 - Cache compiled regex for performance
@@ -188,7 +188,7 @@ interface CachedResult {
 
 **Implementation Strategy**:
 - Use file modification time + size as quick hash
-- Store cache in `.avana-cache` directory
+- Store cache in `.avanasec-cache` directory
 - Expire cache entries after 24 hours
 - Clear cache on pattern updates
 - Track cache hit rate for metrics
@@ -253,7 +253,7 @@ interface JSONScanResult {
 **Implementation Strategy**:
 - Use `JSON.stringify()` with proper formatting
 - Include all issue details
-- Add metadata (Avana version, scan options, etc.)
+- Add metadata (avanasec version, scan options, etc.)
 - Include debug info when `--verbose` is used
 - Validate JSON output in tests
 
@@ -382,7 +382,7 @@ interface ScanResult {
 }
 
 interface ScanMetadata {
-  avanaVersion: string;
+  avanasecVersion: string;
   scanOptions: ScanOptions;
   systemInfo: SystemInfo;
   cacheHitRate?: number;
@@ -431,7 +431,7 @@ interface ScanError {
 **Validates: Requirements 8.2, 8.3**
 
 ### Property 7: Ignore Pattern Effectiveness
-*For any* file matching an ignore pattern (from `.avanaignore` or CLI), the file should not be scanned and should not appear in filesScanned count.
+*For any* file matching an ignore pattern (from `.avanasecignore` or CLI), the file should not be scanned and should not appear in filesScanned count.
 
 **Validates: Requirements 4.4**
 
@@ -487,7 +487,7 @@ interface ScanError {
 
 2. **Configuration Errors** (Exit immediately)
    - Invalid command-line arguments
-   - Invalid `.avanaignore` syntax
+   - Invalid `.avanasecignore` syntax
    - Invalid pattern configuration
 
 3. **System Errors** (Exit immediately)
@@ -532,7 +532,7 @@ try {
 
 ### Dual Testing Approach
 
-Avana will use both unit tests and property-based tests for comprehensive coverage:
+avanasec will use both unit tests and property-based tests for comprehensive coverage:
 
 - **Unit tests**: Verify specific examples, edge cases, and error conditions
 - **Property tests**: Verify universal properties across all inputs
@@ -585,12 +585,12 @@ tests/
 
 **Configuration**:
 - Minimum 100 iterations per property test
-- Each test tagged with: `Feature: avana-core, Property N: [property text]`
+- Each test tagged with: `Feature: avanasec-core, Property N: [property text]`
 - Use smart generators that constrain to valid input space
 
 **Example Property Test**:
 ```typescript
-describe('Feature: avana-core, Property 5: Scan Determinism', () => {
+describe('Feature: avanasec-core, Property 5: Scan Determinism', () => {
   it('should produce identical results for repeated scans', async () => {
     await fc.assert(
       fc.asyncProperty(
@@ -600,8 +600,8 @@ describe('Feature: avana-core, Property 5: Scan Determinism', () => {
           const tempDir = await createTempFiles(fileContents);
           
           // Scan twice
-          const result1 = await avana.scan({ path: tempDir });
-          const result2 = await avana.scan({ path: tempDir });
+          const result1 = await avanasec.scan({ path: tempDir });
+          const result2 = await avanasec.scan({ path: tempDir });
           
           // Results should be identical
           expect(result1.issues).toEqual(result2.issues);
@@ -719,7 +719,7 @@ tests/
 ### npm Publication
 
 1. **Version**: Start at 1.0.0 (major release)
-2. **Package Name**: `avana`
+2. **Package Name**: `avanasec`
 3. **Registry**: npm public registry
 4. **License**: MIT
 
@@ -753,6 +753,9 @@ jobs:
 
 ## Conclusion
 
-This design provides a comprehensive architecture for making Avana robust, performant, and production-ready. The modular design allows for incremental implementation and testing, while the correctness properties ensure that all requirements are validated through property-based testing.
+This design provides a comprehensive architecture for making avanasec robust, performant, and production-ready. The modular design allows for incremental implementation and testing, while the correctness properties ensure that all requirements are validated through property-based testing.
 
 The implementation will follow the spec-driven development workflow, with each component implemented, tested, and validated before moving to the next. The result will be a high-quality, well-tested CLI tool that developers can trust to protect their codebases from security vulnerabilities.
+
+
+

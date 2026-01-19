@@ -345,8 +345,8 @@ export async function scanCommand(options: {
     
     // Security reminder about scan reports
     if (savedPaths.mdPath) {
-      console.log('🔒 Security Reminder: Scan reports contain detected secrets and are automatically');
-      console.log('   added to .gitignore to prevent accidental commits. Never commit scan-reports/\n');
+      console.log('🔒 Security Reminder: Scan reports and cache contain detected secrets and are automatically');
+      console.log('   added to .gitignore to prevent accidental commits. Never commit scan-reports/ or .avana-cache/\n');
     }
 
     // Show file output message with paths

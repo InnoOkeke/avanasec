@@ -1,6 +1,6 @@
-# Avana Implementation Summary
+# avanasec Implementation Summary
 
-**Project**: Avana - Robust Secret Scanner CLI  
+**Project**: avanasec - Robust Secret Scanner CLI  
 **Date**: January 16, 2026  
 **Status**: Git Hook Integration Complete ✅
 
@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-Avana is a production-ready CLI tool for detecting hardcoded secrets, API keys, and insecure code patterns in codebases. The project has successfully completed **Milestone 4: Git Hook Integration**, adding automatic pre-commit scanning to prevent secrets from being committed to version control.
+avanasec is a production-ready CLI tool for detecting hardcoded secrets, API keys, and insecure code patterns in codebases. The project has successfully completed **Milestone 4: Git Hook Integration**, adding automatic pre-commit scanning to prevent secrets from being committed to version control.
 
 ### Key Achievements
 
@@ -25,7 +25,7 @@ Avana is a production-ready CLI tool for detecting hardcoded secrets, API keys, 
 ## Project Structure
 
 ```
-avana/
+avanasec/
 ├── src/
 │   ├── types/
 │   │   └── index.ts                    # TypeScript type definitions
@@ -39,11 +39,11 @@ avana/
 │   │   ├── scan.ts                     # Scan command (with --staged)
 │   │   ├── install.ts                  # Git hook installation
 │   │   └── uninstall.ts                # Git hook removal
-│   ├── index.ts                        # Main Avana engine
+│   ├── index.ts                        # Main avanasec engine
 │   └── cli.ts                          # CLI entry point
 ├── tests/                              # Test files (to be added)
 ├── .kiro/
-│   ├── specs/avana-core/
+│   ├── specs/avanasec-core/
 │   │   └── requirements.md             # 14 EARS requirements
 │   ├── steering/
 │   │   └── project-context.md          # Project context
@@ -126,7 +126,7 @@ avana/
 
 **Install Command**
 ```bash
-avana install
+avanasec install
 ```
 - Sets up Husky automatically
 - Creates `.husky/pre-commit` hook
@@ -135,15 +135,15 @@ avana install
 
 **Uninstall Command**
 ```bash
-avana uninstall
+avanasec uninstall
 ```
-- Safely removes Avana hooks
+- Safely removes avanasec hooks
 - Preserves custom hooks
 - Clear confirmation messages
 
 **Staged File Scanning**
 ```bash
-avana scan --staged
+avanasec scan --staged
 ```
 - Scans only Git staged files
 - Completes in < 2 seconds
@@ -160,10 +160,10 @@ avana scan --staged
 ### 4. CLI Features
 
 **Commands**
-- `avana scan` - Scan project for security issues
-- `avana install` - Install Git pre-commit hooks
-- `avana uninstall` - Remove Git pre-commit hooks
-- `avana --help` - Show help message
+- `avanasec scan` - Scan project for security issues
+- `avanasec install` - Install Git pre-commit hooks
+- `avanasec uninstall` - Remove Git pre-commit hooks
+- `avanasec --help` - Show help message
 
 **Scan Options**
 - `--path <path>` - Specify directory to scan
@@ -224,7 +224,7 @@ These requirements focus on robustness and will be implemented in Milestone 5:
 - Stack trace logging
 
 ⏳ **Requirement 4: Configurable Ignore Patterns**
-- `.avanaignore` file support
+- `.avanasecignore` file support
 - Command-line ignore patterns
 - Verbose logging of ignored files
 
@@ -276,7 +276,7 @@ These requirements focus on robustness and will be implemented in Milestone 5:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                      Avana CLI                          │
+│                      Avanasec CLI                          │
 ├─────────────────────────────────────────────────────────┤
 │  Commands:                                              │
 │  • scan (with --staged flag)                            │
@@ -286,7 +286,7 @@ These requirements focus on robustness and will be implemented in Milestone 5:
                   │
                   ▼
 ┌─────────────────────────────────────────────────────────┐
-│                   Avana Engine                          │
+│                   avanasec Engine                          │
 ├─────────────────────────────────────────────────────────┤
 │  • scan(options): ScanResult                            │
 │  • calculateSecurityScore(result): number               │
@@ -322,10 +322,10 @@ Developer runs: git commit -m "message"
 Git triggers: .husky/pre-commit
     │
     ▼
-Hook executes: npx avana scan --staged
+Hook executes: npx avanasec scan --staged
     │
     ▼
-Avana:
+avanasec:
   1. getStagedFiles() → git diff --cached
   2. scanFiles(stagedFiles)
   3. Check for critical/high issues
@@ -338,7 +338,7 @@ Git: Blocks or allows commit based on exit code
 
 ### Key Design Decisions
 
-1. **Single Package**: Chose `avana` over scoped packages for simplicity
+1. **Single Package**: Chose `avanasec` over scoped packages for simplicity
 2. **Husky Integration**: Industry-standard Git hook manager
 3. **Staged Files Only**: Fast scans by scanning only changed files
 4. **Block on High**: Block commits with critical OR high severity (not just critical)
@@ -363,7 +363,7 @@ Git: Blocks or allows commit based on exit code
 - ✅ `.kiro/DEVLOG.md` - Development timeline and decisions
 
 ### Specification Documents
-- ✅ `.kiro/specs/avana-core/requirements.md` - 14 EARS requirements with 70+ acceptance criteria
+- ✅ `.kiro/specs/avanasec-core/requirements.md` - 14 EARS requirements with 70+ acceptance criteria
 - ✅ `.kiro/steering/project-context.md` - Project context and guidelines
 
 ---
@@ -382,7 +382,7 @@ Git: Blocks or allows commit based on exit code
 
 Quick test:
 ```bash
-cd avana
+cd avanasec
 npm run build
 node dist/cli.js install
 echo "const key = 'sk-proj-abc123...';" > test.js
@@ -535,7 +535,7 @@ git commit -m "test"  # Should be blocked
 
 ## Conclusion
 
-Avana has successfully completed **Milestone 4: Git Hook Integration**, adding a critical feature that prevents secrets from being committed to version control. The implementation is complete, tested, and documented.
+avanasec has successfully completed **Milestone 4: Git Hook Integration**, adding a critical feature that prevents secrets from being committed to version control. The implementation is complete, tested, and documented.
 
 ### Key Achievements
 
@@ -553,8 +553,8 @@ The next milestone (Milestone 5) will focus on implementing Requirements 1-12, a
 ### How to Get Started
 
 ```bash
-# 1. Navigate to Avana directory
-cd avana
+# 1. Navigate to avanasec directory
+cd avanasec
 
 # 2. Install dependencies
 npm install
@@ -568,7 +568,7 @@ node dist/cli.js install
 # 5. Start committing with confidence!
 git add .
 git commit -m "feat: add new feature"
-# 🔒 Running Avana security scan...
+# 🔒 Running avanasec security scan...
 # ✅ No security issues found in staged files
 ```
 
@@ -579,3 +579,6 @@ git commit -m "feat: add new feature"
 **Next Milestone**: Core Refactoring (Requirements 1-12)
 
 🎉 **Congratulations on completing Git Hook Integration!**
+
+
+

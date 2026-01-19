@@ -1,13 +1,13 @@
-# Getting Started with Avana Development
+# Getting Started with avanasec Development
 
 ## Quick Start
 
-You now have a complete, production-ready Avana workspace! Here's how to get started:
+You now have a complete, production-ready avanasec workspace! Here's how to get started:
 
-### 1. Navigate to the Avana Directory
+### 1. Navigate to the avanasec Directory
 
 ```bash
-cd avana
+cd avana  # Note: folder name is still 'avana', but package is 'avanasec'
 ```
 
 ### 2. Install Dependencies
@@ -55,7 +55,7 @@ node dist/cli.js install
 # Now every commit will be automatically scanned!
 git add .
 git commit -m "feat: add new feature"
-# 🔒 Running Avana security scan...
+# 🔒 Running avanasec security scan...
 # ✅ No security issues found in staged files
 ```
 
@@ -71,7 +71,7 @@ node dist/cli.js uninstall
 - **Robust File Handling**: Binary detection, encoding support, large file streaming (>10MB)
 - **High Performance**: Scans 10,000+ files in under 10 seconds with parallel processing
 - **Memory Management**: Automatic garbage collection with configurable limits (default: 500MB)
-- **Smart Ignore System**: Respects .gitignore, .avanaignore, and custom CLI patterns
+- **Smart Ignore System**: Respects .gitignore, .avanasecignore, and custom CLI patterns
 - **Multiple Output Formats**: Console, JSON, and Markdown reports
 - **Property-Based Testing**: 15 properties with 1,500+ test iterations for reliability
 - **Git Integration**: Pre-commit hooks with staged file scanning
@@ -99,76 +99,76 @@ node dist/cli.js uninstall
 
 ```bash
 # For large codebases - increase memory and workers
-avana scan --max-memory 2000 --workers 8
+avanasec scan --max-memory 2000 --workers 8
 
 # Skip large directories with ignore patterns
-avana scan --ignore "node_modules/**" --ignore "dist/**" --ignore "coverage/**"
+avanasec scan --ignore "node_modules/**" --ignore "dist/**" --ignore "coverage/**"
 
-# Use .avanaignore for persistent patterns
-echo "large-data/**" >> .avanaignore
-echo "**/*.backup" >> .avanaignore
-avana scan
+# Use .avanasecignore for persistent patterns
+echo "large-data/**" >> .avanasecignore
+echo "**/*.backup" >> .avanasecignore
+avanasec scan
 ```
 
 ### Output Formats
 
 ```bash
 # JSON output for CI/CD integration
-avana scan --json
-# Creates: scan-reports/avana-security-report-YYYY-MM-DD.json
+avanasec scan --json
+# Creates: scan-reports/avanasec-security-report-YYYY-MM-DD.json
 
 # Markdown report for documentation
-avana scan --output-md
-# Creates: scan-reports/avana-security-report-YYYY-MM-DD.md
+avanasec scan --output-md
+# Creates: scan-reports/avanasec-security-report-YYYY-MM-DD.md
 
 # Both formats
-avana scan --json --output-md
+avanasec scan --json --output-md
 
 # Pretty JSON with metadata and debug info
-avana scan --json --verbose --debug
+avanasec scan --json --verbose --debug
 ```
 
 ### Debugging and Troubleshooting
 
 ```bash
 # Debug mode - see detailed processing info
-avana scan --debug
+avanasec scan --debug
 
 # Quiet mode - minimal output
-avana scan --quiet
+avanasec scan --quiet
 
 # Verbose mode - detailed scan information
-avana scan --verbose
+avanasec scan --verbose
 
 # Disable progress bar (useful for CI/CD)
-avana scan --no-progress
+avanasec scan --no-progress
 
 # Fail on high severity issues (stricter mode)
-avana scan --fail-on-high
+avanasec scan --fail-on-high
 ```
 
 ### Git Integration
 
 ```bash
 # Scan only staged files (fast for pre-commit)
-avana scan --staged
+avanasec scan --staged
 
 # Install hooks with custom configuration
-avana install
+avanasec install
 # This creates .git/hooks/pre-commit with --staged --fail-on-high
 
 # Test the hook manually
 git add .
-avana scan --staged --fail-on-high
+avanasec scan --staged --fail-on-high
 ```
 
 ### Performance Tips
 
-1. **Use .avanaignore** for persistent ignore patterns
+1. **Use .avanasecignore** for persistent ignore patterns
 2. **Increase memory limit** for very large codebases: `--max-memory 2000`
 3. **Adjust worker count** based on CPU: `--workers 8`
 4. **Use --staged** for fast pre-commit scanning
-5. **Enable caching** by keeping .avana-cache directory
+5. **Enable caching** by keeping .avanasec-cache directory
 
 ## Development Workflow
 
@@ -238,7 +238,7 @@ git commit -m "feat: add new feature"
 ## Key Files to Know
 
 ### Source Code
-- `src/index.ts` - Main Avana engine class with all integrations
+- `src/index.ts` - Main avanasec engine class with all integrations
 - `src/cli.ts` - CLI entry point with all new flags
 - `src/commands/scan.ts` - Scan command with advanced options
 - `src/scanners/secret-scanner.ts` - Core scanning logic with robustness features
@@ -249,7 +249,7 @@ git commit -m "feat: add new feature"
 ### Utility Classes (New!)
 - `src/utils/file-type-detector.ts` - Binary detection and encoding support
 - `src/utils/file-stream-scanner.ts` - Large file streaming (>10MB)
-- `src/utils/ignore-pattern-manager.ts` - .avanaignore and CLI patterns
+- `src/utils/ignore-pattern-manager.ts` - .avanasecignore and CLI patterns
 - `src/utils/json-output-formatter.ts` - Production-ready JSON output
 - `src/utils/markdown-output-formatter.ts` - Markdown report generation
 - `src/utils/progress-reporter.ts` - Real-time progress with ETA
@@ -262,9 +262,9 @@ git commit -m "feat: add new feature"
 ### Documentation
 - `README.md` - Complete user documentation with all features
 - `.kiro/DEVLOG.md` - Development log with milestones
-- `.kiro/specs/avana-core/requirements.md` - 14 requirements with 60+ criteria
-- `.kiro/specs/avana-core/design.md` - Architecture with 15 correctness properties
-- `.kiro/specs/avana-core/tasks.md` - 24 implementation tasks (all complete!)
+- `.kiro/specs/avanasec-core/requirements.md` - 14 requirements with 60+ criteria
+- `.kiro/specs/avanasec-core/design.md` - Architecture with 15 correctness properties
+- `.kiro/specs/avanasec-core/tasks.md` - 24 implementation tasks (all complete!)
 - `.kiro/steering/project-context.md` - Project context and guidelines
 
 ### Configuration
@@ -272,13 +272,13 @@ git commit -m "feat: add new feature"
 - `tsconfig.json` - TypeScript strict configuration
 - `vitest.config.ts` - Test configuration for property-based testing
 - `.gitignore` - Git ignore patterns
-- `.avanaignore` - Custom ignore patterns (user-created)
+- `.avanasecignore` - Custom ignore patterns (user-created)
 
 ## Testing
 
 ### Comprehensive Test Suite
 
-Avana includes extensive testing with property-based testing:
+avanasec includes extensive testing with property-based testing:
 
 ```bash
 # Run all tests (unit + property-based + integration)
@@ -336,7 +336,7 @@ tests/
 
 ### Property-Based Testing (15 Properties)
 
-Avana uses fast-check for property-based testing with 100+ iterations per property:
+avanasec uses fast-check for property-based testing with 100+ iterations per property:
 
 1. **Binary File Exclusion** - Ensures binary files are never scanned
 2. **Large File Streaming** - Validates chunked processing for files >10MB
@@ -404,8 +404,8 @@ git tag v1.0.0
 git push origin v1.0.0
 
 # 5. Verify publication
-npm info avana
-npx avana scan --help
+npm info avanasec
+npx avanasec scan --help
 ```
 
 ## Moving to GitHub
@@ -413,15 +413,15 @@ npx avana scan --help
 ### Create New Repository
 
 ```bash
-# 1. Create repository on GitHub (e.g., yourusername/avana)
+# 1. Create repository on GitHub (e.g., innookeke/avanasec)
 
 # 2. Initialize git
 git init
 git add .
-git commit -m "feat: initial commit - avana secret scanner"
+git commit -m "feat: initial commit - avanasec secret scanner"
 
 # 3. Add remote
-git remote add origin https://github.com/yourusername/avana.git
+git remote add origin https://github.com/innookeke/avanasec.git
 
 # 4. Push
 git branch -M main
@@ -436,12 +436,12 @@ After creating the GitHub repository, update these fields in `package.json`:
 {
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/avana.git"
+    "url": "https://github.com/innookeke/avanasec.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/avana/issues"
+    "url": "https://github.com/innookeke/avanasec/issues"
   },
-  "homepage": "https://github.com/yourusername/avana#readme"
+  "homepage": "https://github.com/innookeke/avanasec#readme"
 }
 ```
 
@@ -463,7 +463,7 @@ All major features from the requirements are now complete:
 9. **Progress reporting** - Real-time progress with ETA calculation
 
 ### User Experience ✅
-10. **Smart ignore patterns** - .avanaignore support with glob patterns
+10. **Smart ignore patterns** - .avanasecignore support with glob patterns
 11. **Verbose logging** - Detailed debug information with --debug flag
 12. **JSON output** - Production-ready structured output for CI/CD
 13. **Exit codes** - Standard codes (0,1,2,3) for pipeline integration
@@ -491,59 +491,59 @@ All major features from the requirements are now complete:
 **Memory Issues**:
 ```bash
 # Increase memory limit for large codebases
-avana scan --max-memory 2000
+avanasec scan --max-memory 2000
 
 # Reduce worker count if memory constrained
-avana scan --workers 2
+avanasec scan --workers 2
 
 # Check memory usage with debug mode
-avana scan --debug --verbose
+avanasec scan --debug --verbose
 ```
 
 **Performance Issues**:
 ```bash
 # Add ignore patterns for large directories
-avana scan --ignore "node_modules/**" --ignore "dist/**"
+avanasec scan --ignore "node_modules/**" --ignore "dist/**"
 
-# Use .avanaignore for persistent patterns
-echo "large-data/**" >> .avanaignore
-echo "**/*.backup" >> .avanaignore
+# Use .avanasecignore for persistent patterns
+echo "large-data/**" >> .avanasecignore
+echo "**/*.backup" >> .avanasecignore
 
-# Enable result caching (keep .avana-cache directory)
-ls .avana-cache/  # Should contain cached results
+# Enable result caching (keep .avanasec-cache directory)
+ls .avanasec-cache/  # Should contain cached results
 ```
 
 **False Positives**:
 ```bash
 # Use ignore patterns for test files
-avana scan --ignore "**/*.test.ts" --ignore "fixtures/**"
+avanasec scan --ignore "**/*.test.ts" --ignore "fixtures/**"
 
 # Check pattern confidence scores
-avana scan --json | jq '.issues[].confidence'
+avanasec scan --json | jq '.issues[].confidence'
 
-# Use .avanaignore for persistent exclusions
-echo "test-fixtures/**" >> .avanaignore
+# Use .avanasecignore for persistent exclusions
+echo "test-fixtures/**" >> .avanasecignore
 ```
 
 **Binary File Warnings**:
 ```bash
 # Enable debug mode to see file processing
-avana scan --debug
+avanasec scan --debug
 
 # Binary files are automatically skipped
 # Check file type detection with verbose mode
-avana scan --verbose
+avanasec scan --verbose
 ```
 
 **Git Hook Issues**:
 ```bash
 # Reinstall hooks if they're not working
-avana uninstall
-avana install
+avanasec uninstall
+avanasec install
 
 # Test hooks manually
 git add .
-avana scan --staged --fail-on-high
+avanasec scan --staged --fail-on-high
 
 # Check hook file exists
 cat .git/hooks/pre-commit
@@ -551,7 +551,7 @@ cat .git/hooks/pre-commit
 
 ## Success Criteria ✅
 
-Avana is now ready for publication! All criteria have been met:
+avanasec is now ready for publication! All criteria have been met:
 
 - ✅ **All tests pass** with 80%+ coverage (15 property tests + unit tests + integration tests)
 - ✅ **Documentation is complete** and comprehensive (README, DEVLOG, specs)
@@ -576,6 +576,9 @@ Avana is now ready for publication! All criteria have been met:
 
 ---
 
-**🎉 Congratulations! Avana is production-ready and ready for npm publication!** 
+**🎉 Congratulations! avanasec is production-ready and ready for npm publication!** 
 
 Run the publishing checklist above to get it live on npm! 🚀
+
+
+

@@ -1,12 +1,12 @@
-# Requirements Document: Avana Core
+# Requirements Document: avanasec Core
 
 ## Introduction
 
-Avana is a production-ready CLI tool for detecting hardcoded secrets, API keys, and credentials in codebases. This specification focuses on making Avana robust, performant, and ready for npm publication.
+avanasec is a production-ready CLI tool for detecting hardcoded secrets, API keys, and credentials in codebases. This specification focuses on making avanasec robust, performant, and ready for npm publication.
 
 ## Glossary
 
-- **Avana**: The complete secret scanning CLI tool
+- **avanasec**: The complete secret scanning CLI tool
 - **Secret**: API keys, tokens, passwords, or credentials hardcoded in source code
 - **Pattern**: Regular expression used to detect specific types of secrets
 - **Security_Score**: 0-100 metric indicating codebase security health
@@ -27,7 +27,7 @@ Avana is a production-ready CLI tool for detecting hardcoded secrets, API keys, 
 
 ### Requirement 1: Robust File Handling
 
-**User Story:** As a developer, I want Avana to handle all types of files gracefully, so that scanning never crashes or produces incorrect results.
+**User Story:** As a developer, I want avanasec to handle all types of files gracefully, so that scanning never crashes or produces incorrect results.
 
 #### Acceptance Criteria
 
@@ -68,15 +68,15 @@ Avana is a production-ready CLI tool for detecting hardcoded secrets, API keys, 
 
 #### Acceptance Criteria
 
-1. THE Scanner SHALL support a `.avanaignore` file with glob patterns
-2. WHEN `.avanaignore` exists, THE Scanner SHALL merge it with default ignore patterns
+1. THE Scanner SHALL support a `.avanasecignore` file with glob patterns
+2. WHEN `.avanasecignore` exists, THE Scanner SHALL merge it with default ignore patterns
 3. THE Scanner SHALL support command-line ignore patterns via `--ignore` flag
 4. WHEN a file matches any ignore pattern, THE Scanner SHALL skip it and not report it in statistics
 5. THE Scanner SHALL log ignored files when `--verbose` flag is used
 
 ### Requirement 5: Detailed Logging and Verbosity
 
-**User Story:** As a developer debugging scan issues, I want detailed logs, so that I can understand what Avana is doing.
+**User Story:** As a developer debugging scan issues, I want detailed logs, so that I can understand what avanasec is doing.
 
 #### Acceptance Criteria
 
@@ -88,7 +88,7 @@ Avana is a production-ready CLI tool for detecting hardcoded secrets, API keys, 
 
 ### Requirement 6: JSON Output for CI/CD
 
-**User Story:** As a DevOps engineer, I want machine-readable output, so that I can integrate Avana into CI/CD pipelines.
+**User Story:** As a DevOps engineer, I want machine-readable output, so that I can integrate avanasec into CI/CD pipelines.
 
 #### Acceptance Criteria
 
@@ -124,7 +124,7 @@ Avana is a production-ready CLI tool for detecting hardcoded secrets, API keys, 
 
 ### Requirement 9: File Encoding Detection
 
-**User Story:** As a developer working with international teams, I want Avana to handle different file encodings, so that all files are scanned correctly.
+**User Story:** As a developer working with international teams, I want avanasec to handle different file encodings, so that all files are scanned correctly.
 
 #### Acceptance Criteria
 
@@ -136,7 +136,7 @@ Avana is a production-ready CLI tool for detecting hardcoded secrets, API keys, 
 
 ### Requirement 10: Memory Management
 
-**User Story:** As a developer scanning large repositories, I want Avana to use memory efficiently, so that it doesn't crash or slow down my system.
+**User Story:** As a developer scanning large repositories, I want avanasec to use memory efficiently, so that it doesn't crash or slow down my system.
 
 #### Acceptance Criteria
 
@@ -196,8 +196,8 @@ Avana is a production-ready CLI tool for detecting hardcoded secrets, API keys, 
 #### Acceptance Criteria
 
 1. THE CLI SHALL provide an `install` command to set up Git hooks automatically
-2. WHEN `avana install` is run, THE CLI SHALL install Husky and configure pre-commit hooks
-3. WHEN a developer attempts to commit code, THE Pre_Commit_Hook SHALL automatically run Avana scan
+2. WHEN `avanasec install` is run, THE CLI SHALL install Husky and configure pre-commit hooks
+3. WHEN a developer attempts to commit code, THE Pre_Commit_Hook SHALL automatically run avanasec scan
 4. WHEN critical or high severity issues are detected in staged files, THE Pre_Commit_Hook SHALL block the commit with exit code 1
 5. WHEN no critical or high severity issues are detected, THE Pre_Commit_Hook SHALL allow the commit to proceed
 6. THE Pre_Commit_Hook SHALL complete scanning in under 2 seconds for typical commits
@@ -236,3 +236,6 @@ Avana is a production-ready CLI tool for detecting hardcoded secrets, API keys, 
 - Works on Windows, macOS, Linux
 - Node.js 18+ support
 - No platform-specific dependencies
+
+
+
