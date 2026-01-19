@@ -1,4 +1,4 @@
-# Avana 🔒
+# avanasec 🔒
 
 **A robust, production-ready CLI tool for detecting secrets and credentials in your codebase**
 
@@ -10,14 +10,14 @@
 
 ## 🎯 Overview
 
-Avana prevents costly security breaches by detecting hardcoded secrets, API keys, and credentials before they reach your repository. With 100+ detection patterns, robust file handling, and comprehensive testing, Avana is the security scanner you can trust.
+avanasec prevents costly security breaches by detecting hardcoded secrets, API keys, and credentials before they reach your repository. With 100+ detection patterns, robust file handling, and comprehensive testing, avanasec is the security scanner you can trust.
 
-### Why Avana?
+### Why avanasec?
 
 - **100+ Detection Patterns**: Comprehensive coverage for all major services (AWS, OpenAI, Stripe, GitHub, Web3, and more)
 - **High Performance**: Scans 10,000+ files in under 10 seconds with parallel processing
 - **Robust File Handling**: Binary detection, encoding support, large file streaming (>10MB)
-- **Smart Ignore System**: Respects .gitignore, .avanaignore, and custom patterns
+- **Smart Ignore System**: Respects .gitignore, .avana-cliignore, and custom patterns
 - **Multiple Output Formats**: Console, JSON, and Markdown reports
 - **CI/CD Ready**: Standard exit codes and structured output for pipeline integration
 - **Production-Ready**: Comprehensive error handling, memory management, and property-based testing
@@ -29,14 +29,15 @@ Avana prevents costly security breaches by detecting hardcoded secrets, API keys
 ### Installation
 
 ```bash
-# Install globally
-npm install -g avana-cli
+# Install globally (recommended)
+npm install -g avanasec
 
-# Verify installation
-avana --help
+# Verify installation (after global install)
+avanasec --help
 
 # Or use with npx (no installation required)
-npx avana-cli scan
+npx avanasec scan
+npx avanasec --help
 ```
 
 ### Troubleshooting Installation
@@ -44,11 +45,15 @@ npx avana-cli scan
 If you encounter issues after installation:
 
 ```bash
-# Run diagnostics
-avana troubleshoot
+# Run diagnostics (after global install)
+avanasec troubleshoot
 
-# Or use the alias
-avana doctor
+# Or use the alias (after global install)
+avanasec doctor
+
+# Or with npx (no installation required)
+npx avanasec troubleshoot
+npx avanasec doctor
 ```
 
 **Common Issues:**
@@ -59,43 +64,95 @@ avana doctor
 
 **Manual Installation Steps:**
 
-1. Install the package: `npm install -g avana-cli`
-2. Verify installation: `avana --help`
+1. Install the package: `npm install -g avanasec`
+2. Verify installation: `avanasec --help` (after global install)
 3. If command not found, check your PATH: `npm config get prefix`
 4. Add npm global bin to PATH if needed
 
 **Getting Help:**
 
-- Documentation: [GitHub Repository](https://github.com/innookeke/avana-cli#readme)
-- Report Issues: [GitHub Issues](https://github.com/innookeke/avana-cli/issues)
-- Run diagnostics: `avana troubleshoot`
+- Documentation: [GitHub Repository](https://github.com/innookeke/avanasec#readme)
+- Report Issues: [GitHub Issues](https://github.com/innookeke/avanasec/issues)
+- Run diagnostics: `avanasec troubleshoot` (after global install) or `npx avanasec troubleshoot`
 
 ### Basic Usage
 
+**With Global Installation:**
 ```bash
 # Scan current directory
-avana scan
+avanasec scan
 
 # Scan with verbose output
-avana scan --verbose
+avanasec scan --verbose
 
 # Scan specific path
-avana scan --path ./my-project
-
-# Scan with JSON output
-avana scan --json
+avanasec scan --path ./my-project
 
 # Scan with custom ignore patterns
-avana scan --ignore "**/*.md" --ignore "tests/**"
+avanasec scan --ignore "**/*.md" --ignore "tests/**"
 
 # Scan with memory and worker limits
-avana scan --max-memory 1000 --workers 4
+avanasec scan --max-memory 1000 --workers 4
+
+# Scan and fail on high severity issues (for CI/CD)
+avanasec scan --fail-on-high
+
+# Scan only Git staged files (for pre-commit hooks)
+avanasec scan --staged
+
+# Scan with debug information
+avanasec scan --debug
 
 # Install Git pre-commit hooks
-avana install
+avanasec install
 
 # Remove Git hooks
-avana uninstall
+avanasec uninstall
+
+# Run diagnostics
+avanasec troubleshoot
+
+# Show help
+avanasec --help
+```
+
+**With NPX (no installation required):**
+```bash
+# Scan current directory
+npx avanasec scan
+
+# Scan with verbose output
+npx avanasec scan --verbose
+
+# Scan specific path
+npx avanasec scan --path ./my-project
+
+# Scan with custom ignore patterns
+npx avanasec scan --ignore "**/*.md" --ignore "tests/**"
+
+# Scan with memory and worker limits
+npx avanasec scan --max-memory 1000 --workers 4
+
+# Scan and fail on high severity issues (for CI/CD)
+npx avanasec scan --fail-on-high
+
+# Scan only Git staged files
+npx avanasec scan --staged
+
+# Scan with debug information
+npx avanasec scan --debug
+
+# Install Git pre-commit hooks
+npx avanasec install
+
+# Remove Git hooks
+npx avanasec uninstall
+
+# Run diagnostics
+npx avanasec troubleshoot
+
+# Show help
+npx avanasec --help
 ```
 
 ### Git Hook Integration
@@ -103,8 +160,11 @@ avana uninstall
 Avana can automatically scan your code before each commit to prevent secrets from being committed:
 
 ```bash
-# Install pre-commit hook
-avana install
+# Install pre-commit hook (after global install)
+avanasec install
+
+# Or with npx
+npx avanasec install
 
 # Now every commit will be scanned automatically
 git add .
@@ -155,7 +215,7 @@ git commit --no-verify
 
 ### Comprehensive Detection
 
-Avana detects 100+ types of secrets across major services:
+avana-cli detects 100+ types of secrets across major services:
 
 - **AI/ML APIs**: OpenAI, Anthropic, Hugging Face, Cohere
 - **Cloud Providers**: AWS, Azure, GCP, DigitalOcean
@@ -171,7 +231,7 @@ Avana detects 100+ types of secrets across major services:
 
 ### Insecure Code Pattern Detection
 
-Avana also detects insecure coding patterns that could lead to vulnerabilities:
+avana-cli also detects insecure coding patterns that could lead to vulnerabilities:
 
 - **Code Execution**: `eval()`, Function constructor
 - **SQL Injection**: String concatenation in SQL queries
@@ -197,7 +257,7 @@ Automatically skips:
 
 ### Custom Ignore Patterns
 
-Create a `.avanaignore` file in your project root:
+Create a `.avana-cliignore` file in your project root:
 
 ```gitignore
 # Custom ignore patterns
@@ -231,11 +291,11 @@ temp-*
 
 ### 🔒 Security Protection
 
-**Automatic .gitignore Protection**: When Avana creates the `scan-reports/` directory, it automatically adds it to your `.gitignore` file to prevent accidentally committing security reports (which contain detected secrets) to version control.
+**Automatic .gitignore Protection**: When avanasec creates the `scan-reports/` directory, it automatically adds it to your `.gitignore` file to prevent accidentally committing security reports (which contain detected secrets) to version control.
 
 **Manual Protection**: If you already have a `scan-reports/` directory, add this to your `.gitignore`:
 ```gitignore
-# Avana scan reports (contains detected secrets)
+# avanasec scan reports (contains detected secrets)
 scan-reports/
 ```
 
@@ -246,8 +306,9 @@ scan-reports/
 ### Command Line Options
 
 ```bash
-# Scan command
-avana scan [options]
+# Usage Syntax
+npx avanasec scan [options]      # Using npx
+avanasec scan [options]          # After global installation
 
 Options:
   --path <path>            Path to scan (default: current directory)
@@ -255,9 +316,6 @@ Options:
   --verbose, -v            Show detailed output
   --debug                  Show debug information
   --quiet                  Show minimal output
-  --json                   Save results to JSON file
-  --output-json            Save results to JSON file (alias for --json)
-  --output-md              Save results to Markdown file
   --no-progress            Disable progress bar
   --fail-on-high           Exit with code 1 on high severity issues
   --max-memory <mb>        Set memory limit in MB (default: 500)
@@ -266,18 +324,26 @@ Options:
   --help, -h               Show help message
 
 # Git hook commands
-avana install              Install Git pre-commit hooks
-avana uninstall            Remove Git pre-commit hooks
+npx avanasec install             # Using npx
+npx avanasec uninstall           # Using npx
+npx avanasec troubleshoot        # Using npx
+avanasec install                 # After global installation
+avanasec uninstall               # After global installation
+avanasec troubleshoot            # After global installation
 
-# Examples
-avana scan
-avana scan --path ./my-project
-avana scan --staged
-avana scan --verbose --debug
-avana scan --json --output-md
-avana scan --fail-on-high
-avana scan --max-memory 1000 --workers 4
-avana scan --ignore "**/*.md" --ignore "tests/**"
+# Examples with NPX (recommended)
+npx avanasec scan
+npx avanasec scan --path ./my-project
+npx avanasec scan --staged
+npx avanasec scan --verbose --debug
+npx avanasec scan --fail-on-high
+npx avanasec scan --max-memory 1000 --workers 4
+npx avanasec scan --ignore "**/*.md" --ignore "tests/**"
+
+# Examples with Global Installation
+avanasec scan                  # after npm install -g avanasec
+avanasec scan --verbose
+avanasec install
 ```
 
 ### Exit Codes
@@ -358,11 +424,11 @@ Avana uses standard exit codes for CI/CD integration:
 ```
 
 #### Markdown Output (--output-md)
-Generates a detailed markdown report saved to `scan-reports/avana-security-report-YYYY-MM-DD.md`
+Generates a detailed markdown report saved to `scan-reports/avana-cli-security-report-YYYY-MM-DD.md`
 
 ### Git Hook Behavior
 
-When using `avana install`:
+When using `avanasec install`:
 - **Blocks commits** with critical or high severity issues
 - **Allows commits** with only medium or low severity issues (with warning)
 - Scans only staged files for speed (< 2 seconds)
@@ -376,34 +442,31 @@ When using `avana install`:
 **Memory Issues**
 ```bash
 # Increase memory limit
-avana scan --max-memory 1000
+npx avanasec scan --max-memory 1000
 
 # Reduce worker count
-avana scan --workers 2
+npx avanasec scan --workers 2
 ```
 
 **Performance Issues**
 ```bash
 # Add ignore patterns for large directories
-avana scan --ignore "node_modules/**" --ignore "dist/**"
+npx avanasec scan --ignore "node_modules/**" --ignore "dist/**"
 
-# Use .avanaignore file for persistent patterns
-echo "large-data/**" >> .avanaignore
+# Use .avana-cliignore file for persistent patterns
+echo "large-data/**" >> .avana-cliignore
 ```
 
 **False Positives**
 ```bash
 # Use ignore patterns for test files
-avana scan --ignore "**/*.test.ts" --ignore "fixtures/**"
-
-# Check pattern confidence scores in JSON output
-avana scan --json
+npx avanasec scan --ignore "**/*.test.ts" --ignore "fixtures/**"
 ```
 
 **Binary File Warnings**
 ```bash
 # Enable debug mode to see file processing details
-avana scan --debug
+npx avanasec scan --debug
 
 # Binary files are automatically skipped
 ```
@@ -433,8 +496,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - name: Run Avana Security Scan
-        run: npx avana scan --json
+      - name: Run avanasec Security Scan
+        run: npx avanasec scan
       - name: Upload scan results
         if: always()
         uses: actions/upload-artifact@v3
@@ -449,7 +512,7 @@ jobs:
 security_scan:
   stage: test
   script:
-    - npx avana scan --json --fail-on-high
+    - npx avanasec scan --fail-on-high
   artifacts:
     when: always
     paths:
@@ -469,7 +532,7 @@ pipeline {
     stages {
         stage('Security Scan') {
             steps {
-                sh 'npx avana scan --json'
+                sh 'npx avanasec scan'
                 archiveArtifacts artifacts: 'scan-reports/*', allowEmptyArchive: true
                 publishHTML([
                     allowMissing: false,
@@ -503,8 +566,8 @@ pipeline {
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/avana.git
-cd avana
+git clone https://github.com/innookeke/avanasec.git
+cd avanasec
 
 # Install dependencies
 npm install
@@ -522,7 +585,7 @@ npm run test:coverage
 ### Project Structure
 
 ```
-avana/
+avanasec/
 ├── src/
 │   ├── types/              # TypeScript type definitions
 │   ├── rules/              # Secret detection patterns
@@ -544,7 +607,7 @@ avana/
 
 ## 🧪 Testing
 
-Avana includes comprehensive testing with property-based testing:
+avanasec includes comprehensive testing with property-based testing:
 
 - **Unit Tests**: Core functionality and edge cases
 - **Property-Based Tests**: 15 properties with 100+ iterations each using fast-check
@@ -570,7 +633,7 @@ npm run test:watch
 
 #### Property-Based Testing
 
-Avana uses property-based testing to validate correctness across thousands of generated inputs:
+avanasec uses property-based testing to validate correctness across thousands of generated inputs:
 
 - **Binary File Exclusion**: Ensures binary files are never scanned
 - **Large File Streaming**: Validates chunked processing for files >10MB
@@ -613,8 +676,8 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/avana/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/avana/discussions)
+- **Issues**: [GitHub Issues](https://github.com/yourusername/avanasec/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/yourusername/avanasec/discussions)
 - **Email**: inno.okeke@github.com
 
 ---

@@ -1,11 +1,11 @@
 {
-  "name": "avana-cli",
-  "version": "2.12.0",
+  "name": "avanasec",
+  "version": "1.0.0",
   "description": "A robust, production-ready CLI tool for detecting secrets and credentials in your codebase",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "avana": "./dist/cli.js"
+    "avanasec": "./dist/cli.js"
   },
   "scripts": {
     "build": "tsc",
@@ -52,12 +52,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/innookeke/avana-cli.git"
+    "url": "https://github.com/innookeke/avanasec.git"
   },
   "bugs": {
-    "url": "https://github.com/innookeke/avana-cli/issues"
+    "url": "https://github.com/innookeke/avanasec/issues"
   },
-  "homepage": "https://github.com/innookeke/avana-cli#readme",
+  "homepage": "https://github.com/innookeke/avanasec#readme",
   "engines": {
     "node": ">=18.0.0"
   },

@@ -112,12 +112,12 @@ async function main() {
 🔒 Avana CLI
 
 Usage:
-  avana scan [options]     Scan project for security issues
-  avana install            Install Git pre-commit hooks
-  avana uninstall          Remove Git pre-commit hooks
-  avana troubleshoot       Run diagnostics and troubleshooting
-  avana doctor             Alias for troubleshoot
-  avana --help             Show this help message
+  avana-cli scan [options]     Scan project for security issues
+  avana-cli install            Install Git pre-commit hooks
+  avana-cli uninstall          Remove Git pre-commit hooks
+  avana-cli troubleshoot       Run diagnostics and troubleshooting
+  avana-cli doctor             Alias for troubleshoot
+  avana-cli --help             Show this help message
 
 Scan Options:
   --path <path>            Path to scan (default: current directory)
@@ -138,16 +138,26 @@ Exit Codes:
   3                        Unexpected error occurred
 
 Examples:
-  avana scan
-  avana scan --path ./my-project
-  avana scan --staged
-  avana scan --verbose --debug
-  avana scan --fail-on-high
-  avana scan --max-memory 1000 --workers 4
-  avana scan --ignore "**/*.md" --ignore "tests/**"
-  avana install
-  avana uninstall
-  avana troubleshoot
+  avana-cli scan
+  avana-cli scan --path ./my-project
+  avana-cli scan --staged
+  avana-cli scan --verbose --debug
+  avana-cli scan --fail-on-high
+  avana-cli scan --max-memory 1000 --workers 4
+  avana-cli scan --ignore "**/*.md" --ignore "tests/**"
+  avana-cli install
+  avana-cli uninstall
+  avana-cli troubleshoot
+
+NPX Usage (recommended for trying out):
+  npx avana-cli scan
+  npx avana-cli --help
+  npx avana-cli scan --verbose
+
+Global Installation (for shorter commands):
+  npm install -g avana-cli
+  avana scan  # after global install
+  avana --help
 
 Troubleshooting:
   If you're experiencing issues, run 'avana troubleshoot' for comprehensive

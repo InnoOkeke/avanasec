@@ -4,8 +4,47 @@
 # Scan reports directory (contains detected secrets from previous scans)
 scan-reports/**
 
+# Test files and directories
+tests/**
+**/*.test.ts
+**/*.test.js
+**/*.spec.ts
+**/*.spec.js
+test/**
+__tests__/**
+
+# Documentation files (often contain example secrets)
+*.md
+docs/**
+documentation/**
+
+# Kiro CLI files (may contain development examples)
+.kiro/**
+
+# Pattern definition files (contain regex patterns that look like secrets)
+src/rules/**
+**/rules/**
+**/patterns/**
+**/pattern-validator.ts
+src/utils/pattern-validator.ts
+
+# Build and dependency directories
+node_modules/**
+dist/**
+build/**
+.git/**
+
+# Configuration and cache directories
+.avana-cache/**
+.cache/**
+.tmp/**
+temp/**
+
+# Log files
+*.log
+logs/**
+
 # Additional patterns can be added here
 # Examples:
-# *.log
-# temp/**
-# secrets.txt
+# *.env.example
+# config.example.js
