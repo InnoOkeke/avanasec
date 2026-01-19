@@ -1,5 +1,5 @@
 /**
- * Avana - Web3/Blockchain Pattern Tests
+ * Avanasec - Web3/Blockchain Pattern Tests
  * Tests for Web3, blockchain, and cryptocurrency secret detection patterns
  */
 

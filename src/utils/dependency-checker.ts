@@ -7,7 +7,7 @@ import { ExitCode } from './exit-codes';
 import { displayChardetError, handleChardetLoadingError } from './chardet-error-handler';
 
 /**
- * Required dependencies for Avana CLI
+ * Required dependencies for Avanasec CLI
  */
 const REQUIRED_DEPENDENCIES = [
   {
@@ -88,7 +88,7 @@ export function displayDependencyError(missingDeps?: string[]): void {
 
   console.error(`${colors.red}${colors.bold}❌ Missing Dependencies${colors.reset}`);
   console.error();
-  console.error(`${colors.red}Avana CLI requires the following dependencies that are not installed:${colors.reset}`);
+  console.error(`${colors.red}Avanasec CLI requires the following dependencies that are not installed:${colors.reset}`);
   console.error();
 
   // Show details for each missing dependency
@@ -113,13 +113,13 @@ export function displayDependencyError(missingDeps?: string[]): void {
   console.error();
   console.error(`${colors.blue}1. Make sure you're in the correct project directory${colors.reset}`);
   console.error(`${colors.blue}2. Try running: npm install${colors.reset}`);
-  console.error(`${colors.blue}3. If using global installation: npm install -g avana-cli${colors.reset}`);
+  console.error(`${colors.blue}3. If using global installation: npm install -g avanasec${colors.reset}`);
   console.error(`${colors.blue}4. Check your Node.js version: node --version (requires 18+)${colors.reset}`);
   console.error();
   
   console.error(`${colors.yellow}${colors.bold}📚 Need Help?${colors.reset}`);
-  console.error(`${colors.yellow}Visit: https://github.com/innookeke/avana-cli#installation${colors.reset}`);
-  console.error(`${colors.yellow}Report issues: https://github.com/innookeke/avana-cli/issues${colors.reset}`);
+  console.error(`${colors.yellow}Visit: https://github.com/innookeke/avanasec#installation${colors.reset}`);
+  console.error(`${colors.yellow}Report issues: https://github.com/innookeke/avanasec/issues${colors.reset}`);
   console.error();
 }
 
@@ -217,14 +217,14 @@ export function checkDependency(moduleName: string, context: string): boolean {
 export function displayTroubleshootingInfo(): void {
   console.error(`${colors.blue}${colors.bold}🔍 General Troubleshooting${colors.reset}`);
   console.error();
-  console.error(`${colors.blue}If you're experiencing issues with Avana CLI:${colors.reset}`);
+  console.error(`${colors.blue}If you're experiencing issues with Avanasec CLI:${colors.reset}`);
   console.error();
   console.error(`${colors.blue}1. Verify installation:${colors.reset}`);
-  console.error(`   npm list avana-cli`);
+  console.error(`   npm list avanasec`);
   console.error();
   console.error(`${colors.blue}2. Reinstall the package:${colors.reset}`);
-  console.error(`   npm uninstall avana-cli`);
-  console.error(`   npm install avana-cli`);
+  console.error(`   npm uninstall avanasec`);
+  console.error(`   npm install avanasec`);
   console.error();
   console.error(`${colors.blue}3. Clear npm cache:${colors.reset}`);
   console.error(`   npm cache clean --force`);
@@ -236,7 +236,7 @@ export function displayTroubleshootingInfo(): void {
   console.error(`   npm install -g npm@latest`);
   console.error();
   console.error(`${colors.yellow}${colors.bold}📞 Still need help?${colors.reset}`);
-  console.error(`${colors.yellow}Create an issue: https://github.com/innookeke/avana-cli/issues${colors.reset}`);
+  console.error(`${colors.yellow}Create an issue: https://github.com/innookeke/avanasec/issues${colors.reset}`);
   console.error(`${colors.yellow}Include your Node.js version and the full error message.${colors.reset}`);
   console.error();
 }

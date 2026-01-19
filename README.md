@@ -17,7 +17,7 @@ avanasec prevents costly security breaches by detecting hardcoded secrets, API k
 - **100+ Detection Patterns**: Comprehensive coverage for all major services (AWS, OpenAI, Stripe, GitHub, Web3, and more)
 - **High Performance**: Scans 10,000+ files in under 10 seconds with parallel processing
 - **Robust File Handling**: Binary detection, encoding support, large file streaming (>10MB)
-- **Smart Ignore System**: Respects .gitignore, .avana-cliignore, and custom patterns
+- **Smart Ignore System**: Respects .gitignore, .avanasecignore, and custom patterns
 - **Multiple Output Formats**: Console, JSON, and Markdown reports
 - **CI/CD Ready**: Standard exit codes and structured output for pipeline integration
 - **Production-Ready**: Comprehensive error handling, memory management, and property-based testing
@@ -60,7 +60,7 @@ npx avanasec doctor
 
 - **Command not found**: Ensure npm global bin directory is in your PATH
 - **Permission errors**: Try using `sudo` on Unix systems or run as administrator on Windows
-- **Module errors**: Run `npm install -g avana-cli` to reinstall dependencies
+- **Module errors**: Run `npm install -g avanasec` to reinstall dependencies
 
 **Manual Installation Steps:**
 
@@ -157,7 +157,7 @@ npx avanasec --help
 
 ### Git Hook Integration
 
-Avana can automatically scan your code before each commit to prevent secrets from being committed:
+Avanasec can automatically scan your code before each commit to prevent secrets from being committed:
 
 ```bash
 # Install pre-commit hook (after global install)
@@ -169,12 +169,12 @@ npx avanasec install
 # Now every commit will be scanned automatically
 git add .
 git commit -m "feat: add new feature"
-# 🔒 Running Avana security scan...
+# 🔒 Running Avanasec security scan...
 # ✅ No security issues found in staged files
 ```
 
 **What happens:**
-- Before each commit, Avana scans only your staged files (fast!)
+- Before each commit, Avanasec scans only your staged files (fast!)
 - Commits with critical or high severity issues are blocked
 - You get clear error messages with file locations and fix suggestions
 - Scans complete in under 2 seconds
@@ -215,7 +215,7 @@ git commit --no-verify
 
 ### Comprehensive Detection
 
-avana-cli detects 100+ types of secrets across major services:
+avanasec detects 100+ types of secrets across major services:
 
 - **AI/ML APIs**: OpenAI, Anthropic, Hugging Face, Cohere
 - **Cloud Providers**: AWS, Azure, GCP, DigitalOcean
@@ -231,7 +231,7 @@ avana-cli detects 100+ types of secrets across major services:
 
 ### Insecure Code Pattern Detection
 
-avana-cli also detects insecure coding patterns that could lead to vulnerabilities:
+avanasec also detects insecure coding patterns that could lead to vulnerabilities:
 
 - **Code Execution**: `eval()`, Function constructor
 - **SQL Injection**: String concatenation in SQL queries
@@ -257,7 +257,7 @@ Automatically skips:
 
 ### Custom Ignore Patterns
 
-Create a `.avana-cliignore` file in your project root:
+Create a `.avanasecignore` file in your project root:
 
 ```gitignore
 # Custom ignore patterns
@@ -353,7 +353,7 @@ avanasec install
 
 ### Exit Codes
 
-Avana uses standard exit codes for CI/CD integration:
+Avanasec uses standard exit codes for CI/CD integration:
 
 - **0**: No critical or high severity issues found (success)
 - **1**: Critical or high severity issues detected (blocks CI/CD and commits)
@@ -429,7 +429,7 @@ Avana uses standard exit codes for CI/CD integration:
 ```
 
 #### Markdown Output (--output-md)
-Generates a detailed markdown report saved to `scan-reports/avana-cli-security-report-YYYY-MM-DD.md`
+Generates a detailed markdown report saved to `scan-reports/avanasec-security-report-YYYY-MM-DD.md`
 
 ### Git Hook Behavior
 
@@ -458,8 +458,8 @@ npx avanasec scan --workers 2
 # Add ignore patterns for large directories
 npx avanasec scan --ignore "node_modules/**" --ignore "dist/**"
 
-# Use .avana-cliignore file for persistent patterns
-echo "large-data/**" >> .avana-cliignore
+# Use .avanasecignore file for persistent patterns
+echo "large-data/**" >> .avanasecignore
 ```
 
 **False Positives**
@@ -694,3 +694,4 @@ MIT License - see [LICENSE](LICENSE) file for details.
 *Built with ❤️ for developers who care about security*
 
 </div>
+

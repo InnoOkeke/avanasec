@@ -113,9 +113,9 @@ function installPackageInTempDir(tempDir, tarballPath) {
   try {
     // Initialize a new npm project
     const packageJsonContent = {
-      name: 'avana-test-env',
+      name: 'avanasec-test-env',
       version: '1.0.0',
-      description: 'Test environment for avana-cli',
+      description: 'Test environment for avanasec',
       private: true
     };
     
@@ -147,7 +147,7 @@ function testBinaryAccessibility(tempDir) {
   
   try {
     // Test using npx
-    const helpOutput = execSync('npx avana --help', {
+    const helpOutput = execSync('npx avanasec --help', {
       cwd: tempDir,
       encoding: 'utf-8',
       timeout: 10000
@@ -173,11 +173,11 @@ function testDependencyInstallation(tempDir) {
   logInfo('Testing dependency installation...');
   
   const nodeModulesPath = path.join(tempDir, 'node_modules');
-  const avanaPath = path.join(nodeModulesPath, 'avana-cli');
-  const avanaNodeModulesPath = path.join(avanaPath, 'node_modules');
+  const avanasecPath = path.join(nodeModulesPath, 'avanasec');
+  const avanasecNodeModulesPath = path.join(avanasecPath, 'node_modules');
   
-  if (!fs.existsSync(avanaPath)) {
-    logError('avana-cli not found in node_modules');
+  if (!fs.existsSync(avanasecPath)) {
+    logError('avanasec not found in node_modules');
     return false;
   }
   
@@ -192,11 +192,11 @@ function testDependencyInstallation(tempDir) {
   let allDepsInstalled = true;
   
   for (const dep of requiredDependencies) {
-    // Check if dependency exists in main node_modules or avana's node_modules
+    // Check if dependency exists in main node_modules or avanasec's node_modules
     const mainDepPath = path.join(nodeModulesPath, dep);
-    const avanaDepPath = path.join(avanaNodeModulesPath, dep);
+    const avanasecDepPath = path.join(avanasecNodeModulesPath, dep);
     
-    if (fs.existsSync(mainDepPath) || fs.existsSync(avanaDepPath)) {
+    if (fs.existsSync(mainDepPath) || fs.existsSync(avanasecDepPath)) {
       logSuccess(`Dependency installed: ${dep}`);
     } else {
       logError(`Dependency missing: ${dep}`);
@@ -223,7 +223,7 @@ console.log("Hello world");
 `);
     
     // Run a scan on the test file
-    const scanOutput = execSync('npx avana scan --path . --quiet', {
+    const scanOutput = execSync('npx avanasec scan --path . --quiet', {
       cwd: tempDir,
       encoding: 'utf-8',
       timeout: 15000
@@ -233,7 +233,7 @@ console.log("Hello world");
     logSuccess('Basic scan functionality works');
     
     // Test help command
-    const helpOutput = execSync('npx avana --help', {
+    const helpOutput = execSync('npx avanasec --help', {
       cwd: tempDir,
       encoding: 'utf-8',
       timeout: 5000

@@ -58,7 +58,7 @@ describe('Feature: dependency-fix, Property 2: Dependency Installation', () => {
               timeout: 30000 
             });
             
-            const tarballMatch = packOutput.match(/avana-cli-[\d.]+\.tgz/);
+            const tarballMatch = packOutput.match(/avanasec-[\d.]+\.tgz/);
             expect(tarballMatch).toBeTruthy();
             
             const tarballName = tarballMatch![0];
@@ -239,7 +239,7 @@ describe('Feature: dependency-fix, Property 2: Dependency Installation', () => {
               timeout: 30000 
             });
             
-            const tarballMatch = packOutput.match(/avana-cli-[\d.]+\.tgz/);
+            const tarballMatch = packOutput.match(/avanasec-[\d.]+\.tgz/);
             const tarballName = tarballMatch![0];
             
             execSync(`npm install ${join(process.cwd(), tarballName)}`, {
@@ -249,7 +249,7 @@ describe('Feature: dependency-fix, Property 2: Dependency Installation', () => {
             });
             
             // Validate installed package structure
-            const packagePath = join(tempDir, 'node_modules', 'avana-cli');
+            const packagePath = join(tempDir, 'node_modules', 'avanasec');
             expect(existsSync(packagePath)).toBe(true);
             
             // Should have all required files

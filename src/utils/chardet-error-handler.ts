@@ -75,7 +75,7 @@ export function displayChardetError(error: Error, context?: string): void {
   console.error();
   
   console.error(`${colors.blue}${colors.bold}📞 Still need help?${colors.reset}`);
-  console.error(`${colors.blue}Report this issue: https://github.com/innookeke/avana-cli/issues${colors.reset}`);
+  console.error(`${colors.blue}Report this issue: https://github.com/innookeke/avanasec/issues${colors.reset}`);
   console.error(`${colors.blue}Include your Node.js version and operating system.${colors.reset}`);
   console.error();
 }

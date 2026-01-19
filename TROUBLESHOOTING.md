@@ -1,15 +1,15 @@
-# Troubleshooting Guide: Avana CLI
+# Troubleshooting Guide: Avanasec CLI
 
-This guide helps you resolve common issues with Avana CLI installation and usage.
+This guide helps you resolve common issues with Avanasec CLI installation and usage.
 
 ## Quick Diagnostics
 
 Run the built-in diagnostics tool first:
 
 ```bash
-avana troubleshoot
+avanasec troubleshoot
 # or
-avana doctor
+avanasec doctor
 ```
 
 This will check your system configuration and identify common issues automatically.
@@ -18,13 +18,13 @@ This will check your system configuration and identify common issues automatical
 
 ### Command Not Found
 
-**Problem**: `avana: command not found` or `'avana' is not recognized`
+**Problem**: `avanasec: command not found` or `'avanasec' is not recognized`
 
 **Solutions**:
 
 1. **Verify Installation**:
    ```bash
-   npm list -g avana-cli
+   npm list -g avanasec
    ```
 
 2. **Check npm Global Path**:
@@ -38,8 +38,8 @@ This will check your system configuration and identify common issues automatical
 
 4. **Reinstall Globally**:
    ```bash
-   npm uninstall -g avana-cli
-   npm install -g avana-cli
+   npm uninstall -g avanasec
+   npm install -g avanasec
    ```
 
 ### Permission Errors
@@ -50,12 +50,12 @@ This will check your system configuration and identify common issues automatical
 
 1. **Use sudo** (macOS/Linux):
    ```bash
-   sudo npm install -g avana-cli
+   sudo npm install -g avanasec
    ```
 
 2. **Run as Administrator** (Windows):
    - Open Command Prompt as Administrator
-   - Run: `npm install -g avana-cli`
+   - Run: `npm install -g avanasec`
 
 3. **Configure npm for Global Installs** (Recommended):
    ```bash
@@ -63,7 +63,7 @@ This will check your system configuration and identify common issues automatical
    npm config set prefix '~/.npm-global'
    echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.profile
    source ~/.profile
-   npm install -g avana-cli
+   npm install -g avanasec
    ```
 
 ### Module Loading Errors
@@ -74,15 +74,15 @@ This will check your system configuration and identify common issues automatical
 
 1. **Reinstall Dependencies**:
    ```bash
-   npm uninstall -g avana-cli
+   npm uninstall -g avanasec
    npm cache clean --force
-   npm install -g avana-cli
+   npm install -g avanasec
    ```
 
 2. **Manual Dependency Installation**:
    ```bash
    npm install -g chardet cli-progress iconv-lite minimatch
-   npm install -g avana-cli
+   npm install -g avanasec
    ```
 
 3. **Check Node.js Version**:
@@ -106,7 +106,7 @@ This will check your system configuration and identify common issues automatical
 
 1. **Check chardet Module**:
    ```bash
-   avana troubleshoot
+   avanasec troubleshoot
    ```
 
 2. **Reinstall chardet**:
@@ -114,7 +114,7 @@ This will check your system configuration and identify common issues automatical
    npm install -g chardet
    ```
 
-3. **Use Fallback Mode**: Avana automatically falls back to basic encoding detection if chardet fails.
+3. **Use Fallback Mode**: Avanasec automatically falls back to basic encoding detection if chardet fails.
 
 ### Memory Issues
 
@@ -124,17 +124,17 @@ This will check your system configuration and identify common issues automatical
 
 1. **Increase Memory Limit**:
    ```bash
-   avana scan --max-memory 1000  # 1GB limit
+   avanasec scan --max-memory 1000  # 1GB limit
    ```
 
 2. **Use Ignore Patterns**:
    ```bash
-   avana scan --ignore "node_modules/**" --ignore "dist/**"
+   avanasec scan --ignore "node_modules/**" --ignore "dist/**"
    ```
 
 3. **Scan Smaller Directories**:
    ```bash
-   avana scan --path ./src
+   avanasec scan --path ./src
    ```
 
 ### Performance Issues
@@ -145,12 +145,12 @@ This will check your system configuration and identify common issues automatical
 
 1. **Use More Workers**:
    ```bash
-   avana scan --workers 8
+   avanasec scan --workers 8
    ```
 
 2. **Add Ignore Patterns**:
    ```bash
-   avana scan --ignore "**/*.log" --ignore "**/*.tmp"
+   avanasec scan --ignore "**/*.log" --ignore "**/*.tmp"
    ```
 
 3. **Check .avanaignore File**: Create a `.avanaignore` file with patterns to exclude:
@@ -172,7 +172,7 @@ This will check your system configuration and identify common issues automatical
 
 1. **Use PowerShell**: Run commands in PowerShell instead of Command Prompt
 2. **Check PATH**: Ensure `%APPDATA%\npm` is in your PATH
-3. **Use Full Path**: `%APPDATA%\npm\avana.cmd scan`
+3. **Use Full Path**: `%APPDATA%\npm\avanasec.cmd scan`
 
 ### macOS
 
@@ -204,14 +204,14 @@ This will check your system configuration and identify common issues automatical
 
 1. **Install Hooks**:
    ```bash
-   avana install
+   avanasec install
    ```
 
 2. **Check Hook Files**: Verify `.husky/pre-commit` exists and is executable
 
 3. **Test Manually**:
    ```bash
-   avana scan --staged
+   avanasec scan --staged
    ```
 
 4. **Bypass for Testing**:
@@ -221,23 +221,23 @@ This will check your system configuration and identify common issues automatical
 
 ### CI/CD Integration Issues
 
-**Problem**: Avana failing in CI/CD pipelines
+**Problem**: Avanasec failing in CI/CD pipelines
 
 **Solutions**:
 
 1. **Use Specific Exit Codes**:
    ```bash
-   avana scan --fail-on-high
+   avanasec scan --fail-on-high
    ```
 
 2. **Generate Reports**:
    ```bash
-   avana scan --json --output-md
+   avanasec scan --json --output-md
    ```
 
 3. **Set Memory Limits**:
    ```bash
-   avana scan --max-memory 512
+   avanasec scan --max-memory 512
    ```
 
 ## Getting Additional Help
@@ -247,7 +247,7 @@ This will check your system configuration and identify common issues automatical
 Always start with the built-in diagnostics:
 
 ```bash
-avana troubleshoot
+avanasec troubleshoot
 ```
 
 This provides:
@@ -272,25 +272,25 @@ When reporting issues, please include:
 
 3. **Diagnostic Output**:
    ```bash
-   avana troubleshoot > diagnostics.txt
+   avanasec troubleshoot > diagnostics.txt
    ```
 
 ### Support Channels
 
-- **Documentation**: [GitHub Repository](https://github.com/innookeke/avana-cli#readme)
-- **Issues**: [GitHub Issues](https://github.com/innookeke/avana-cli/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/innookeke/avana-cli/discussions)
+- **Documentation**: [GitHub Repository](https://github.com/innookeke/avanasec#readme)
+- **Issues**: [GitHub Issues](https://github.com/innookeke/avanasec/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/innookeke/avanasec/discussions)
 
 ### Quick Reference
 
 | Issue | Command | Description |
 |-------|---------|-------------|
-| Installation check | `npm list -g avana-cli` | Verify global installation |
-| Diagnostics | `avana troubleshoot` | Run system diagnostics |
-| Reinstall | `npm uninstall -g avana-cli && npm install -g avana-cli` | Clean reinstall |
+| Installation check | `npm list -g avanasec` | Verify global installation |
+| Diagnostics | `avanasec troubleshoot` | Run system diagnostics |
+| Reinstall | `npm uninstall -g avanasec && npm install -g avanasec` | Clean reinstall |
 | Clear cache | `npm cache clean --force` | Clear npm cache |
 | Check PATH | `echo $PATH` (Unix) / `echo %PATH%` (Windows) | Verify PATH configuration |
-| Test command | `avana --help` | Verify command works |
+| Test command | `avanasec --help` | Verify command works |
 
 ## Advanced Troubleshooting
 
@@ -299,7 +299,7 @@ When reporting issues, please include:
 Enable debug output for detailed information:
 
 ```bash
-avana scan --debug
+avanasec scan --debug
 ```
 
 ### Verbose Logging
@@ -307,7 +307,7 @@ avana scan --debug
 Get detailed scan information:
 
 ```bash
-avana scan --verbose
+avanasec scan --verbose
 ```
 
 ### Manual Testing
@@ -316,13 +316,13 @@ Test individual components:
 
 ```bash
 # Test file detection
-avana scan --path ./test-file.js --verbose
+avanasec scan --path ./test-file.js --verbose
 
 # Test pattern matching
-avana scan --debug | grep "Pattern"
+avanasec scan --debug | grep "Pattern"
 
 # Test memory usage
-avana scan --verbose | grep "Memory"
+avanasec scan --verbose | grep "Memory"
 ```
 
 ### Environment Variables
@@ -331,14 +331,14 @@ Set environment variables for debugging:
 
 ```bash
 # Enable debug logging
-export DEBUG=avana:*
-avana scan
+export DEBUG=avanasec:*
+avanasec scan
 
 # Set memory limit
 export NODE_OPTIONS="--max-old-space-size=2048"
-avana scan
+avanasec scan
 ```
 
 ---
 
-**Need more help?** Run `avana troubleshoot` for automated diagnostics and solutions.
+**Need more help?** Run `avanasec troubleshoot` for automated diagnostics and solutions.

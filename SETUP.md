@@ -10,8 +10,8 @@
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/innookeke/avana-cli.git
-cd avana-cli
+git clone https://github.com/innookeke/avanasec.git
+cd avanasec
 npm install
 ```
 
@@ -144,7 +144,7 @@ rm -f temp-file 2>/dev/null || del temp-file 2>nul
 
 ### Project Structure
 ```
-avana-cli/
+avanasec/
 ├── .kiro/                  # Kiro CLI integration
 │   ├── specs/              # Feature specifications
 │   ├── steering/           # Development guidelines
