@@ -1,6 +1,6 @@
 {
   "name": "avanasec",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A robust, production-ready CLI tool for detecting secrets and credentials in your codebase",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
