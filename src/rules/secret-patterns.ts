@@ -591,11 +591,11 @@ export const SECRET_PATTERNS: SecretPattern[] = [
   // Web3/Blockchain/Cryptocurrency
   // ============================================
   {
-    id: 'ethereum-private-key',
-    name: 'Ethereum Private Key',
+    id: 'evm-private-key',
+    name: 'EVM-Compatible Private Key',
     pattern: /0x[a-fA-F0-9]{64}/g,
     severity: 'critical',
-    description: 'Ethereum private key detected',
+    description: 'EVM-compatible private key detected (Ethereum, Polygon, BSC, Arbitrum, Optimism, Fantom, etc.)',
     suggestion: 'Remove private key immediately and use secure key management',
   },
   {
@@ -739,11 +739,11 @@ export const SECRET_PATTERNS: SecretPattern[] = [
   // Additional Blockchain Networks
   // ============================================
   {
-    id: 'tron-private-key',
-    name: 'Tron Private Key',
+    id: 'generic-blockchain-private-key',
+    name: 'Generic Blockchain Private Key',
     pattern: /[a-fA-F0-9]{64}/g,
     severity: 'critical',
-    description: 'Tron private key detected (64-character hex)',
+    description: 'Generic blockchain private key detected (64-character hex - Tron, Cosmos, Chainlink, etc.)',
     suggestion: 'Remove private key immediately and use secure key management',
   },
   {
@@ -752,22 +752,6 @@ export const SECRET_PATTERNS: SecretPattern[] = [
     pattern: /ed25519:[1-9A-HJ-NP-Za-km-z]{87,88}/g,
     severity: 'critical',
     description: 'NEAR Protocol private key detected',
-    suggestion: 'Remove private key immediately and use secure key management',
-  },
-  {
-    id: 'cosmos-private-key',
-    name: 'Cosmos Private Key',
-    pattern: /[a-fA-F0-9]{64}/g,
-    severity: 'critical',
-    description: 'Cosmos private key detected',
-    suggestion: 'Remove private key immediately and use secure key management',
-  },
-  {
-    id: 'polkadot-private-key',
-    name: 'Polkadot Private Key',
-    pattern: /0x[a-fA-F0-9]{64}/g,
-    severity: 'critical',
-    description: 'Polkadot private key detected',
     suggestion: 'Remove private key immediately and use secure key management',
   },
   {
@@ -808,54 +792,6 @@ export const SECRET_PATTERNS: SecretPattern[] = [
     pattern: /[a-fA-F0-9]{66}/g,
     severity: 'critical',
     description: 'Ripple (XRP) private key detected',
-    suggestion: 'Remove private key immediately and use secure key management',
-  },
-  {
-    id: 'chainlink-node-key',
-    name: 'Chainlink Node Key',
-    pattern: /[a-fA-F0-9]{64}/g,
-    severity: 'critical',
-    description: 'Chainlink node private key detected',
-    suggestion: 'Remove private key immediately and use secure key management',
-  },
-  {
-    id: 'polygon-private-key',
-    name: 'Polygon Private Key',
-    pattern: /0x[a-fA-F0-9]{64}/g,
-    severity: 'critical',
-    description: 'Polygon private key detected',
-    suggestion: 'Remove private key immediately and use secure key management',
-  },
-  {
-    id: 'bsc-private-key',
-    name: 'Binance Smart Chain Private Key',
-    pattern: /0x[a-fA-F0-9]{64}/g,
-    severity: 'critical',
-    description: 'Binance Smart Chain private key detected',
-    suggestion: 'Remove private key immediately and use secure key management',
-  },
-  {
-    id: 'fantom-private-key',
-    name: 'Fantom Private Key',
-    pattern: /0x[a-fA-F0-9]{64}/g,
-    severity: 'critical',
-    description: 'Fantom private key detected',
-    suggestion: 'Remove private key immediately and use secure key management',
-  },
-  {
-    id: 'arbitrum-private-key',
-    name: 'Arbitrum Private Key',
-    pattern: /0x[a-fA-F0-9]{64}/g,
-    severity: 'critical',
-    description: 'Arbitrum private key detected',
-    suggestion: 'Remove private key immediately and use secure key management',
-  },
-  {
-    id: 'optimism-private-key',
-    name: 'Optimism Private Key',
-    pattern: /0x[a-fA-F0-9]{64}/g,
-    severity: 'critical',
-    description: 'Optimism private key detected',
     suggestion: 'Remove private key immediately and use secure key management',
   },
 
@@ -1393,7 +1329,7 @@ export const SECRET_PATTERNS: SecretPattern[] = [
   {
     id: 'apple-team-id',
     name: 'Apple Team ID',
-    pattern: /[A-Z0-9]{10}/g,
+    pattern: /(?:team[_-]?id|apple[_-]?team|TEAM_ID|APPLE_TEAM_ID)[\s=:'"]*([A-Z0-9]{10})\b/gi,
     severity: 'medium',
     description: 'Apple Team ID detected',
     suggestion: 'Move to environment variable: APPLE_TEAM_ID',

@@ -1,66 +1,46 @@
 # 🔒 Avana Security Scan Report (Score: 0/100)
 
-**Generated:** 1/17/2026, 3:15:14 AM  
+**Generated:** 1/18/2026, 12:32:24 AM  
 **Status:** ⚠️ Issues Detected
 
 ## 📊 Scan Metadata
 
 | Metric | Value |
 |--------|-------|
-| **Duration** | 4041ms |
-| **Files Scanned** | 233 |
-| **Total Issues** | 233 |
-| **Timestamp** | 2026-01-17T02:15:14.411Z |
+| **Duration** | 14846ms |
+| **Files Scanned** | 21 |
+| **Total Issues** | 1221 |
+| **Timestamp** | 2026-01-17T23:32:24.331Z |
 
 ## 📈 Issue Summary
 
 | Severity | Count | Icon |
 |----------|-------|------|
-| **Critical** | 110 | 🔴 |
-| **High** | 105 | 🟠 |
-| **Medium** | 18 | 🟡 |
+| **Critical** | 768 | 🔴 |
+| **High** | 400 | 🟠 |
+| **Medium** | 53 | 🟡 |
 | **Low** | 0 | 🟢 |
 | **Info** | 0 | ℹ️ |
 
 ### Severity Distribution
 
 ```
-Critical: █████████ 110
-High:     █████████ 105
-Medium:   ██ 18
+Critical: █████████████ 768
+High:     ███████ 400
+Medium:   █ 53
 Low:       0
 ```
 
 ## 🚨 Detected Issues
 
-### 🔴 Critical Severity (110 issues)
+### 🔴 Critical Severity (768 issues)
 
-#### 1. 🔴 AWS SES API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\.kiro\DEVLOG.md` |
-| **Line** | 210 |
-| **Severity** | 🔴 CRITICAL |
-| **Type** | secret |
-| **Description** | AWS SES API key detected |
-
-**Code Context:**
-
-```
-- **Direct Pattern Integration**: Uses getAllSecretPatterns() directly instead of SecretScanner wrapper
-```
-
-**💡 Recommendation:** Move to environment variable: AWS_SES_ACCESS_KEY
-
----
-
-#### 2. 🔴 OpenAI API Key
+#### 1. 🔴 OpenAI API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\GIT_HOOK_IMPLEMENTATION.md` |
-| **Line** | 141 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 20 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -68,7 +48,27 @@ Low:       0
 **Code Context:**
 
 ```
-echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
+"code": "echo \"const key = 'sk-proj-1234567890abcdef';\" > test-secret.js",
+```
+
+**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+
+---
+
+#### 2. 🔴 OpenAI API Key
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 102 |
+| **Severity** | 🔴 CRITICAL |
+| **Type** | secret |
+| **Description** | OpenAI API key detected |
+
+**Code Context:**
+
+```
+"code": "echo \"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\" > test-secret.js",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -79,8 +79,8 @@ echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 71 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 114 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -88,7 +88,7 @@ echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
 **Code Context:**
 
 ```
-echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
+"code": "echo \"const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\" > test-secret-temp.js",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -99,8 +99,8 @@ echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 91 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 210 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -108,7 +108,7 @@ echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\" > test-secret.js",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -119,8 +119,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 111 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 493 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -128,7 +128,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret-temp.js
+"code": "const key = \"sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop\";",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -139,8 +139,8 @@ echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefg
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 131 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 516 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -148,7 +148,7 @@ echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefg
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "const key = \"sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop\";",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -159,8 +159,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 191 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 539 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -168,7 +168,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
+"code": "const key = \"sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop\";",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -179,8 +179,8 @@ echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 211 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 562 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -188,7 +188,7 @@ echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
 **Code Context:**
 
 ```
-echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
+"code": "const key = \"sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop\";",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -199,8 +199,8 @@ echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 231 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 585 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -208,7 +208,7 @@ echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "const key = \"sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop\";",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -219,8 +219,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 251 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 608 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -228,7 +228,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret-temp.js
+"code": "\"code\": \"echo \\\"const key = 'sk-proj-1234567890abcdef';\\\" > test-secret.js\",",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -239,8 +239,8 @@ echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefg
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 271 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 620 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -248,7 +248,7 @@ echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefg
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "\"code\": \"echo \\\"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\\\" > test-secret.js\",",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -259,8 +259,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 291 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 632 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -268,7 +268,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
+"code": "\"code\": \"echo \\\"const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\\\" > test-secret-temp.js\",",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -279,8 +279,8 @@ echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 311 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 644 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -288,7 +288,7 @@ echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
 **Code Context:**
 
 ```
-echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
+"code": "\"code\": \"echo \\\"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\\\" > test-secret.js\",",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -299,8 +299,8 @@ echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 331 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 656 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -308,7 +308,7 @@ echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "\"code\": \"const key = \\\"sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop\\\";\",",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -319,8 +319,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 351 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 668 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -328,7 +328,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret-temp.js
+"code": "\"code\": \"const key = \\\"sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop\\\";\",",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -339,8 +339,8 @@ echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefg
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 371 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 680 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -348,7 +348,7 @@ echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefg
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "\"code\": \"const key = \\\"sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop\\\";\",",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -359,8 +359,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 391 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 692 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -368,7 +368,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
+"code": "\"code\": \"const key = \\\"sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop\\\";\",",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -379,8 +379,8 @@ echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 411 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 704 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -388,7 +388,7 @@ echo "const key = 'sk-proj-1234567890abcdef';" > test-secret.js
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "\"code\": \"const key = \\\"sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop\\\";\",",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -399,8 +399,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 431 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1064 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -408,7 +408,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret-temp.js
+"code": "\"code\": \"echo \\\"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\\\" > test-secret.js\",",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -419,8 +419,8 @@ echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefg
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 451 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1076 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -428,7 +428,7 @@ echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefg
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "\"code\": \"echo \\\"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\\\" > test-secret.js\",",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -439,8 +439,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 471 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1519 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -448,7 +448,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const key = 'sk-proj-1234567890abcdef';\" > test-secret.js",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -459,8 +459,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 491 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1531 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -468,7 +468,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\" > test-secret.js",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -479,8 +479,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 511 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1543 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -488,7 +488,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\" > test-secret-temp.js",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -499,8 +499,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 531 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1555 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -508,7 +508,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret-temp.js
+"code": "echo \"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\" > test-secret.js",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -519,8 +519,8 @@ echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefg
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 551 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1735 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -528,7 +528,7 @@ echo "const key = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefg
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\" > test-secret.js",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -539,8 +539,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 571 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1747 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -548,7 +548,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\" > test-secret.js",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -559,8 +559,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 591 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2343 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -568,7 +568,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "createTempFile(testDir, 'secret.txt', 'const key = \"sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop\";');",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -579,8 +579,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 611 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2484 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -588,7 +588,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "const content = 'const key = \"sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop\";\\n';",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -599,8 +599,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 631 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2496 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -608,7 +608,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "const openaiKey = \"sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop\";",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -619,8 +619,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 651 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2508 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -628,7 +628,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "const secret = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -639,8 +639,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 671 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2520 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -648,7 +648,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "const content = 'a'.repeat(200) + 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop' + 'b'.repeat(200);",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -659,8 +659,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 691 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2532 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -668,7 +668,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "const content = 'const key = \"sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop\";\\n';",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
@@ -679,8 +679,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 711 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2568 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
 | **Description** | OpenAI API key detected |
@@ -688,635 +688,635 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "const secret = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';",
 ```
 
 **💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
 
 ---
 
-#### 34. 🔴 OpenAI API Key
+#### 34. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1056 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 126 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const secret = 'AKIAIOSFODNN7EXAMPLE';\" > test-aws.js",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 35. 🔴 OpenAI API Key
+#### 35. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1076 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 222 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const secret = 'AKIAIOSFODNN7EXAMPLE';\" > test-aws.js",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 36. 🔴 OpenAI API Key
+#### 36. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1256 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 716 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "\"code\": \"echo \\\"const secret = 'AKIAIOSFODNN7EXAMPLE';\\\" > test-aws.js\",",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 37. 🔴 OpenAI API Key
+#### 37. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1276 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 728 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "\"code\": \"echo \\\"const secret = 'AKIAIOSFODNN7EXAMPLE';\\\" > test-aws.js\",",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 38. 🔴 OpenAI API Key
+#### 38. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1296 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1088 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "\"code\": \"echo \\\"const secret = 'AKIAIOSFODNN7EXAMPLE';\\\" > test-aws.js\",",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 39. 🔴 OpenAI API Key
+#### 39. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1316 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1100 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "\"code\": \"echo \\\"const secret = 'AKIAIOSFODNN7EXAMPLE';\\\" > test-aws.js\",",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 40. 🔴 OpenAI API Key
+#### 40. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1336 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1567 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const secret = 'AKIAIOSFODNN7EXAMPLE';\" > test-aws.js",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 41. 🔴 OpenAI API Key
+#### 41. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1356 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1579 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const secret = 'AKIAIOSFODNN7EXAMPLE';\" > test-aws.js",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 42. 🔴 OpenAI API Key
+#### 42. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1376 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1759 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const secret = 'AKIAIOSFODNN7EXAMPLE';\" > test-aws.js",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 43. 🔴 OpenAI API Key
+#### 43. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1396 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1771 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const secret = 'AKIAIOSFODNN7EXAMPLE';\" > test-aws.js",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 44. 🔴 OpenAI API Key
+#### 44. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1416 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2366 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "fc.constant('const AWS_ACCESS_KEY = \"AKIA1234567890ABCDEF\";'),",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 45. 🔴 OpenAI API Key
+#### 45. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1436 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2378 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "'const secret = \"AKIA1234567890ABCDEF\";',",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 46. 🔴 OpenAI API Key
+#### 46. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1456 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2402 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "'const secret = \"AKIA1234567890ABCDEF\";',",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 47. 🔴 OpenAI API Key
+#### 47. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1476 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2544 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "const awsKey = \"AKIAIOSFODNN7EXAMPLE\";",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 48. 🔴 OpenAI API Key
+#### 48. 🔴 AWS Access Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1496 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2649 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | AWS Access Key ID detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "fs.writeFileSync(path.join(dir3, 'secret3.js'), 'const AWS_ACCESS_KEY = \"AKIAIOSFODNN7EXAMPLE\";');",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Move to AWS credentials file or environment variable
 
 ---
 
-#### 49. 🔴 OpenAI API Key
+#### 49. 🔴 GitHub Token
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1516 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2390 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | GitHub Personal Access Token detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "fc.constant('const token = \"ghp_1234567890abcdefghijklmnopqrstuvwxyz12\";'),",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Revoke token and use GitHub Secrets for CI/CD
 
 ---
 
-#### 50. 🔴 OpenAI API Key
+#### 50. 🔴 GitHub Token
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1536 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2426 |
 | **Severity** | 🔴 CRITICAL |
 | **Type** | secret |
-| **Description** | OpenAI API key detected |
+| **Description** | GitHub Personal Access Token detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "fc.constant('const token = \"ghp_1234567890abcdefghijklmnopqrstuvwxyz12\";'),",
 ```
 
-**💡 Recommendation:** Move to environment variable: OPENAI_API_KEY
+**💡 Recommendation:** Revoke token and use GitHub Secrets for CI/CD
 
 ---
 
 
-*... and 60 more critical severity issues*
+*... and 718 more critical severity issues*
 
-### 🟠 High Severity (105 issues)
+### 🟠 High Severity (400 issues)
 
-#### 1. 🟠 Generic API Key
+#### 1. 🟠 Web3 Provider URL with API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 91 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 3403 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Potential API key detected |
+| **Description** | Web3 provider URL with API key detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "'https://mainnet.infura.io/v3/1234567890abcdef1234567890abcdef',",
 ```
 
-**💡 Recommendation:** Move to environment variable
+**💡 Recommendation:** Move API key to environment variable
 
 ---
 
-#### 2. 🟠 Generic API Key
+#### 2. 🟠 Web3 Provider URL with API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 131 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 3415 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Potential API key detected |
+| **Description** | Web3 provider URL with API key detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "'https://goerli.infura.io/v3/abcdef1234567890abcdef1234567890',",
 ```
 
-**💡 Recommendation:** Move to environment variable
+**💡 Recommendation:** Move API key to environment variable
 
 ---
 
-#### 3. 🟠 Generic API Key
+#### 3. 🟠 Web3 Provider URL with API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 231 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 3427 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Potential API key detected |
+| **Description** | Web3 provider URL with API key detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "'const provider = \"https://polygon-mainnet.infura.io/v3/1234567890abcdef1234567890abcdef\";'",
 ```
 
-**💡 Recommendation:** Move to environment variable
+**💡 Recommendation:** Move API key to environment variable
 
 ---
 
-#### 4. 🟠 Generic API Key
+#### 4. 🟠 Web3 Provider URL with API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 271 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 3439 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Potential API key detected |
+| **Description** | Web3 provider URL with API key detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "'https://mainnet.infura.io/v3/1234567890abcdef1234567890abcdef',",
 ```
 
-**💡 Recommendation:** Move to environment variable
+**💡 Recommendation:** Move API key to environment variable
 
 ---
 
-#### 5. 🟠 Generic API Key
+#### 5. 🟠 Web3 Provider URL with API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 331 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 3451 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Potential API key detected |
+| **Description** | Web3 provider URL with API key detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "'https://goerli.infura.io/v3/abcdef1234567890abcdef1234567890',",
 ```
 
-**💡 Recommendation:** Move to environment variable
+**💡 Recommendation:** Move API key to environment variable
 
 ---
 
-#### 6. 🟠 Generic API Key
+#### 6. 🟠 Web3 Provider URL with API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 371 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 3463 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Potential API key detected |
+| **Description** | Web3 provider URL with API key detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "'const provider = \"https://polygon-mainnet.infura.io/v3/1234567890abcdef1234567890abcdef\";'",
 ```
 
-**💡 Recommendation:** Move to environment variable
+**💡 Recommendation:** Move API key to environment variable
 
 ---
 
-#### 7. 🟠 Generic API Key
+#### 7. 🟠 Web3 Provider URL with API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 411 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 3475 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Potential API key detected |
+| **Description** | Web3 provider URL with API key detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "url: \"https://mainnet.infura.io/v3/1234567890abcdef1234567890abcdef\",",
 ```
 
-**💡 Recommendation:** Move to environment variable
+**💡 Recommendation:** Move API key to environment variable
 
 ---
 
-#### 8. 🟠 Generic API Key
+#### 8. 🟠 Web3 Provider URL with API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 451 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 4039 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Potential API key detected |
+| **Description** | Web3 provider URL with API key detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "'https://mainnet.infura.io/v3/1234567890abcdef1234567890abcdef',",
 ```
 
-**💡 Recommendation:** Move to environment variable
+**💡 Recommendation:** Move API key to environment variable
 
 ---
 
-#### 9. 🟠 Generic API Key
+#### 9. 🟠 Web3 Provider URL with API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 471 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 4051 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Potential API key detected |
+| **Description** | Web3 provider URL with API key detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "'https://goerli.infura.io/v3/abcdef1234567890abcdef1234567890',",
 ```
 
-**💡 Recommendation:** Move to environment variable
+**💡 Recommendation:** Move API key to environment variable
 
 ---
 
-#### 10. 🟠 Generic API Key
+#### 10. 🟠 Web3 Provider URL with API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 491 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 4063 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Potential API key detected |
+| **Description** | Web3 provider URL with API key detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "'const provider = \"https://polygon-mainnet.infura.io/v3/1234567890abcdef1234567890abcdef\";'",
 ```
 
-**💡 Recommendation:** Move to environment variable
+**💡 Recommendation:** Move API key to environment variable
 
 ---
 
-#### 11. 🟠 Generic API Key
+#### 11. 🟠 Web3 Provider URL with API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 511 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 4087 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Potential API key detected |
+| **Description** | Web3 provider URL with API key detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "'https://mainnet.infura.io/v3/1234567890abcdef1234567890abcdef',",
 ```
 
-**💡 Recommendation:** Move to environment variable
+**💡 Recommendation:** Move API key to environment variable
 
 ---
 
-#### 12. 🟠 Generic API Key
+#### 12. 🟠 Web3 Provider URL with API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 551 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 4099 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Potential API key detected |
+| **Description** | Web3 provider URL with API key detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "'https://goerli.infura.io/v3/abcdef1234567890abcdef1234567890',",
 ```
 
-**💡 Recommendation:** Move to environment variable
+**💡 Recommendation:** Move API key to environment variable
 
 ---
 
-#### 13. 🟠 Generic API Key
+#### 13. 🟠 Web3 Provider URL with API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 571 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 4111 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Potential API key detected |
+| **Description** | Web3 provider URL with API key detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "'const provider = \"https://polygon-mainnet.infura.io/v3/1234567890abcdef1234567890abcdef\";'",
 ```
 
-**💡 Recommendation:** Move to environment variable
+**💡 Recommendation:** Move API key to environment variable
 
 ---
 
-#### 14. 🟠 Generic API Key
+#### 14. 🟠 Web3 Provider URL with API Key
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 591 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 4135 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Potential API key detected |
+| **Description** | Web3 provider URL with API key detected |
 
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "url: \"https://mainnet.infura.io/v3/1234567890abcdef1234567890abcdef\",",
 ```
 
-**💡 Recommendation:** Move to environment variable
+**💡 Recommendation:** Move API key to environment variable
 
 ---
 
@@ -1324,8 +1324,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 611 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 102 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential API key detected |
@@ -1333,7 +1333,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\" > test-secret.js",
 ```
 
 **💡 Recommendation:** Move to environment variable
@@ -1344,8 +1344,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 631 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 210 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential API key detected |
@@ -1353,7 +1353,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\" > test-secret.js",
 ```
 
 **💡 Recommendation:** Move to environment variable
@@ -1364,8 +1364,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 651 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 620 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential API key detected |
@@ -1373,7 +1373,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "\"code\": \"echo \\\"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\\\" > test-secret.js\",",
 ```
 
 **💡 Recommendation:** Move to environment variable
@@ -1384,8 +1384,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 671 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 644 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential API key detected |
@@ -1393,7 +1393,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "\"code\": \"echo \\\"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\\\" > test-secret.js\",",
 ```
 
 **💡 Recommendation:** Move to environment variable
@@ -1404,8 +1404,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 691 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1064 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential API key detected |
@@ -1413,7 +1413,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "\"code\": \"echo \\\"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\\\" > test-secret.js\",",
 ```
 
 **💡 Recommendation:** Move to environment variable
@@ -1424,8 +1424,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 711 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1076 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential API key detected |
@@ -1433,7 +1433,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "\"code\": \"echo \\\"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\\\" > test-secret.js\",",
 ```
 
 **💡 Recommendation:** Move to environment variable
@@ -1444,8 +1444,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1056 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1531 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential API key detected |
@@ -1453,7 +1453,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\" > test-secret.js",
 ```
 
 **💡 Recommendation:** Move to environment variable
@@ -1464,8 +1464,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1076 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1555 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential API key detected |
@@ -1473,7 +1473,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\" > test-secret.js",
 ```
 
 **💡 Recommendation:** Move to environment variable
@@ -1484,8 +1484,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1256 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1735 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential API key detected |
@@ -1493,7 +1493,7 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\" > test-secret.js",
 ```
 
 **💡 Recommendation:** Move to environment variable
@@ -1504,8 +1504,8 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1276 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1747 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential API key detected |
@@ -1513,339 +1513,19 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
+"code": "echo \"const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';\" > test-secret.js",
 ```
 
 **💡 Recommendation:** Move to environment variable
 
 ---
 
-#### 25. 🟠 Generic API Key
+#### 25. 🟠 Generic Secret
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1296 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 26. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1316 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 27. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1336 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 28. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1356 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 29. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1376 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 30. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1396 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 31. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1416 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 32. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1436 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 33. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1456 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 34. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1476 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 35. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1496 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 36. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1516 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 37. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1536 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 38. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1556 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 39. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1576 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 40. 🟠 Generic API Key
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 1596 |
-| **Severity** | 🟠 HIGH |
-| **Type** | secret |
-| **Description** | Potential API key detected |
-
-**Code Context:**
-
-```
-echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';" > test-secret.js
-```
-
-**💡 Recommendation:** Move to environment variable
-
----
-
-#### 41. 🟠 Generic Secret
-
-| Detail | Value |
-|--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 151 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 126 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential secret detected |
@@ -1853,19 +1533,19 @@ echo "const apiKey = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcd
 **Code Context:**
 
 ```
-echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
+"code": "echo \"const secret = 'AKIAIOSFODNN7EXAMPLE';\" > test-aws.js",
 ```
 
 **💡 Recommendation:** Move to environment variable
 
 ---
 
-#### 42. 🟠 Generic Secret
+#### 26. 🟠 Generic Secret
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 171 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 222 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential secret detected |
@@ -1873,19 +1553,19 @@ echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
 **Code Context:**
 
 ```
-echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
+"code": "echo \"const secret = 'AKIAIOSFODNN7EXAMPLE';\" > test-aws.js",
 ```
 
 **💡 Recommendation:** Move to environment variable
 
 ---
 
-#### 43. 🟠 Generic Secret
+#### 27. 🟠 Generic Secret
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 731 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 716 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential secret detected |
@@ -1893,19 +1573,19 @@ echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
 **Code Context:**
 
 ```
-echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
+"code": "\"code\": \"echo \\\"const secret = 'AKIAIOSFODNN7EXAMPLE';\\\" > test-aws.js\",",
 ```
 
 **💡 Recommendation:** Move to environment variable
 
 ---
 
-#### 44. 🟠 Generic Secret
+#### 28. 🟠 Generic Secret
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 751 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 728 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential secret detected |
@@ -1913,19 +1593,19 @@ echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
 **Code Context:**
 
 ```
-echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
+"code": "\"code\": \"echo \\\"const secret = 'AKIAIOSFODNN7EXAMPLE';\\\" > test-aws.js\",",
 ```
 
 **💡 Recommendation:** Move to environment variable
 
 ---
 
-#### 45. 🟠 Generic Secret
+#### 29. 🟠 Generic Secret
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 771 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1088 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential secret detected |
@@ -1933,19 +1613,19 @@ echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
 **Code Context:**
 
 ```
-echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
+"code": "\"code\": \"echo \\\"const secret = 'AKIAIOSFODNN7EXAMPLE';\\\" > test-aws.js\",",
 ```
 
 **💡 Recommendation:** Move to environment variable
 
 ---
 
-#### 46. 🟠 Generic Secret
+#### 30. 🟠 Generic Secret
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 791 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1100 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential secret detected |
@@ -1953,19 +1633,19 @@ echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
 **Code Context:**
 
 ```
-echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
+"code": "\"code\": \"echo \\\"const secret = 'AKIAIOSFODNN7EXAMPLE';\\\" > test-aws.js\",",
 ```
 
 **💡 Recommendation:** Move to environment variable
 
 ---
 
-#### 47. 🟠 Generic Secret
+#### 31. 🟠 Generic Secret
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 811 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1567 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential secret detected |
@@ -1973,19 +1653,19 @@ echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
 **Code Context:**
 
 ```
-echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
+"code": "echo \"const secret = 'AKIAIOSFODNN7EXAMPLE';\" > test-aws.js",
 ```
 
 **💡 Recommendation:** Move to environment variable
 
 ---
 
-#### 48. 🟠 Generic Secret
+#### 32. 🟠 Generic Secret
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 831 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1579 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential secret detected |
@@ -1993,19 +1673,19 @@ echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
 **Code Context:**
 
 ```
-echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
+"code": "echo \"const secret = 'AKIAIOSFODNN7EXAMPLE';\" > test-aws.js",
 ```
 
 **💡 Recommendation:** Move to environment variable
 
 ---
 
-#### 49. 🟠 Generic Secret
+#### 33. 🟠 Generic Secret
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 851 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1759 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential secret detected |
@@ -2013,19 +1693,19 @@ echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
 **Code Context:**
 
 ```
-echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
+"code": "echo \"const secret = 'AKIAIOSFODNN7EXAMPLE';\" > test-aws.js",
 ```
 
 **💡 Recommendation:** Move to environment variable
 
 ---
 
-#### 50. 🟠 Generic Secret
+#### 34. 🟠 Generic Secret
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 871 |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1771 |
 | **Severity** | 🟠 HIGH |
 | **Type** | secret |
 | **Description** | Potential secret detected |
@@ -2033,223 +1713,983 @@ echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
 **Code Context:**
 
 ```
-echo "const secret = 'AKIAIOSFODNN7EXAMPLE';" > test-aws.js
+"code": "echo \"const secret = 'AKIAIOSFODNN7EXAMPLE';\" > test-aws.js",
 ```
 
 **💡 Recommendation:** Move to environment variable
 
 ---
 
-
-*... and 55 more high severity issues*
-
-### 🟡 Medium Severity (18 issues)
-
-#### 1. 🟡 .env File Content
+#### 35. 🟠 Generic Secret
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 2061 |
-| **Severity** | 🟡 MEDIUM |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2508 |
+| **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Environment variable assignment detected (possible .env file content) |
+| **Description** | Potential secret detected |
 
 **Code Context:**
 
 ```
-SEED_PHRASE=crew athlete post earn wide wealth liar typical radio delay seminar you
+"code": "const secret = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';",
 ```
 
-**💡 Recommendation:** Ensure .env files are in .gitignore and not committed
+**💡 Recommendation:** Move to environment variable
 
 ---
 
-#### 2. 🟡 .env File Content
+#### 36. 🟠 Generic Secret
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 2081 |
-| **Severity** | 🟡 MEDIUM |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 2568 |
+| **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Environment variable assignment detected (possible .env file content) |
+| **Description** | Potential secret detected |
 
 **Code Context:**
 
 ```
-SEED_PHRASE=crew athlete post earn wide wealth liar typical radio delay seminar you
+"code": "const secret = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';",
 ```
 
-**💡 Recommendation:** Ensure .env files are in .gitignore and not committed
+**💡 Recommendation:** Move to environment variable
 
 ---
 
-#### 3. 🟡 .env File Content
+#### 37. 🟠 Bearer Token
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 2101 |
-| **Severity** | 🟡 MEDIUM |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 240 |
+| **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Environment variable assignment detected (possible .env file content) |
+| **Description** | Bearer token detected |
 
 **Code Context:**
 
 ```
-RED='\033[0;31m'
+"title": "Bearer Token",
 ```
 
-**💡 Recommendation:** Ensure .env files are in .gitignore and not committed
+**💡 Recommendation:** Do not hardcode bearer tokens
 
 ---
 
-#### 4. 🟡 .env File Content
+#### 38. 🟠 Bearer Token
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 2121 |
-| **Severity** | 🟡 MEDIUM |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 241 |
+| **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Environment variable assignment detected (possible .env file content) |
+| **Description** | Bearer token detected |
 
 **Code Context:**
 
 ```
-GREEN='\033[0;32m'
+"description": "Bearer token detected",
 ```
 
-**💡 Recommendation:** Ensure .env files are in .gitignore and not committed
+**💡 Recommendation:** Do not hardcode bearer tokens
 
 ---
 
-#### 5. 🟡 .env File Content
+#### 39. 🟠 Bearer Token
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 2141 |
-| **Severity** | 🟡 MEDIUM |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 245 |
+| **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Environment variable assignment detected (possible .env file content) |
+| **Description** | Bearer token detected |
 
 **Code Context:**
 
 ```
-YELLOW='\033[1;33m'
+"code": "name: 'Twitter Bearer Token',",
 ```
 
-**💡 Recommendation:** Ensure .env files are in .gitignore and not committed
+**💡 Recommendation:** Do not hardcode bearer tokens
 
 ---
 
-#### 6. 🟡 .env File Content
+#### 40. 🟠 Bearer Token
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 2161 |
-| **Severity** | 🟡 MEDIUM |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 246 |
+| **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Environment variable assignment detected (possible .env file content) |
+| **Description** | Bearer token detected |
 
 **Code Context:**
 
 ```
-NC='\033[0m' # No Color
+"suggestion": "Do not hardcode bearer tokens"
 ```
 
-**💡 Recommendation:** Ensure .env files are in .gitignore and not committed
+**💡 Recommendation:** Do not hardcode bearer tokens
 
 ---
 
-#### 7. 🟡 .env File Content
+#### 41. 🟠 Bearer Token
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 2181 |
-| **Severity** | 🟡 MEDIUM |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 252 |
+| **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Environment variable assignment detected (possible .env file content) |
+| **Description** | Bearer token detected |
 
 **Code Context:**
 
 ```
-TESTS_PASSED=0
+"title": "Bearer Token",
 ```
 
-**💡 Recommendation:** Ensure .env files are in .gitignore and not committed
+**💡 Recommendation:** Do not hardcode bearer tokens
 
 ---
 
-#### 8. 🟡 .env File Content
+#### 42. 🟠 Bearer Token
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 2201 |
-| **Severity** | 🟡 MEDIUM |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 253 |
+| **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Environment variable assignment detected (possible .env file content) |
+| **Description** | Bearer token detected |
 
 **Code Context:**
 
 ```
-TESTS_FAILED=0
+"description": "Bearer token detected",
 ```
 
-**💡 Recommendation:** Ensure .env files are in .gitignore and not committed
+**💡 Recommendation:** Do not hardcode bearer tokens
 
 ---
 
-#### 9. 🟡 .env File Content
+#### 43. 🟠 Bearer Token
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 2221 |
-| **Severity** | 🟡 MEDIUM |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 257 |
+| **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Environment variable assignment detected (possible .env file content) |
+| **Description** | Bearer token detected |
 
 **Code Context:**
 
 ```
-SEED_PHRASE=crew athlete post earn wide wealth liar typical radio delay seminar you
+"code": "description: 'Twitter Bearer token detected',",
 ```
 
-**💡 Recommendation:** Ensure .env files are in .gitignore and not committed
+**💡 Recommendation:** Do not hardcode bearer tokens
 
 ---
 
-#### 10. 🟡 .env File Content
+#### 44. 🟠 Bearer Token
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\scan-reports\avana-security-report-2026-01-17.md` |
-| **Line** | 2241 |
-| **Severity** | 🟡 MEDIUM |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 258 |
+| **Severity** | 🟠 HIGH |
 | **Type** | secret |
-| **Description** | Environment variable assignment detected (possible .env file content) |
+| **Description** | Bearer token detected |
 
 **Code Context:**
 
 ```
-PRIVATE_KEY=f89b5493d42642a06c4f46d0472fefa2d54068c0143ef0b5d4e3f480f52b2f35
+"suggestion": "Do not hardcode bearer tokens"
 ```
 
-**💡 Recommendation:** Ensure .env files are in .gitignore and not committed
+**💡 Recommendation:** Do not hardcode bearer tokens
 
 ---
 
-#### 11. 🟡 .env File Content
+#### 45. 🟠 Bearer Token
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\TEST_GIT_HOOKS.md` |
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 347 |
+| **Severity** | 🟠 HIGH |
+| **Type** | secret |
+| **Description** | Bearer token detected |
+
+**Code Context:**
+
+```
+"title": "Bearer Token",
+```
+
+**💡 Recommendation:** Do not hardcode bearer tokens
+
+---
+
+#### 46. 🟠 Bearer Token
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 348 |
+| **Severity** | 🟠 HIGH |
+| **Type** | secret |
+| **Description** | Bearer token detected |
+
+**Code Context:**
+
+```
+"description": "Bearer token detected",
+```
+
+**💡 Recommendation:** Do not hardcode bearer tokens
+
+---
+
+#### 47. 🟠 Bearer Token
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 352 |
+| **Severity** | 🟠 HIGH |
+| **Type** | secret |
+| **Description** | Bearer token detected |
+
+**Code Context:**
+
+```
+"code": "name: 'Twitter Bearer Token',",
+```
+
+**💡 Recommendation:** Do not hardcode bearer tokens
+
+---
+
+#### 48. 🟠 Bearer Token
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 353 |
+| **Severity** | 🟠 HIGH |
+| **Type** | secret |
+| **Description** | Bearer token detected |
+
+**Code Context:**
+
+```
+"suggestion": "Do not hardcode bearer tokens"
+```
+
+**💡 Recommendation:** Do not hardcode bearer tokens
+
+---
+
+#### 49. 🟠 Bearer Token
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 359 |
+| **Severity** | 🟠 HIGH |
+| **Type** | secret |
+| **Description** | Bearer token detected |
+
+**Code Context:**
+
+```
+"title": "Bearer Token",
+```
+
+**💡 Recommendation:** Do not hardcode bearer tokens
+
+---
+
+#### 50. 🟠 Bearer Token
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 360 |
+| **Severity** | 🟠 HIGH |
+| **Type** | secret |
+| **Description** | Bearer token detected |
+
+**Code Context:**
+
+```
+"description": "Bearer token detected",
+```
+
+**💡 Recommendation:** Do not hardcode bearer tokens
+
+---
+
+
+*... and 350 more high severity issues*
+
+### 🟡 Medium Severity (53 issues)
+
+#### 1. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 6 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"C:/Users/IMAOBONG/avana/.kiro/documenting/GIT_HOOK_IMPLEMENTATION.md",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 2. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 12 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"id": "openai-api-key-C:\\Users\\IMAOBONG\\avana\\.kiro\\documenting\\GIT_HOOK_IMPLEMENTATION.md-140",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 3. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 17 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"file": "C:\\Users\\IMAOBONG\\avana\\.kiro\\documenting\\GIT_HOOK_IMPLEMENTATION.md",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 4. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 24 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"id": "apple-app-id-C:\\Users\\IMAOBONG\\avana\\.kiro\\documenting\\GIT_HOOK_IMPLEMENTATION.md-198",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 5. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 29 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"file": "C:\\Users\\IMAOBONG\\avana\\.kiro\\documenting\\GIT_HOOK_IMPLEMENTATION.md",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 6. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 32 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "- This file (`GIT_HOOK_IMPLEMENTATION.md`)",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 7. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 55 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "│   ├── GIT_HOOK_IMPLEMENTATION.md      # Technical details",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 8. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 67 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "- ✅ `GIT_HOOK_IMPLEMENTATION.md` - Technical implementation details",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 9. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 79 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "- Create CONTRIBUTING.md",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 10. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 423 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "if (BINARY_EXTENSIONS.has(ext)) {",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 11. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 944 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "\"C:/Users/IMAOBONG/avana/.kiro/documenting/GIT_HOOK_IMPLEMENTATION.md\",",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 12. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 956 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "\"id\": \"openai-api-key-.kiro\\\\documenting\\\\GIT_HOOK_IMPLEMENTATION.md-140\",",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 13. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 968 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "\"file\": \".kiro\\\\documenting\\\\GIT_HOOK_IMPLEMENTATION.md\",",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 14. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 980 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "\"id\": \"apple-app-id-.kiro\\\\documenting\\\\GIT_HOOK_IMPLEMENTATION.md-198\",",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 15. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 992 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "\"file\": \".kiro\\\\documenting\\\\GIT_HOOK_IMPLEMENTATION.md\",",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 16. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1004 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "\"code\": \"- This file (`GIT_HOOK_IMPLEMENTATION.md`)\",",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 17. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1016 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "\"code\": \"│   ├── GIT_HOOK_IMPLEMENTATION.md      # Technical details\",",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 18. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1028 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "\"code\": \"- ✅ `GIT_HOOK_IMPLEMENTATION.md` - Technical implementation details\",",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 19. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1040 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "\"code\": \"- Create CONTRIBUTING.md\",",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 20. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1052 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "\"code\": \"if (BINARY_EXTENSIONS.has(ext)) {\",",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 21. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1591 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "| **File** | `.kiro\\documenting\\GIT_HOOK_IMPLEMENTATION.md` |",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 22. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1603 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "| **File** | `.kiro\\documenting\\GIT_HOOK_IMPLEMENTATION.md` |",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 23. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1615 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "- This file (`GIT_HOOK_IMPLEMENTATION.md`)",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 24. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1627 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "│   ├── GIT_HOOK_IMPLEMENTATION.md      # Technical details",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 25. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1639 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "- ✅ `GIT_HOOK_IMPLEMENTATION.md` - Technical implementation details",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 26. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1651 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "- Create CONTRIBUTING.md",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 27. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1794 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) first.",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 28. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.avana-cache\scan-results.json` |
+| **Line** | 1877 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+"code": "if (BINARY_EXTENSIONS.has(ext)) {",
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 29. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\documenting\GIT_HOOK_IMPLEMENTATION.md` |
+| **Line** | 199 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+- This file (`GIT_HOOK_IMPLEMENTATION.md`)
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 30. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\documenting\IMPLEMENTATION_SUMMARY.md` |
+| **Line** | 52 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+│   ├── GIT_HOOK_IMPLEMENTATION.md      # Technical details
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 31. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\documenting\IMPLEMENTATION_SUMMARY.md` |
+| **Line** | 360 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+- ✅ `GIT_HOOK_IMPLEMENTATION.md` - Technical implementation details
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 32. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\documenting\IMPLEMENTATION_SUMMARY.md` |
+| **Line** | 457 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+- Create CONTRIBUTING.md
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 33. 🟡 .env File Content
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\documenting\TEST_GIT_HOOKS.md` |
 | **Line** | 152 |
 | **Severity** | 🟡 MEDIUM |
 | **Type** | secret |
@@ -2265,11 +2705,11 @@ RED='\033[0;31m'
 
 ---
 
-#### 12. 🟡 .env File Content
+#### 34. 🟡 .env File Content
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\TEST_GIT_HOOKS.md` |
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\documenting\TEST_GIT_HOOKS.md` |
 | **Line** | 153 |
 | **Severity** | 🟡 MEDIUM |
 | **Type** | secret |
@@ -2285,11 +2725,11 @@ GREEN='\033[0;32m'
 
 ---
 
-#### 13. 🟡 .env File Content
+#### 35. 🟡 .env File Content
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\TEST_GIT_HOOKS.md` |
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\documenting\TEST_GIT_HOOKS.md` |
 | **Line** | 154 |
 | **Severity** | 🟡 MEDIUM |
 | **Type** | secret |
@@ -2305,11 +2745,11 @@ YELLOW='\033[1;33m'
 
 ---
 
-#### 14. 🟡 .env File Content
+#### 36. 🟡 .env File Content
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\TEST_GIT_HOOKS.md` |
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\documenting\TEST_GIT_HOOKS.md` |
 | **Line** | 155 |
 | **Severity** | 🟡 MEDIUM |
 | **Type** | secret |
@@ -2325,11 +2765,11 @@ NC='\033[0m' # No Color
 
 ---
 
-#### 15. 🟡 .env File Content
+#### 37. 🟡 .env File Content
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\TEST_GIT_HOOKS.md` |
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\documenting\TEST_GIT_HOOKS.md` |
 | **Line** | 158 |
 | **Severity** | 🟡 MEDIUM |
 | **Type** | secret |
@@ -2345,11 +2785,11 @@ TESTS_PASSED=0
 
 ---
 
-#### 16. 🟡 .env File Content
+#### 38. 🟡 .env File Content
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\TEST_GIT_HOOKS.md` |
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\documenting\TEST_GIT_HOOKS.md` |
 | **Line** | 159 |
 | **Severity** | 🟡 MEDIUM |
 | **Type** | secret |
@@ -2365,12 +2805,132 @@ TESTS_FAILED=0
 
 ---
 
-#### 17. 🟡 .env File Content
+#### 39. 🟡 Apple App ID
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\TEST_GIT_HOOKS.md` |
-| **Line** | 198 |
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\scan-reports\avana-security-report-2026-01-17.md` |
+| **Line** | 42 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+| **File** | `.kiro\documenting\GIT_HOOK_IMPLEMENTATION.md` |
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 40. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\scan-reports\avana-security-report-2026-01-17.md` |
+| **Line** | 182 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+| **File** | `.kiro\documenting\GIT_HOOK_IMPLEMENTATION.md` |
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 41. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\scan-reports\avana-security-report-2026-01-17.md` |
+| **Line** | 191 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+- This file (`GIT_HOOK_IMPLEMENTATION.md`)
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 42. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\scan-reports\avana-security-report-2026-01-17.md` |
+| **Line** | 211 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+│   ├── GIT_HOOK_IMPLEMENTATION.md      # Technical details
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 43. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\scan-reports\avana-security-report-2026-01-17.md` |
+| **Line** | 231 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+- ✅ `GIT_HOOK_IMPLEMENTATION.md` - Technical implementation details
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 44. 🟡 Apple App ID
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\scan-reports\avana-security-report-2026-01-17.md` |
+| **Line** | 251 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Apple App ID detected |
+
+**Code Context:**
+
+```
+- Create CONTRIBUTING.md
+```
+
+**💡 Recommendation:** Move to environment variable: APPLE_APP_ID
+
+---
+
+#### 45. 🟡 .env File Content
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\scan-reports\avana-security-report-2026-01-17.md` |
+| **Line** | 271 |
 | **Severity** | 🟡 MEDIUM |
 | **Type** | secret |
 | **Description** | Environment variable assignment detected (possible .env file content) |
@@ -2378,19 +2938,19 @@ TESTS_FAILED=0
 **Code Context:**
 
 ```
-SEED_PHRASE=crew athlete post earn wide wealth liar typical radio delay seminar you
+RED='\033[0;31m'
 ```
 
 **💡 Recommendation:** Ensure .env files are in .gitignore and not committed
 
 ---
 
-#### 18. 🟡 .env File Content
+#### 46. 🟡 .env File Content
 
 | Detail | Value |
 |--------|-------|
-| **File** | `C:\Users\IMAOBONG\DevFlow\avana\TEST_GIT_HOOKS.md` |
-| **Line** | 199 |
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\scan-reports\avana-security-report-2026-01-17.md` |
+| **Line** | 291 |
 | **Severity** | 🟡 MEDIUM |
 | **Type** | secret |
 | **Description** | Environment variable assignment detected (possible .env file content) |
@@ -2398,20 +2958,102 @@ SEED_PHRASE=crew athlete post earn wide wealth liar typical radio delay seminar 
 **Code Context:**
 
 ```
-PRIVATE_KEY=f89b5493d42642a06c4f46d0472fefa2d54068c0143ef0b5d4e3f480f52b2f35
+GREEN='\033[0;32m'
 ```
 
 **💡 Recommendation:** Ensure .env files are in .gitignore and not committed
 
 ---
 
+#### 47. 🟡 .env File Content
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\scan-reports\avana-security-report-2026-01-17.md` |
+| **Line** | 311 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Environment variable assignment detected (possible .env file content) |
+
+**Code Context:**
+
+```
+YELLOW='\033[1;33m'
+```
+
+**💡 Recommendation:** Ensure .env files are in .gitignore and not committed
+
+---
+
+#### 48. 🟡 .env File Content
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\scan-reports\avana-security-report-2026-01-17.md` |
+| **Line** | 331 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Environment variable assignment detected (possible .env file content) |
+
+**Code Context:**
+
+```
+NC='\033[0m' # No Color
+```
+
+**💡 Recommendation:** Ensure .env files are in .gitignore and not committed
+
+---
+
+#### 49. 🟡 .env File Content
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\scan-reports\avana-security-report-2026-01-17.md` |
+| **Line** | 351 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Environment variable assignment detected (possible .env file content) |
+
+**Code Context:**
+
+```
+TESTS_PASSED=0
+```
+
+**💡 Recommendation:** Ensure .env files are in .gitignore and not committed
+
+---
+
+#### 50. 🟡 .env File Content
+
+| Detail | Value |
+|--------|-------|
+| **File** | `C:\Users\IMAOBONG\avana\.kiro\scan-reports\avana-security-report-2026-01-17.md` |
+| **Line** | 371 |
+| **Severity** | 🟡 MEDIUM |
+| **Type** | secret |
+| **Description** | Environment variable assignment detected (possible .env file content) |
+
+**Code Context:**
+
+```
+TESTS_FAILED=0
+```
+
+**💡 Recommendation:** Ensure .env files are in .gitignore and not committed
+
+---
+
+
+*... and 3 more medium severity issues*
 
 
 ## 💡 Recommendations
 
 ### 🚨 **URGENT: Critical Issues Detected**
 
-You have **110 critical** security issue(s) that require immediate attention:
+You have **768 critical** security issue(s) that require immediate attention:
 
 - **Stop deployment** until these are resolved
 - **Review all critical issues** listed above
@@ -2420,7 +3062,7 @@ You have **110 critical** security issue(s) that require immediate attention:
 
 ### ⚠️ **High Priority Issues**
 
-You have **105 high** severity issue(s):
+You have **400 high** severity issue(s):
 
 - **Address within 24-48 hours**
 - **Review security implications** carefully
@@ -2428,7 +3070,7 @@ You have **105 high** severity issue(s):
 
 ### 📋 **General Improvements**
 
-You have **18 medium** and **0 low** severity issues:
+You have **53 medium** and **0 low** severity issues:
 
 - **Plan fixes** in upcoming development cycles
 - **Consider security impact** during code reviews

@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Avana is a comprehensive security scanner CLI tool for detecting secrets, credentials, and security vulnerabilities in codebases. Built for the Dynamous Kiro Hackathon, it demonstrates production-ready development with 100+ security patterns, robust testing, and seamless Git integration.
+Avana is a comprehensive security scanner CLI tool for detecting secrets, credentials, and security vulnerabilities in codebases. Built with production-ready development practices, it demonstrates 100+ security patterns, robust testing, and seamless Git integration.
 
 ## Core Purpose
 
@@ -94,20 +94,21 @@ avana/
 - ✅ **Communication**: Messaging, email, webhook integrations
 - ✅ **Development**: Version control, CI/CD, deployment keys
 
-## Hackathon Criteria
+## Quality Standards
 
-Remember to optimize for:
-- **Application Quality** (40 points): Build something useful and polished
-- **Kiro CLI Usage** (20 points): Deep integration with Kiro workflows
-- **Documentation** (20 points): Comprehensive README and DEVLOG
-- **Innovation** (15 points): Unique features like comprehensive security patterns
-- **Presentation** (5 points): Clear demo and explanation
+Focus on delivering:
+- **Application Quality**: Build something useful and polished
+- **Development Process**: Deep integration with modern development workflows
+- **Documentation**: Comprehensive README, SETUP guide, and DEVLOG
+- **Innovation**: Unique features like comprehensive security patterns and property-based testing
+- **Professional Presentation**: Clear demo and excellent code quality
 
 ## Important Files
 
 - **Spec**: `.kiro/specs/avana-core/` (requirements.md, design.md, tasks.md)
-- **DEVLOG**: `.kiro/DEVLOG.md` (development timeline and decisions)
+- **DEVLOG**: `DEVLOG.md` (development timeline and decisions)
 - **README**: `README.md` (project overview and setup)
+- **SETUP**: `SETUP.md` (quick setup guide for developers)
 - **Patterns**: `src/rules/secret-patterns.ts` (100+ security patterns)
 - **Tests**: `tests/` (property-based and unit tests)
 

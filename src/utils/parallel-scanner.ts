@@ -72,8 +72,12 @@ export class ParallelScanner {
     // Wait for all workers to complete
     await Promise.all(workerPromises);
 
-    // Sort results by file path for consistent output
-    this.results.sort((a, b) => a.file.localeCompare(b.file));
+    // Sort results by file path for consistent output (with null safety)
+    this.results.sort((a, b) => {
+      const aFile = a.file || '';
+      const bFile = b.file || '';
+      return aFile.localeCompare(bFile);
+    });
 
     return this.results;
   }

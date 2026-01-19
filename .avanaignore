@@ -1,0 +1,11 @@
+# Avana Ignore Patterns
+# This file specifies patterns for files and directories that Avana should not scan
+
+# Scan reports directory (contains detected secrets from previous scans)
+scan-reports/**
+
+# Additional patterns can be added here
+# Examples:
+# *.log
+# temp/**
+# secrets.txt

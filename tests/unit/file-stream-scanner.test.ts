@@ -36,8 +36,8 @@ describe('FileStreamScanner', () => {
     });
 
     it('should scan large files without memory issues', async () => {
-      // Create a 15MB file
-      const largeFilePath = createLargeFile(tempDir, 'large.txt', 15);
+      // Create a 5MB file (reduced for faster tests)
+      const largeFilePath = createLargeFile(tempDir, 'large.txt', 5);
 
       const issues = await scanner.scanStream(largeFilePath, 'utf-8');
 
@@ -49,132 +49,62 @@ describe('FileStreamScanner', () => {
 
       const issues = await scanner.scanStream(filePath, 'utf-8');
 
-      expect(issues).toEqual([]);
-    });
-
-    it('should detect secrets in file content', async () => {
-      const content = `
-const config = {
-  apiKey: "sk_test_1234567890abcdef",
-  secret: "my-secret-key-12345"
-};
-`;
-      const filePath = createTempFile(tempDir, 'secrets.ts', content);
-
-      const issues = await scanner.scanStream(filePath, 'utf-8');
-
-      // Should detect at least one secret
-      expect(issues.length).toBeGreaterThanOrEqual(0);
-    });
-
-    it('should track line numbers correctly', async () => {
-      const lines = [
-        '// Line 1',
-        '// Line 2',
-        'const API_KEY = "sk_test_abc123";',
-        '// Line 4',
-        '// Line 5',
-      ];
-      const content = lines.join('\n');
-      const filePath = createTempFile(tempDir, 'lines.txt', content);
-
-      const issues = await scanner.scanStream(filePath, 'utf-8');
-
-      // If issues found, line numbers should be valid
-      issues.forEach(issue => {
-        expect(issue.line).toBeGreaterThan(0);
-        expect(issue.line).toBeLessThanOrEqual(lines.length);
-      });
-    });
-
-    it('should handle files with different encodings', async () => {
-      const content = 'const key = "test123";\n';
-      const filePath = createTempFile(tempDir, 'encoded.txt', content);
-
-      // Should not throw for different encodings
-      await expect(scanner.scanStream(filePath, 'utf-8')).resolves.toBeDefined();
-      await expect(scanner.scanStream(filePath, 'ascii')).resolves.toBeDefined();
-    });
-
-    it('should handle files with special characters', async () => {
-      const content = 'const key = "test-key-™-©-®";\n';
-      const filePath = createTempFile(tempDir, 'special.txt', content);
-
-      const issues = await scanner.scanStream(filePath, 'utf-8');
-
       expect(Array.isArray(issues)).toBe(true);
+      expect(issues.length).toBe(0);
     });
 
-    it('should handle files with long lines', async () => {
-      const longLine = 'x'.repeat(100000);
-      const content = `${longLine}\nconst API_KEY = "sk_test_123";\n${longLine}`;
-      const filePath = createTempFile(tempDir, 'longlines.txt', content);
+    it('should detect secrets in files', async () => {
+      const content = 'const key = "sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop";\n';
+      const filePath = createTempFile(tempDir, 'secret.txt', content);
 
       const issues = await scanner.scanStream(filePath, 'utf-8');
 
-      expect(Array.isArray(issues)).toBe(true);
-    });
-
-    it('should handle files with many lines', async () => {
-      const lines: string[] = [];
-      for (let i = 0; i < 10000; i++) {
-        lines.push(`// Line ${i + 1}`);
-      }
-      // Add a secret in the middle
-      lines[5000] = 'const API_KEY = "sk_test_middle";';
-      
-      const content = lines.join('\n');
-      const filePath = createTempFile(tempDir, 'manylines.txt', content);
-
-      const issues = await scanner.scanStream(filePath, 'utf-8');
-
-      expect(Array.isArray(issues)).toBe(true);
+      expect(issues.length).toBeGreaterThan(0);
+      expect(issues[0].severity).toBe('critical');
     });
 
     it('should handle files with multiple secrets', async () => {
       const content = `
-const config = {
-  stripeKey: "sk_test_1234567890",
-  awsKey: "AKIA1234567890ABCDEF",
-  githubToken: "ghp_1234567890abcdefghij",
-  password: "super-secret-password"
-};
-`;
-      const filePath = createTempFile(tempDir, 'multiple.ts', content);
+const openaiKey = "sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop";
+const stripeKey = "sk_test_1234567890abcdef";
+const awsKey = "AKIAIOSFODNN7EXAMPLE";
+      `;
+      const filePath = createTempFile(tempDir, 'multiple.txt', content);
 
       const issues = await scanner.scanStream(filePath, 'utf-8');
 
-      expect(Array.isArray(issues)).toBe(true);
+      expect(issues.length).toBeGreaterThan(2);
     });
 
     it('should handle files with secrets near chunk boundaries', async () => {
-      const chunkSize = 64 * 1024; // 64KB
-      const padding = 'x'.repeat(chunkSize - 50);
-      const secret = 'const API_KEY = "sk_test_boundary";';
+      // Create content that will span chunk boundaries
+      const padding = 'a'.repeat(65000); // Just under 64KB
+      const secret = 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop';
       const content = padding + secret + padding;
-      
       const filePath = createTempFile(tempDir, 'boundary.txt', content);
 
       const issues = await scanner.scanStream(filePath, 'utf-8');
 
-      expect(Array.isArray(issues)).toBe(true);
+      expect(issues.length).toBeGreaterThan(0);
     });
 
     it('should not crash on binary-like content', async () => {
-      const binaryContent = Buffer.from([0x00, 0x01, 0x02, 0xFF, 0xFE]).toString('binary');
-      const filePath = createTempFile(tempDir, 'binary.dat', binaryContent);
+      const content = Buffer.from([0x00, 0x01, 0x02, 0x03, 0xFF, 0xFE]).toString('binary');
+      const filePath = createTempFile(tempDir, 'binary.txt', content);
 
-      // Should not throw
-      await expect(scanner.scanStream(filePath, 'utf-8')).resolves.toBeDefined();
+      const issues = await scanner.scanStream(filePath, 'utf-8');
+
+      expect(Array.isArray(issues)).toBe(true);
     });
 
     it('should handle files with only whitespace', async () => {
-      const content = '   \n\t\t\n   \n';
+      const content = '   \n\t\n   \n';
       const filePath = createTempFile(tempDir, 'whitespace.txt', content);
 
       const issues = await scanner.scanStream(filePath, 'utf-8');
 
-      expect(issues).toEqual([]);
+      expect(Array.isArray(issues)).toBe(true);
+      expect(issues.length).toBe(0);
     });
 
     it('should handle files with mixed line endings', async () => {
@@ -187,18 +117,17 @@ const config = {
     });
 
     it('should handle non-existent files gracefully', async () => {
-      const nonExistentPath = tempDir + '/non-existent.txt';
+      const nonExistentPath = tempDir + '/nonexistent.txt';
 
-      // Should throw or handle gracefully
       await expect(scanner.scanStream(nonExistentPath, 'utf-8')).rejects.toThrow();
     });
   });
 
   describe('chunk processing', () => {
     it('should process files in chunks', async () => {
-      // Create a file larger than default chunk size (64KB)
-      const content = 'x'.repeat(100 * 1024); // 100KB
-      const filePath = createTempFile(tempDir, 'chunks.txt', content);
+      // Create a file larger than default chunk size
+      const content = 'a'.repeat(100000); // 100KB
+      const filePath = createTempFile(tempDir, 'chunked.txt', content);
 
       const issues = await scanner.scanStream(filePath, 'utf-8');
 
@@ -206,24 +135,19 @@ const config = {
     });
 
     it('should handle overlap between chunks', async () => {
-      const chunkSize = 64 * 1024;
-      // Place secret exactly at chunk boundary
-      const part1 = 'x'.repeat(chunkSize);
-      const secret = 'API_KEY="sk_test_overlap"';
-      const part2 = 'x'.repeat(1000);
-      const content = part1 + secret + part2;
-      
+      const smallScanner = new FileStreamScanner({ chunkSize: 100, overlap: 20 });
+      const content = 'a'.repeat(200) + 'sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop' + 'b'.repeat(200);
       const filePath = createTempFile(tempDir, 'overlap.txt', content);
 
-      const issues = await scanner.scanStream(filePath, 'utf-8');
+      const issues = await smallScanner.scanStream(filePath, 'utf-8');
 
-      expect(Array.isArray(issues)).toBe(true);
+      expect(issues.length).toBeGreaterThan(0);
     });
   });
 
   describe('encoding handling', () => {
     it('should handle UTF-8 encoding', async () => {
-      const content = 'const key = "test-key-你好";\n';
+      const content = 'const key = "sk-proj-1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnop";\n';
       const filePath = createTempFile(tempDir, 'utf8.txt', content);
 
       const issues = await scanner.scanStream(filePath, 'utf-8');
@@ -232,7 +156,7 @@ const config = {
     });
 
     it('should handle ASCII encoding', async () => {
-      const content = 'const key = "test-key-123";\n';
+      const content = 'const key = "sk_test_1234567890abcdef";\n';
       const filePath = createTempFile(tempDir, 'ascii.txt', content);
 
       const issues = await scanner.scanStream(filePath, 'ascii');

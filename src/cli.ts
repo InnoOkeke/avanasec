@@ -5,10 +5,24 @@
  * Command-line interface for security scanning
  */
 
+import { validateDependenciesOrExit, displayTroubleshootingInfo } from './utils/dependency-checker';
 import { scanCommand } from './commands/scan';
 import { installCommand } from './commands/install';
 import { uninstallCommand } from './commands/uninstall';
+import { troubleshootCommand } from './commands/troubleshoot';
 import { handleUnexpectedError, handleInvalidArguments, ExitCode } from './utils/exit-codes';
+
+// Validate dependencies before doing anything else
+try {
+  validateDependenciesOrExit();
+} catch (error) {
+  console.error('❌ Failed to validate dependencies');
+  if (error instanceof Error) {
+    console.error(`Error: ${error.message}`);
+  }
+  displayTroubleshootingInfo();
+  process.exit(ExitCode.INVALID_ARGUMENTS);
+}
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -21,8 +35,8 @@ async function main() {
       const debug = args.includes('--debug');
       const quiet = args.includes('--quiet');
       const staged = args.includes('--staged');
-      const outputJson = args.includes('--output-json') || args.includes('--json');
-      const outputMd = args.includes('--output-md');
+      const outputJson = false; // JSON output removed - using Markdown only
+      const outputMd = true;   // Always use Markdown output
       const noProgress = args.includes('--no-progress');
       const failOnHigh = args.includes('--fail-on-high');
       
@@ -81,8 +95,6 @@ async function main() {
         debug,
         quiet,
         staged, 
-        outputJson, 
-        outputMd, 
         ignorePatterns,
         noProgress,
         failOnHigh,
@@ -93,6 +105,8 @@ async function main() {
       await installCommand();
     } else if (command === 'uninstall') {
       await uninstallCommand();
+    } else if (command === 'troubleshoot' || command === 'doctor') {
+      await troubleshootCommand();
     } else if (command === '--help' || command === '-h') {
       console.log(`
 🔒 Avana CLI
@@ -101,6 +115,8 @@ Usage:
   avana scan [options]     Scan project for security issues
   avana install            Install Git pre-commit hooks
   avana uninstall          Remove Git pre-commit hooks
+  avana troubleshoot       Run diagnostics and troubleshooting
+  avana doctor             Alias for troubleshoot
   avana --help             Show this help message
 
 Scan Options:
@@ -109,9 +125,6 @@ Scan Options:
   --verbose, -v            Show detailed output
   --debug                  Show debug information
   --quiet                  Show minimal output
-  --json                   Save results to JSON file
-  --output-json            Save results to JSON file (alias for --json)
-  --output-md              Save results to Markdown file
   --no-progress            Disable progress bar
   --fail-on-high           Exit with code 1 on high severity issues
   --max-memory <mb>        Set memory limit in MB (default: 500)
@@ -129,12 +142,20 @@ Examples:
   avana scan --path ./my-project
   avana scan --staged
   avana scan --verbose --debug
-  avana scan --json --output-md
   avana scan --fail-on-high
   avana scan --max-memory 1000 --workers 4
   avana scan --ignore "**/*.md" --ignore "tests/**"
   avana install
   avana uninstall
+  avana troubleshoot
+
+Troubleshooting:
+  If you're experiencing issues, run 'avana troubleshoot' for comprehensive
+  diagnostics and troubleshooting guidance.
+
+Support:
+  Documentation: https://github.com/innookeke/avana-cli#readme
+  Report Issues: https://github.com/innookeke/avana-cli/issues
     `);
       process.exit(ExitCode.SUCCESS);
     } else {

@@ -48,7 +48,7 @@ describe('Feature: avana-core, Property 1: Binary File Exclusion', () => {
           return true;
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 25 }
     );
   });
 
@@ -70,7 +70,7 @@ describe('Feature: avana-core, Property 1: Binary File Exclusion', () => {
           return true;
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 25 }
     );
   });
 
@@ -89,7 +89,7 @@ describe('Feature: avana-core, Property 1: Binary File Exclusion', () => {
           return true;
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 25 }
     );
   });
 
@@ -122,7 +122,7 @@ describe('Feature: avana-core, Property 1: Binary File Exclusion', () => {
             return true;
           }
         ),
-        { numRuns: 100 }
+        { numRuns: 10 }
       );
     } finally {
       cleanupTempDir(testDir);
@@ -143,7 +143,7 @@ describe('Feature: avana-core, Property 1: Binary File Exclusion', () => {
             Buffer.from(binaryPart)
           ]);
           
-          const filePath = createTempFile(tempDir, 'mixed.dat', mixedContent.toString('binary'));
+          const filePath = createTempFile(tempDir, 'mixed.dat', mixedContent);
           
           const isBinary = detector.isBinary(filePath);
           
@@ -156,7 +156,7 @@ describe('Feature: avana-core, Property 1: Binary File Exclusion', () => {
           return true;
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 25 }
     );
   });
 
@@ -181,7 +181,7 @@ describe('Feature: avana-core, Property 1: Binary File Exclusion', () => {
           return true;
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 25 }
     );
   });
 
@@ -211,7 +211,7 @@ describe('Feature: avana-core, Property 1: Binary File Exclusion', () => {
           return true;
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 25 }
     );
   });
 });

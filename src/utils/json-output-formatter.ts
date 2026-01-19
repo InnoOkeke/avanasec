@@ -311,11 +311,15 @@ export class JSONOutputFormatter {
         case 'severity':
           const severityDiff = severityOrder[a.severity] - severityOrder[b.severity];
           if (severityDiff !== 0) return severityDiff;
-          // Secondary sort by file
-          return a.file.localeCompare(b.file);
+          // Secondary sort by file (with null safety)
+          const aFile = a.file || '';
+          const bFile = b.file || '';
+          return aFile.localeCompare(bFile);
 
         case 'file':
-          const fileDiff = a.file.localeCompare(b.file);
+          const aFileForFile = a.file || '';
+          const bFileForFile = b.file || '';
+          const fileDiff = aFileForFile.localeCompare(bFileForFile);
           if (fileDiff !== 0) return fileDiff;
           // Secondary sort by line number
           return a.line - b.line;
@@ -323,11 +327,15 @@ export class JSONOutputFormatter {
         case 'line':
           const lineDiff = a.line - b.line;
           if (lineDiff !== 0) return lineDiff;
-          // Secondary sort by file
-          return a.file.localeCompare(b.file);
+          // Secondary sort by file (with null safety)
+          const aFileForLine = a.file || '';
+          const bFileForLine = b.file || '';
+          return aFileForLine.localeCompare(bFileForLine);
 
         case 'type':
-          const typeDiff = a.type.localeCompare(b.type);
+          const aType = a.type || '';
+          const bType = b.type || '';
+          const typeDiff = aType.localeCompare(bType);
           if (typeDiff !== 0) return typeDiff;
           // Secondary sort by severity
           return severityOrder[a.severity] - severityOrder[b.severity];

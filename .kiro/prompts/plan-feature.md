@@ -2,7 +2,7 @@
 
 ## Feature Planning Instructions
 
-Plan new features for Avana following spec-driven development methodology and hackathon best practices.
+Plan new features for Avana following spec-driven development methodology and professional best practices.
 
 ## Planning Process
 

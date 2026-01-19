@@ -1,6 +1,6 @@
 {
-  "name": "avana",
-  "version": "1.0.0",
+  "name": "avana-cli",
+  "version": "2.12.0",
   "description": "A robust, production-ready CLI tool for detecting secrets and credentials in your codebase",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,16 +9,23 @@
   },
   "scripts": {
     "build": "tsc",
+    "build:validate": "npm run build && npm run validate:build",
     "dev": "tsc --watch",
     "scan": "node dist/cli.js scan",
     "scan:verbose": "node dist/cli.js scan --verbose",
     "prepare": "husky || true",
     "test": "vitest run",
+    "test:unit-only": "vitest run tests/unit",
+    "test:property": "vitest run tests/property",
+    "test:integration": "vitest run tests/integration",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "lint": "eslint src --ext .ts",
     "format": "prettier --write \"src/**/*.ts\"",
-    "prepublishOnly": "npm run build && npm test"
+    "validate:build": "node scripts/validate-build.js",
+    "validate:pre-publish": "node scripts/pre-publish-validation.js",
+    "prepublishOnly": "npm run build && npm run validate:build",
+    "prepack": "npm run build && npm run validate:build"
   },
   "keywords": [
     "security",
@@ -33,24 +40,33 @@
     "secret-detection",
     "credential-scanning",
     "pre-commit",
-    "security-scanner"
+    "security-scanner",
+    "dependency-fix",
+    "module-loading",
+    "binary-accessibility",
+    "npm-package",
+    "typescript",
+    "node-cli"
   ],
   "author": "Innocent",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/innookeke/avana.git"
+    "url": "https://github.com/innookeke/avana-cli.git"
   },
   "bugs": {
-    "url": "https://github.com/innookeke/avana/issues"
+    "url": "https://github.com/innookeke/avana-cli/issues"
   },
-  "homepage": "https://github.com/innookeke/avana#readme",
+  "homepage": "https://github.com/innookeke/avana-cli#readme",
   "engines": {
     "node": ">=18.0.0"
   },
   "dependencies": {
     "husky": "^9.0.0",
-    "minimatch": "^10.1.1"
+    "minimatch": "^10.1.1",
+    "chardet": "^2.1.1",
+    "cli-progress": "^3.12.0",
+    "iconv-lite": "^0.7.2"
   },
   "devDependencies": {
     "@types/cli-progress": "^3.11.6",
@@ -59,11 +75,8 @@
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
     "@vitest/coverage-v8": "^2.0.0",
-    "chardet": "^2.1.1",
-    "cli-progress": "^3.12.0",
     "eslint": "^8.57.0",
     "fast-check": "^3.23.2",
-    "iconv-lite": "^0.7.2",
     "prettier": "^3.2.0",
     "typescript": "^5.5.0",
     "vitest": "^2.1.9"

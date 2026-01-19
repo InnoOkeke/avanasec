@@ -18,10 +18,31 @@ export function createTempDir(prefix: string = 'avana-test-'): string {
 /**
  * Create a temporary file with content
  */
-export function createTempFile(dir: string, filename: string, content: string): string {
+export function createTempFile(dir: string, filename: string, content: string | Buffer): string {
   const filePath = path.join(dir, filename);
-  fs.writeFileSync(filePath, content, 'utf-8');
-  return filePath;
+  
+  try {
+    if (Buffer.isBuffer(content)) {
+      fs.writeFileSync(filePath, content);
+    } else {
+      // Ensure the content is valid UTF-8
+      fs.writeFileSync(filePath, content, 'utf-8');
+    }
+    return filePath;
+  } catch (error) {
+    // If UTF-8 fails, try binary mode
+    if (typeof content === 'string') {
+      try {
+        fs.writeFileSync(filePath, content, 'binary');
+        return filePath;
+      } catch {
+        // If all else fails, create an empty file
+        fs.writeFileSync(filePath, '');
+        return filePath;
+      }
+    }
+    throw error;
+  }
 }
 
 /**
@@ -36,11 +57,54 @@ export function createTempFiles(dir: string, files: Record<string, string>): str
 }
 
 /**
- * Clean up temporary directory
+ * Clean up temporary directory with retry logic for Windows
  */
 export function cleanupTempDir(dir: string): void {
-  if (fs.existsSync(dir)) {
-    fs.rmSync(dir, { recursive: true, force: true });
+  if (!fs.existsSync(dir)) {
+    return;
+  }
+
+  // Try multiple times with delays for Windows file locking issues
+  let attempts = 0;
+  const maxAttempts = 3;
+  
+  while (attempts < maxAttempts) {
+    try {
+      // First, try to make all files writable
+      try {
+        const files = fs.readdirSync(dir, { recursive: true });
+        for (const file of files) {
+          const filePath = path.join(dir, file.toString());
+          if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+            try {
+              fs.chmodSync(filePath, 0o666);
+            } catch {
+              // Ignore chmod errors
+            }
+          }
+        }
+      } catch {
+        // Ignore directory reading errors
+      }
+
+      // Try to remove the directory
+      fs.rmSync(dir, { recursive: true, force: true });
+      return; // Success
+    } catch (error) {
+      attempts++;
+      if (attempts >= maxAttempts) {
+        // Final attempt failed, log but don't throw
+        console.warn(`Failed to cleanup temp directory ${dir}:`, error);
+        return;
+      }
+      
+      // Wait before retry
+      const delay = attempts * 100;
+      const start = Date.now();
+      while (Date.now() - start < delay) {
+        // Busy wait
+      }
+    }
   }
 }
 

@@ -3,7 +3,10 @@
  * Provides progress reporting functionality for file scanning operations
  */
 
-import * as cliProgress from 'cli-progress';
+import { safeRequireWithError } from './dependency-checker';
+
+// Safe require for cli-progress with error handling
+const cliProgress = safeRequireWithError('cli-progress', 'Progress bar functionality');
 
 export interface ProgressOptions {
   total: number;
@@ -20,7 +23,7 @@ export interface ProgressStats {
 }
 
 export class ProgressReporter {
-  private progressBar: cliProgress.SingleBar | null = null;
+  private progressBar: any | null = null;
   private startTime: number = 0;
   private lastUpdateTime: number = 0;
   private current: number = 0;

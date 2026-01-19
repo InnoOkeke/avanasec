@@ -5,7 +5,10 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { minimatch } from 'minimatch';
+import { safeRequireWithError } from './dependency-checker';
+
+// Safe require for minimatch with error handling
+const { minimatch } = safeRequireWithError('minimatch', 'File pattern matching');
 
 /**
  * Configuration for ignore patterns

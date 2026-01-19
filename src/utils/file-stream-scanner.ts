@@ -4,10 +4,13 @@
  */
 
 import * as fs from 'fs';
-import * as iconv from 'iconv-lite';
+import { safeRequireWithError } from './dependency-checker';
 import type { SecurityIssue, FileEncoding } from '../types';
 import { getAllSecretPatterns } from '../rules/secret-patterns';
 import { getAdditionalSecretPatterns } from '../rules/additional-patterns';
+
+// Safe require for iconv-lite with error handling
+const iconv = safeRequireWithError('iconv-lite', 'Character encoding conversion');
 
 /**
  * Default chunk size: 64KB

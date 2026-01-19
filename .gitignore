@@ -40,3 +40,6 @@ yarn-error.log*
 *.tmp
 .temp/
 
+# Avana scan reports (contains detected secrets)
+scan-reports/
+

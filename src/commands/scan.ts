@@ -5,12 +5,28 @@
 
 import { Avana } from '../index';
 import type { ScanOptions } from '../types';
-import { JSONOutputFormatter } from '../utils/json-output-formatter';
+// JSON output removed - using Markdown only for reliability
 import { MarkdownOutputFormatter } from '../utils/markdown-output-formatter';
 import { determineExitCode, exitWithCode, ExitCode } from '../utils/exit-codes';
 import { execSync } from 'child_process';
 import * as path from 'path';
 import * as fs from 'fs';
+
+/**
+ * Format memory size in human-readable format
+ */
+function formatMemorySize(bytes: number): string {
+  const units = ['B', 'KB', 'MB', 'GB'];
+  let size = bytes;
+  let unitIndex = 0;
+
+  while (size >= 1024 && unitIndex < units.length - 1) {
+    size /= 1024;
+    unitIndex++;
+  }
+
+  return `${size.toFixed(2)} ${units[unitIndex]}`;
+}
 
 /**
  * Get list of Git staged files
@@ -34,62 +50,63 @@ function getStagedFiles(): string[] {
 }
 
 /**
- * Save results to file
+ * Save results to Markdown file
  */
 async function saveResults(
   result: any, 
   score: number, 
-  outputJson: boolean, 
-  outputMd: boolean, 
-  rootPath: string
-): Promise<{ jsonPath?: string; mdPath?: string }> {
+  rootPath: string,
+  verbose: boolean = false
+): Promise<{ mdPath: string }> {
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T')[0];
   const reportsDir = path.join(rootPath, 'scan-reports');
   
   // Create scan-reports directory if it doesn't exist
   if (!fs.existsSync(reportsDir)) {
     fs.mkdirSync(reportsDir, { recursive: true });
-  }
-  
-  const savedPaths: { jsonPath?: string; mdPath?: string } = {};
-  
-  if (outputJson) {
-    const jsonFormatter = new JSONOutputFormatter();
-    const jsonContent = jsonFormatter.format(result, { 
-      pretty: true, 
-      includeMetadata: true,
-      includeDebugInfo: false 
-    });
     
-    const jsonFilename = `avana-security-report-${timestamp}.json`;
-    const jsonPath = path.join(reportsDir, jsonFilename);
-    
+    // Automatically add scan-reports to .gitignore to prevent committing secrets
+    const gitignorePath = path.join(rootPath, '.gitignore');
     try {
-      fs.writeFileSync(jsonPath, jsonContent, 'utf-8');
-      console.log(`📄 JSON report saved: ${jsonFilename}`);
-      savedPaths.jsonPath = jsonPath;
+      let gitignoreContent = '';
+      if (fs.existsSync(gitignorePath)) {
+        gitignoreContent = fs.readFileSync(gitignorePath, 'utf-8');
+      }
+      
+      // Check if scan-reports is already in .gitignore
+      if (!gitignoreContent.includes('scan-reports')) {
+        const newEntry = gitignoreContent.endsWith('\n') || gitignoreContent === '' 
+          ? '# Avana scan reports (contains detected secrets)\nscan-reports/\n'
+          : '\n# Avana scan reports (contains detected secrets)\nscan-reports/\n';
+        
+        fs.writeFileSync(gitignorePath, gitignoreContent + newEntry);
+        
+        if (verbose) {
+          console.log('📝 Added scan-reports/ to .gitignore to prevent committing secrets');
+        }
+      }
     } catch (error) {
-      console.error(`❌ Failed to save JSON report: ${error instanceof Error ? error.message : String(error)}`);
+      // Silently fail if we can't write to .gitignore - don't break the scan
+      if (verbose) {
+        console.warn('⚠️  Could not update .gitignore - please manually add scan-reports/ to prevent committing secrets');
+      }
     }
   }
   
-  if (outputMd) {
-    const mdFormatter = new MarkdownOutputFormatter();
-    const mdContent = mdFormatter.format(result, score);
-    
-    const mdFilename = `avana-security-report-${timestamp}.md`;
-    const mdPath = path.join(reportsDir, mdFilename);
-    
-    try {
-      fs.writeFileSync(mdPath, mdContent, 'utf-8');
-      console.log(`📝 Markdown report saved: ${mdFilename}`);
-      savedPaths.mdPath = mdPath;
-    } catch (error) {
-      console.error(`❌ Failed to save Markdown report: ${error instanceof Error ? error.message : String(error)}`);
-    }
-  }
+  const mdFormatter = new MarkdownOutputFormatter();
+  const mdContent = mdFormatter.format(result, score);
   
-  return savedPaths;
+  const mdFilename = `avana-security-report-${timestamp}.md`;
+  const mdPath = path.join(reportsDir, mdFilename);
+  
+  try {
+    fs.writeFileSync(mdPath, mdContent, 'utf-8');
+    console.log(`📝 Markdown report saved: ${mdFilename}`);
+    return { mdPath };
+  } catch (error) {
+    console.error(`❌ Failed to save Markdown report: ${error instanceof Error ? error.message : String(error)}`);
+    throw error;
+  }
 }
 
 export async function scanCommand(options: { 
@@ -98,8 +115,6 @@ export async function scanCommand(options: {
   debug?: boolean;
   quiet?: boolean;
   staged?: boolean;
-  outputJson?: boolean;
-  outputMd?: boolean;
   ignorePatterns?: string[];
   noProgress?: boolean;
   failOnHigh?: boolean;
@@ -114,16 +129,27 @@ export async function scanCommand(options: {
     const stagedFiles = getStagedFiles();
     
     if (stagedFiles.length === 0) {
-      console.log('ℹ️  No staged files to scan\n');
+      if (!options.quiet) {
+        console.log('ℹ️  No staged files to scan\n');
+      }
       return;
     }
     
-    console.log(`🔍 Scanning ${stagedFiles.length} staged file(s)...\n`);
+    if (!options.quiet) {
+      console.log(`🔍 Scanning ${stagedFiles.length} staged file(s)...\n`);
+    }
     
-    const guardian = new Avana();
+    // Create Avana instance with robust options
+    const avana = new Avana({
+      debugMode: options.debug || false,
+      maxMemoryMB: options.maxMemory || 500,
+      cacheDir: path.join(rootPath, '.avana-cache'),
+      workerCount: options.workers
+    });
+    
     const scanOptions: ScanOptions = {
       path: projectPath,
-      verbose: options.verbose,
+      verbose: options.verbose && !options.quiet,
       includeFiles: stagedFiles,
       config: {
         enabled: true,
@@ -154,14 +180,17 @@ export async function scanCommand(options: {
       }
     };
     
-    const result = await guardian.scan(scanOptions);
-    const scoreResult = guardian.calculateSecurityScore(result);
+    const result = await avana.scan(scanOptions);
+    const scoreResult = avana.calculateSecurityScore(result);
     
-    // Save results to files (always save markdown, optionally save JSON)
-    const savedPaths = await saveResults(result, scoreResult.score, options.outputJson || false, true, projectPath);
+    // Save results to Markdown file
+    const savedPaths = await saveResults(result, scoreResult.score, projectPath, options.verbose || false);
     
     // Display results for staged files
     displayStagedResults(result, scoreResult.score, savedPaths, options);
+    
+    // Cleanup resources
+    await avana.cleanup();
     
     // Determine and use proper exit code
     const exitCode = determineExitCode(result, { failOnHigh: options.failOnHigh });
@@ -169,14 +198,22 @@ export async function scanCommand(options: {
     return;
   }
   
-  console.log('🔍 Scanning project for security issues...\n');
-  console.log(`📁 Path: ${projectPath}\n`);
+  if (!options.quiet) {
+    console.log('🔍 Scanning project for security issues...\n');
+    console.log(`📁 Path: ${projectPath}\n`);
+  }
 
-  const guardian = new Avana();
+  // Create Avana instance with robust options
+  const avana = new Avana({
+    debugMode: options.debug || false,
+    maxMemoryMB: options.maxMemory || 500,
+    cacheDir: path.join(rootPath, '.avana-cache'),
+    workerCount: options.workers
+  });
   
   const scanOptions: ScanOptions = {
     path: projectPath,
-    verbose: options.verbose,
+    verbose: (options.verbose && !options.quiet) || false,
     config: {
       enabled: true,
       scanOnCommit: false,
@@ -206,28 +243,43 @@ export async function scanCommand(options: {
     }
   };
 
-  const result = await guardian.scan(scanOptions);
-  const scoreResult = guardian.calculateSecurityScore(result);
+  const result = await avana.scan(scanOptions);
+  const scoreResult = avana.calculateSecurityScore(result);
 
-  // Save results to files (always save markdown, optionally save JSON)
-  const savedPaths = await saveResults(result, scoreResult.score, options.outputJson || false, true, projectPath);
+  // Save results to Markdown file
+  const savedPaths = await saveResults(result, scoreResult.score, projectPath, options.verbose || false);
 
   // Display results
-  console.log(`✅ Scan complete in ${result.duration}ms\n`);
+  if (!options.quiet) {
+    console.log(`✅ Scan complete in ${result.duration}ms\n`);
+    
+    // Show statistics if debug mode
+    if (options.debug) {
+      const memoryStats = avana.getMemoryStats();
+      const cacheStats = avana.getCacheStats();
+      const errorStats = avana.getErrorStats();
+      
+      console.log('🔧 Debug Information:');
+      console.log(`   Memory: ${formatMemorySize(memoryStats.currentUsage)} / ${formatMemorySize(memoryStats.limit)}`);
+      console.log(`   Cache: ${cacheStats.hitRate.toFixed(1)}% hit rate (${cacheStats.hitCount} hits, ${cacheStats.missCount} misses)`);
+      console.log(`   Errors: ${errorStats.totalErrors} total errors`);
+      console.log('');
+    }
+  }
   
   if (result.issues.length === 0) {
-    console.log('🎉 No security issues found!\n');
-    console.log(`📊 Security Score: ${scoreResult.score}/100 (Excellent)\n`);
-    
-    // Show file output message with paths
-    console.log(`📋 Reports have been saved:`);
-    if (savedPaths.jsonPath) {
-      console.log(`   📄 JSON: ${savedPaths.jsonPath}`);
-    }
-    if (savedPaths.mdPath) {
+    if (!options.quiet) {
+      console.log('🎉 No security issues found!\n');
+      console.log(`📊 Security Score: ${scoreResult.score}/100 (Excellent)\n`);
+      
+      // Show file output message with paths
+      console.log(`📋 Reports have been saved:`);
       console.log(`   📝 Markdown: ${savedPaths.mdPath}`);
+      console.log('');
     }
-    console.log('');
+    
+    // Cleanup resources
+    await avana.cleanup();
     
     // Exit with success code
     process.exit(ExitCode.SUCCESS);
@@ -235,53 +287,59 @@ export async function scanCommand(options: {
   }
 
   // Display summary
-  console.log('🚨 SECURITY ISSUES FOUND\n');
-  console.log(`┌─────────────────────────────────────────┐`);
-  console.log(`│ 🔴 Critical: ${result.summary.critical.toString().padEnd(27)}│`);
-  console.log(`│ 🟠 High:     ${result.summary.high.toString().padEnd(27)}│`);
-  console.log(`│ 🟡 Medium:   ${result.summary.medium.toString().padEnd(27)}│`);
-  console.log(`│ 🟢 Low:      ${result.summary.low.toString().padEnd(27)}│`);
-  console.log(`└─────────────────────────────────────────┘\n`);
+  if (!options.quiet) {
+    console.log('🚨 SECURITY ISSUES FOUND\n');
+    console.log(`┌─────────────────────────────────────────┐`);
+    console.log(`│ 🔴 Critical: ${result.summary.critical.toString().padEnd(27)}│`);
+    console.log(`│ 🟠 High:     ${result.summary.high.toString().padEnd(27)}│`);
+    console.log(`│ 🟡 Medium:   ${result.summary.medium.toString().padEnd(27)}│`);
+    console.log(`│ 🟢 Low:      ${result.summary.low.toString().padEnd(27)}│`);
+    console.log(`└─────────────────────────────────────────┘\n`);
 
-  // Display critical, high, and medium issues
-  const criticalIssues = result.issues.filter(i => i.severity === 'critical' || i.severity === 'high' || i.severity === 'medium');
-  
-  if (criticalIssues.length > 0) {
-    console.log('Critical, High & Medium Severity Issues:\n');
+    // Display critical, high, and medium issues
+    const criticalIssues = result.issues.filter(i => i.severity === 'critical' || i.severity === 'high' || i.severity === 'medium');
     
-    criticalIssues.slice(0, 10).forEach((issue) => {
-      const icon = issue.severity === 'critical' ? '🔴' : issue.severity === 'high' ? '🟠' : '🟡';
-      console.log(`${icon} ${issue.title}`);
-      console.log(`   File: ${issue.file}:${issue.line}`);
-      console.log(`   ${issue.description}`);
-      if (issue.suggestion) {
-        console.log(`   ✅ Fix: ${issue.suggestion}`);
+    if (criticalIssues.length > 0) {
+      console.log('Critical, High & Medium Severity Issues:\n');
+      
+      criticalIssues.slice(0, 10).forEach((issue) => {
+        const icon = issue.severity === 'critical' ? '🔴' : issue.severity === 'high' ? '🟠' : '🟡';
+        console.log(`${icon} ${issue.title}`);
+        console.log(`   File: ${issue.file}:${issue.line}`);
+        console.log(`   ${issue.description}`);
+        if (issue.suggestion) {
+          console.log(`   ✅ Fix: ${issue.suggestion}`);
+        }
+        console.log('');
+      });
+
+      if (criticalIssues.length > 10) {
+        console.log(`... and ${criticalIssues.length - 10} more issues\n`);
       }
-      console.log('');
-    });
-
-    if (criticalIssues.length > 10) {
-      console.log(`... and ${criticalIssues.length - 10} more issues\n`);
     }
-  }
 
-  console.log(`📊 Security Score: ${scoreResult.score}/100\n`);
-  
-  if (scoreResult.score < 50) {
-    console.log('⚠️  Your security score is low. Please address critical issues immediately.\n');
-  } else if (scoreResult.score < 80) {
-    console.log('💡 Your security score is moderate. Consider addressing high-priority issues.\n');
-  }
+    console.log(`📊 Security Score: ${scoreResult.score}/100\n`);
+    
+    if (scoreResult.score < 50) {
+      console.log('⚠️  Your security score is low. Please address critical issues immediately.\n');
+    } else if (scoreResult.score < 80) {
+      console.log('💡 Your security score is moderate. Consider addressing high-priority issues.\n');
+    }
+    
+    // Security reminder about scan reports
+    if (savedPaths.mdPath) {
+      console.log('🔒 Security Reminder: Scan reports contain detected secrets and are automatically');
+      console.log('   added to .gitignore to prevent accidental commits. Never commit scan-reports/\n');
+    }
 
-  // Show file output message with paths
-  console.log(`📋 Detailed reports have been saved for easy review:`);
-  if (savedPaths.jsonPath) {
-    console.log(`   📄 JSON: ${savedPaths.jsonPath}`);
-  }
-  if (savedPaths.mdPath) {
+    // Show file output message with paths
+    console.log(`📋 Detailed reports have been saved for easy review:`);
     console.log(`   📝 Markdown: ${savedPaths.mdPath}`);
+    console.log('');
   }
-  console.log('');
+
+  // Cleanup resources
+  await avana.cleanup();
 
   // Determine and use proper exit code
   const exitCode = determineExitCode(result, { failOnHigh: options.failOnHigh });
@@ -294,20 +352,15 @@ export async function scanCommand(options: {
 function displayStagedResults(
   result: any, 
   score: number, 
-  savedPaths: { jsonPath?: string; mdPath?: string },
-  options: { outputJson?: boolean; outputMd?: boolean; failOnHigh?: boolean }
+  savedPaths: { mdPath: string },
+  options: { failOnHigh?: boolean }
 ): void {
   if (result.issues.length === 0) {
     console.log('✅ No security issues found in staged files\n');
     
     // Show file output message with paths for staged scans
     console.log(`📋 Reports have been saved:`);
-    if (savedPaths.jsonPath) {
-      console.log(`   📄 JSON: ${savedPaths.jsonPath}`);
-    }
-    if (savedPaths.mdPath) {
-      console.log(`   📝 Markdown: ${savedPaths.mdPath}`);
-    }
+    console.log(`   📝 Markdown: ${savedPaths.mdPath}`);
     console.log('');
     return;
   }
@@ -350,12 +403,7 @@ function displayStagedResults(
     
     // Show file output message with paths for staged scans
     console.log(`📋 Reports have been saved:`);
-    if (savedPaths.jsonPath) {
-      console.log(`   📄 JSON: ${savedPaths.jsonPath}`);
-    }
-    if (savedPaths.mdPath) {
-      console.log(`   📝 Markdown: ${savedPaths.mdPath}`);
-    }
+    console.log(`   📝 Markdown: ${savedPaths.mdPath}`);
     console.log('');
   }
 }

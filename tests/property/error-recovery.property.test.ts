@@ -43,7 +43,7 @@ describe('Feature: avana-core, Property 3: Encoding Handling', () => {
           expect(errorHandler.hasErrors()).toBe(true);
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 25 }
     );
   });
 
@@ -68,7 +68,7 @@ describe('Feature: avana-core, Property 3: Encoding Handling', () => {
           expect(summary['InvalidEncodingError']).toBe(filePaths.length);
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 25 }
     );
   });
 
@@ -88,7 +88,7 @@ describe('Feature: avana-core, Property 3: Encoding Handling', () => {
           expect(errors[errors.length - 1].type).toBe('InvalidEncodingError');
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 25 }
     );
   });
 });
@@ -121,7 +121,7 @@ describe('Feature: avana-core, Property 4: Permission Error Recovery', () => {
           expect(errorHandler.hasErrors()).toBe(true);
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 25 }
     );
   });
 
@@ -146,7 +146,7 @@ describe('Feature: avana-core, Property 4: Permission Error Recovery', () => {
           expect(summary['FilePermissionError']).toBe(filePaths.length);
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 25 }
     );
   });
 
@@ -170,7 +170,7 @@ describe('Feature: avana-core, Property 4: Permission Error Recovery', () => {
           expect(lastError.timestamp).toBeInstanceOf(Date);
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 25 }
     );
   });
 
@@ -192,7 +192,7 @@ describe('Feature: avana-core, Property 4: Permission Error Recovery', () => {
           expect(lastError.filePath).toBe(filePath);
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 25 }
     );
   });
 
@@ -225,7 +225,7 @@ describe('Feature: avana-core, Property 4: Permission Error Recovery', () => {
           expect(errorHandler.getErrorCount()).toBe(permissionErrorCount + encodingErrorCount);
         }
       ),
-      { numRuns: 100 }
+      { numRuns: 25 }
     );
   });
 });

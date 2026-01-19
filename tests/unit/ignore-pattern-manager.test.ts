@@ -67,6 +67,13 @@ describe('IgnorePatternManager', () => {
       expect(ignoreManager.shouldIgnore('yarn.lock')).toBe(true);
       expect(ignoreManager.shouldIgnore('Cargo.lock')).toBe(true);
     });
+
+    it('should ignore scan-reports directory by default', () => {
+      expect(ignoreManager.shouldIgnore('scan-reports/report.md')).toBe(true);
+      expect(ignoreManager.shouldIgnore('scan-reports/avana-security-report-2026-01-19.md')).toBe(true);
+      expect(ignoreManager.shouldIgnore('scan-reports/subdir/report.json')).toBe(true);
+      expect(ignoreManager.shouldIgnore('other-reports/report.md')).toBe(false);
+    });
   });
 
   describe('.avanaignore File Loading', () => {

@@ -5,8 +5,11 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import * as chardet from 'chardet';
+import { safeRequireWithError } from './dependency-checker';
 import type { FileEncoding, FileInfo } from '../types';
+
+// Safe require for chardet with error handling
+const chardet = safeRequireWithError('chardet', 'File encoding detection');
 
 /**
  * Size threshold for streaming (10MB)
@@ -68,7 +71,7 @@ export class FileTypeDetector {
   }
 
   /**
-   * Detect file encoding
+   * Detect file encoding with enhanced error handling
    */
   public detectEncoding(filePath: string): FileEncoding {
     try {
@@ -80,16 +83,29 @@ export class FileTypeDetector {
         return bom;
       }
 
-      // Use chardet for encoding detection
-      const detected = chardet.detect(buffer);
-      if (detected) {
-        return this.normalizeEncoding(detected);
+      // Use chardet for encoding detection with error handling
+      try {
+        const detected = chardet.detect(buffer);
+        if (detected) {
+          return this.normalizeEncoding(detected);
+        }
+      } catch (chardetError) {
+        // Log chardet-specific error but continue with fallback
+        if (process.env.DEBUG) {
+          console.warn(`⚠️  chardet encoding detection failed for ${filePath}: ${chardetError instanceof Error ? chardetError.message : 'Unknown error'}`);
+        }
+        
+        // Fallback to basic encoding detection
+        return this.fallbackEncodingDetection(buffer);
       }
 
       // Default to UTF-8
       return 'utf-8';
     } catch (error) {
-      // If detection fails, assume UTF-8
+      // If detection fails completely, assume UTF-8
+      if (process.env.DEBUG) {
+        console.warn(`⚠️  Encoding detection failed for ${filePath}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      }
       return 'utf-8';
     }
   }
@@ -196,8 +212,85 @@ export class FileTypeDetector {
   }
 
   /**
-   * Normalize encoding name from chardet to our FileEncoding type
+   * Fallback encoding detection when chardet fails
    */
+  private fallbackEncodingDetection(buffer: Buffer): FileEncoding {
+    // Simple heuristic-based encoding detection
+    let nullBytes = 0;
+    let highBitBytes = 0;
+    let validUtf8Sequences = 0;
+    
+    for (let i = 0; i < buffer.length; i++) {
+      const byte = buffer[i];
+      
+      // Count null bytes (indicator of binary or UTF-16)
+      if (byte === 0) {
+        nullBytes++;
+      }
+      
+      // Count high-bit bytes (non-ASCII)
+      if (byte > 127) {
+        highBitBytes++;
+        
+        // Check for valid UTF-8 sequences
+        if (this.isValidUtf8Sequence(buffer, i)) {
+          validUtf8Sequences++;
+        }
+      }
+    }
+    
+    const totalBytes = buffer.length;
+    const nullRatio = nullBytes / totalBytes;
+    const highBitRatio = highBitBytes / totalBytes;
+    
+    // If many null bytes, likely UTF-16 or binary
+    if (nullRatio > 0.1) {
+      return 'utf-16';
+    }
+    
+    // If mostly ASCII, return ASCII
+    if (highBitRatio < 0.05) {
+      return 'ascii';
+    }
+    
+    // If high-bit bytes with valid UTF-8 sequences, likely UTF-8
+    if (validUtf8Sequences > 0) {
+      return 'utf-8';
+    }
+    
+    // Default fallback
+    return 'utf-8';
+  }
+
+  /**
+   * Check if byte sequence at position is valid UTF-8
+   */
+  private isValidUtf8Sequence(buffer: Buffer, startIndex: number): boolean {
+    if (startIndex >= buffer.length) return false;
+    
+    const firstByte = buffer[startIndex];
+    
+    // Single byte (ASCII)
+    if ((firstByte & 0x80) === 0) {
+      return true;
+    }
+    
+    // Multi-byte sequence
+    let expectedBytes = 0;
+    if ((firstByte & 0xE0) === 0xC0) expectedBytes = 1; // 110xxxxx
+    else if ((firstByte & 0xF0) === 0xE0) expectedBytes = 2; // 1110xxxx
+    else if ((firstByte & 0xF8) === 0xF0) expectedBytes = 3; // 11110xxx
+    else return false;
+    
+    // Check continuation bytes
+    for (let i = 1; i <= expectedBytes; i++) {
+      if (startIndex + i >= buffer.length) return false;
+      const byte = buffer[startIndex + i];
+      if ((byte & 0xC0) !== 0x80) return false; // 10xxxxxx
+    }
+    
+    return true;
+  }
   private normalizeEncoding(detected: string): FileEncoding {
     const lower = detected.toLowerCase();
     

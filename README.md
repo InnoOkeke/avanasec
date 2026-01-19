@@ -10,15 +10,17 @@
 
 ## 🎯 Overview
 
-Avana prevents costly security breaches by detecting hardcoded secrets, API keys, and credentials before they reach your repository. With 80+ detection patterns and a focus on zero false positives, Avana is the security scanner you can trust.
+Avana prevents costly security breaches by detecting hardcoded secrets, API keys, and credentials before they reach your repository. With 100+ detection patterns, robust file handling, and comprehensive testing, Avana is the security scanner you can trust.
 
 ### Why Avana?
 
-- **80+ Detection Patterns**: Comprehensive coverage for all major services (AWS, OpenAI, Stripe, GitHub, and more)
-- **Zero Configuration**: Works out of the box with sensible defaults
-- **Fast Scanning**: Scans thousands of files in seconds
-- **CI/CD Ready**: Exit codes and JSON output for pipeline integration
-- **Production-Ready**: Robust error handling, edge case coverage, and extensive testing
+- **100+ Detection Patterns**: Comprehensive coverage for all major services (AWS, OpenAI, Stripe, GitHub, Web3, and more)
+- **High Performance**: Scans 10,000+ files in under 10 seconds with parallel processing
+- **Robust File Handling**: Binary detection, encoding support, large file streaming (>10MB)
+- **Smart Ignore System**: Respects .gitignore, .avanaignore, and custom patterns
+- **Multiple Output Formats**: Console, JSON, and Markdown reports
+- **CI/CD Ready**: Standard exit codes and structured output for pipeline integration
+- **Production-Ready**: Comprehensive error handling, memory management, and property-based testing
 
 ---
 
@@ -28,23 +30,66 @@ Avana prevents costly security breaches by detecting hardcoded secrets, API keys
 
 ```bash
 # Install globally
-npm install -g avana
+npm install -g avana-cli
+
+# Verify installation
+avana --help
 
 # Or use with npx (no installation required)
-npx avana scan
+npx avana-cli scan
 ```
+
+### Troubleshooting Installation
+
+If you encounter issues after installation:
+
+```bash
+# Run diagnostics
+avana troubleshoot
+
+# Or use the alias
+avana doctor
+```
+
+**Common Issues:**
+
+- **Command not found**: Ensure npm global bin directory is in your PATH
+- **Permission errors**: Try using `sudo` on Unix systems or run as administrator on Windows
+- **Module errors**: Run `npm install -g avana-cli` to reinstall dependencies
+
+**Manual Installation Steps:**
+
+1. Install the package: `npm install -g avana-cli`
+2. Verify installation: `avana --help`
+3. If command not found, check your PATH: `npm config get prefix`
+4. Add npm global bin to PATH if needed
+
+**Getting Help:**
+
+- Documentation: [GitHub Repository](https://github.com/innookeke/avana-cli#readme)
+- Report Issues: [GitHub Issues](https://github.com/innookeke/avana-cli/issues)
+- Run diagnostics: `avana troubleshoot`
 
 ### Basic Usage
 
 ```bash
 # Scan current directory
-npm run scan
+avana scan
 
 # Scan with verbose output
-npm run scan:verbose
+avana scan --verbose
 
 # Scan specific path
 avana scan --path ./my-project
+
+# Scan with JSON output
+avana scan --json
+
+# Scan with custom ignore patterns
+avana scan --ignore "**/*.md" --ignore "tests/**"
+
+# Scan with memory and worker limits
+avana scan --max-memory 1000 --workers 4
 
 # Install Git pre-commit hooks
 avana install
@@ -110,17 +155,19 @@ git commit --no-verify
 
 ### Comprehensive Detection
 
-Avana detects 80+ types of secrets across major services:
+Avana detects 100+ types of secrets across major services:
 
-- **AI/ML APIs**: OpenAI, Anthropic, Hugging Face
-- **Cloud Providers**: AWS, Azure, GCP
-- **Payment Processors**: Stripe, PayPal, Square
-- **Version Control**: GitHub, GitLab, Bitbucket
-- **Communication**: Slack, Discord, Telegram, Twilio
-- **Email Services**: SendGrid, Mailgun, Mailchimp
+- **AI/ML APIs**: OpenAI, Anthropic, Hugging Face, Cohere
+- **Cloud Providers**: AWS, Azure, GCP, DigitalOcean
+- **Payment Processors**: Stripe, PayPal, Square, Adyen
+- **Web3/Blockchain**: Ethereum, Bitcoin, Solana, Polygon, DeFi protocols
+- **Version Control**: GitHub, GitLab, Bitbucket tokens
+- **Communication**: Slack, Discord, Telegram, Twilio, WhatsApp
+- **Email Services**: SendGrid, Mailgun, Mailchimp, Postmark
 - **Databases**: PostgreSQL, MongoDB, Redis connection strings
-- **Private Keys**: RSA, SSH, PGP, EC keys
-- **And 60+ more patterns**
+- **Private Keys**: RSA, SSH, PGP, EC keys, JWT secrets
+- **OAuth Providers**: Google, Microsoft, Apple, Facebook, Twitter
+- **And 70+ more patterns**
 
 ### Insecure Code Pattern Detection
 
@@ -136,14 +183,43 @@ Avana also detects insecure coding patterns that could lead to vulnerabilities:
 - **Configuration Issues**: Hardcoded URLs, CORS wildcards
 - **And 20+ more patterns**
 
-### Smart Ignore
+### Smart Ignore System
 
 Automatically skips:
-- `node_modules`, `.git`, `dist`, `build`
-- Test files and directories
-- `.env` files (meant for local secrets)
-- Database files (`.sqlite`, `.db`)
-- Lock files (`package-lock.json`)
+- **Dependencies**: `node_modules`, `vendor`, `bower_components`
+- **Build outputs**: `dist`, `build`, `out`, `.next`, `target`
+- **Version control**: `.git`, `.svn`, `.hg`
+- **IDE files**: `.vscode`, `.idea`, `*.swp`
+- **Test coverage**: `coverage`, `.nyc_output`
+- **Lock files**: `package-lock.json`, `yarn.lock`, `Cargo.lock`
+- **Binary files**: Images, executables, archives
+- **Cache directories**: `.cache`, `tmp`, `temp`
+
+### Custom Ignore Patterns
+
+Create a `.avanaignore` file in your project root:
+
+```gitignore
+# Custom ignore patterns
+docs/**
+*.md
+test-fixtures/**
+legacy-code/**
+
+# Comments are supported
+# Glob patterns work: *, **, ?
+**/*.backup
+temp-*
+```
+
+### Performance Features
+
+- **Parallel Processing**: Multi-threaded scanning with configurable worker count
+- **Memory Management**: Automatic garbage collection and configurable memory limits
+- **Large File Streaming**: Efficient handling of files >10MB with chunked processing
+- **Result Caching**: 24-hour cache with file modification tracking
+- **Binary Detection**: Smart binary file exclusion to avoid false positives
+- **Progress Reporting**: Real-time progress with ETA calculation
 
 ### Security Score
 
@@ -152,6 +228,16 @@ Automatically skips:
 - High: -10 points each
 - Medium: -5 points each
 - Low: -2 points each
+
+### 🔒 Security Protection
+
+**Automatic .gitignore Protection**: When Avana creates the `scan-reports/` directory, it automatically adds it to your `.gitignore` file to prevent accidentally committing security reports (which contain detected secrets) to version control.
+
+**Manual Protection**: If you already have a `scan-reports/` directory, add this to your `.gitignore`:
+```gitignore
+# Avana scan reports (contains detected secrets)
+scan-reports/
+```
 
 ---
 
@@ -164,20 +250,115 @@ Automatically skips:
 avana scan [options]
 
 Options:
-  --path <path>     Path to scan (default: current directory)
-  --staged          Scan only Git staged files (for pre-commit hooks)
-  --verbose, -v     Show detailed output
-  --help, -h        Show help message
+  --path <path>            Path to scan (default: current directory)
+  --staged                 Scan only Git staged files (for pre-commit hooks)
+  --verbose, -v            Show detailed output
+  --debug                  Show debug information
+  --quiet                  Show minimal output
+  --json                   Save results to JSON file
+  --output-json            Save results to JSON file (alias for --json)
+  --output-md              Save results to Markdown file
+  --no-progress            Disable progress bar
+  --fail-on-high           Exit with code 1 on high severity issues
+  --max-memory <mb>        Set memory limit in MB (default: 500)
+  --workers <count>        Set number of worker threads (default: CPU count - 1)
+  --ignore <pattern>       Ignore files matching pattern (can be used multiple times)
+  --help, -h               Show help message
 
 # Git hook commands
-avana install       Install Git pre-commit hooks
-avana uninstall     Remove Git pre-commit hooks
+avana install              Install Git pre-commit hooks
+avana uninstall            Remove Git pre-commit hooks
+
+# Examples
+avana scan
+avana scan --path ./my-project
+avana scan --staged
+avana scan --verbose --debug
+avana scan --json --output-md
+avana scan --fail-on-high
+avana scan --max-memory 1000 --workers 4
+avana scan --ignore "**/*.md" --ignore "tests/**"
 ```
 
 ### Exit Codes
 
-- `0`: No critical or high severity issues found
-- `1`: Critical or high severity issues detected (blocks CI/CD and commits)
+Avana uses standard exit codes for CI/CD integration:
+
+- **0**: No critical or high severity issues found (success)
+- **1**: Critical or high severity issues detected (blocks CI/CD and commits)
+- **2**: Invalid arguments or configuration error
+- **3**: Unexpected error occurred (system error)
+
+### Output Formats
+
+#### Console Output (Default)
+```
+🔍 Scanning project for security issues...
+📁 Path: ./my-project
+
+✅ Scan complete in 1234ms
+
+🚨 SECURITY ISSUES FOUND
+
+┌─────────────────────────────────────────┐
+│ 🔴 Critical: 2                          │
+│ 🟠 High:     1                          │
+│ 🟡 Medium:   0                          │
+│ 🟢 Low:      0                          │
+└─────────────────────────────────────────┘
+
+🔴 OpenAI API Key
+   File: src/config.ts:12
+   OpenAI API key detected
+   ✅ Fix: Move to environment variable: OPENAI_API_KEY
+
+📊 Security Score: 60/100
+```
+
+#### JSON Output (--json)
+```json
+{
+  "success": false,
+  "timestamp": "2024-01-17T10:30:00.000Z",
+  "duration": 1234,
+  "filesScanned": 150,
+  "securityScore": 60,
+  "issues": [
+    {
+      "id": "openai-api-key-001",
+      "type": "OpenAI API Key",
+      "severity": "critical",
+      "message": "OpenAI API key detected",
+      "file": "src/config.ts",
+      "line": 12,
+      "match": "sk-1234567890abcdef",
+      "confidence": 0.95,
+      "rule": {
+        "id": "openai-api-key",
+        "name": "OpenAI API Key"
+      }
+    }
+  ],
+  "summary": {
+    "total": 3,
+    "critical": 2,
+    "high": 1,
+    "medium": 0,
+    "low": 0,
+    "byType": {
+      "OpenAI API Key": 2,
+      "AWS Access Key": 1
+    },
+    "byFile": {
+      "src/config.ts": 2,
+      "src/aws.ts": 1
+    }
+  }
+}
+```
+
+#### Markdown Output (--output-md)
+Generates a detailed markdown report saved to `scan-reports/avana-security-report-YYYY-MM-DD.md`
 
 ### Git Hook Behavior
 
@@ -186,6 +367,55 @@ When using `avana install`:
 - **Allows commits** with only medium or low severity issues (with warning)
 - Scans only staged files for speed (< 2 seconds)
 - Provides clear error messages with fix suggestions
+- Uses `--fail-on-high` flag by default for stricter security
+
+### Troubleshooting
+
+#### Common Issues
+
+**Memory Issues**
+```bash
+# Increase memory limit
+avana scan --max-memory 1000
+
+# Reduce worker count
+avana scan --workers 2
+```
+
+**Performance Issues**
+```bash
+# Add ignore patterns for large directories
+avana scan --ignore "node_modules/**" --ignore "dist/**"
+
+# Use .avanaignore file for persistent patterns
+echo "large-data/**" >> .avanaignore
+```
+
+**False Positives**
+```bash
+# Use ignore patterns for test files
+avana scan --ignore "**/*.test.ts" --ignore "fixtures/**"
+
+# Check pattern confidence scores in JSON output
+avana scan --json
+```
+
+**Binary File Warnings**
+```bash
+# Enable debug mode to see file processing details
+avana scan --debug
+
+# Binary files are automatically skipped
+```
+
+#### Performance Characteristics
+
+- **Small projects** (< 100 files): < 1 second
+- **Medium projects** (100-1,000 files): 1-3 seconds  
+- **Large projects** (1,000-10,000 files): 3-10 seconds
+- **Very large projects** (> 10,000 files): 10+ seconds
+
+Memory usage typically stays under 200MB for most projects, with a default limit of 500MB.
 
 ### CI/CD Integration
 
@@ -203,7 +433,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - run: npx avana scan
+      - name: Run Avana Security Scan
+        run: npx avana scan --json
+      - name: Upload scan results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: security-scan-results
+          path: scan-reports/
 ```
 
 #### GitLab CI
@@ -212,10 +449,45 @@ jobs:
 security_scan:
   stage: test
   script:
-    - npx avana scan
+    - npx avana scan --json --fail-on-high
+  artifacts:
+    when: always
+    paths:
+      - scan-reports/
+    reports:
+      junit: scan-reports/*.json
   only:
     - merge_requests
     - main
+```
+
+#### Jenkins Pipeline
+
+```groovy
+pipeline {
+    agent any
+    stages {
+        stage('Security Scan') {
+            steps {
+                sh 'npx avana scan --json'
+                archiveArtifacts artifacts: 'scan-reports/*', allowEmptyArchive: true
+                publishHTML([
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'scan-reports',
+                    reportFiles: '*.html',
+                    reportName: 'Security Scan Report'
+                ])
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
 ```
 
 ---
@@ -272,22 +544,42 @@ avana/
 
 ## 🧪 Testing
 
-Avana includes comprehensive testing:
+Avana includes comprehensive testing with property-based testing:
 
-- **Unit Tests**: Core functionality
-- **Property-Based Tests**: Edge cases with fast-check
-- **Integration Tests**: End-to-end workflows
+- **Unit Tests**: Core functionality and edge cases
+- **Property-Based Tests**: 15 properties with 100+ iterations each using fast-check
+- **Integration Tests**: End-to-end workflows and CLI integration
+- **Performance Tests**: Memory usage and scan speed validation
 
 ```bash
 # Run all tests
 npm test
 
-# Watch mode
-npm run test:watch
-
-# Coverage report
+# Run with coverage
 npm run test:coverage
+
+# Run property-based tests only
+npm test -- --grep "property"
+
+# Run integration tests only
+npm test -- --grep "integration"
+
+# Watch mode for development
+npm run test:watch
 ```
+
+#### Property-Based Testing
+
+Avana uses property-based testing to validate correctness across thousands of generated inputs:
+
+- **Binary File Exclusion**: Ensures binary files are never scanned
+- **Large File Streaming**: Validates chunked processing for files >10MB
+- **Encoding Handling**: Tests UTF-8, UTF-16, Latin-1, and ASCII support
+- **Memory Limit Enforcement**: Verifies memory usage stays within bounds
+- **Parallel Scan Equivalence**: Ensures parallel and sequential scans produce identical results
+- **Cache Correctness**: Validates cache hits/misses and expiration
+- **Pattern Compilation**: Tests all 100+ regex patterns for correctness
+- **And 8 more properties** covering error recovery, progress reporting, and output formatting
 
 ---
 
