@@ -65,7 +65,7 @@ async function saveResults(
   if (!fs.existsSync(reportsDir)) {
     fs.mkdirSync(reportsDir, { recursive: true });
     
-    // Automatically add scan-reports to .gitignore to prevent committing secrets
+    // Automatically add scan-reports and .avana-cache to .gitignore to prevent committing secrets
     const gitignorePath = path.join(rootPath, '.gitignore');
     try {
       let gitignoreContent = '';
@@ -73,22 +73,39 @@ async function saveResults(
         gitignoreContent = fs.readFileSync(gitignorePath, 'utf-8');
       }
       
+      let updated = false;
+      
       // Check if scan-reports is already in .gitignore
       if (!gitignoreContent.includes('scan-reports')) {
         const newEntry = gitignoreContent.endsWith('\n') || gitignoreContent === '' 
-          ? '# Avana scan reports (contains detected secrets)\nscan-reports/\n'
-          : '\n# Avana scan reports (contains detected secrets)\nscan-reports/\n';
+          ? '# Avanasec scan reports (contains detected secrets)\nscan-reports/\n'
+          : '\n# Avanasec scan reports (contains detected secrets)\nscan-reports/\n';
         
-        fs.writeFileSync(gitignorePath, gitignoreContent + newEntry);
+        gitignoreContent += newEntry;
+        updated = true;
+      }
+      
+      // Check if .avana-cache is already in .gitignore
+      if (!gitignoreContent.includes('.avana-cache')) {
+        const newEntry = gitignoreContent.endsWith('\n') || gitignoreContent === '' 
+          ? '# Avanasec cache (scan results cache)\n.avana-cache/\n'
+          : '\n# Avanasec cache (scan results cache)\n.avana-cache/\n';
+        
+        gitignoreContent += newEntry;
+        updated = true;
+      }
+      
+      if (updated) {
+        fs.writeFileSync(gitignorePath, gitignoreContent);
         
         if (verbose) {
-          console.log('📝 Added scan-reports/ to .gitignore to prevent committing secrets');
+          console.log('📝 Added scan-reports/ and .avana-cache/ to .gitignore');
         }
       }
     } catch (error) {
       // Silently fail if we can't write to .gitignore - don't break the scan
       if (verbose) {
-        console.warn('⚠️  Could not update .gitignore - please manually add scan-reports/ to prevent committing secrets');
+        console.warn('⚠️  Could not update .gitignore - please manually add scan-reports/ and .avana-cache/');
       }
     }
   }

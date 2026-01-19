@@ -293,10 +293,15 @@ temp-*
 
 **Automatic .gitignore Protection**: When avanasec creates the `scan-reports/` directory, it automatically adds it to your `.gitignore` file to prevent accidentally committing security reports (which contain detected secrets) to version control.
 
-**Manual Protection**: If you already have a `scan-reports/` directory, add this to your `.gitignore`:
+**Cache Directory**: The `.avana-cache/` directory stores scan results for performance optimization. This directory is automatically ignored by git and should be added to your `.gitignore`:
+
+**Manual Protection**: If you already have these directories, add this to your `.gitignore`:
 ```gitignore
 # avanasec scan reports (contains detected secrets)
 scan-reports/
+
+# avanasec cache (scan results cache)
+.avana-cache/
 ```
 
 ---

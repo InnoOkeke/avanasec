@@ -43,3 +43,5 @@ yarn-error.log*
 # Avana scan reports (contains detected secrets)
 scan-reports/
 
+# Avana cache (scan results cache)
+.avana-cache/

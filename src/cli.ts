@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Avana CLI
+ * Avanasec CLI
  * Command-line interface for security scanning
  */
 
@@ -109,15 +109,15 @@ async function main() {
       await troubleshootCommand();
     } else if (command === '--help' || command === '-h') {
       console.log(`
-🔒 Avana CLI
+🔒 Avanasec CLI
 
 Usage:
-  avana-cli scan [options]     Scan project for security issues
-  avana-cli install            Install Git pre-commit hooks
-  avana-cli uninstall          Remove Git pre-commit hooks
-  avana-cli troubleshoot       Run diagnostics and troubleshooting
-  avana-cli doctor             Alias for troubleshoot
-  avana-cli --help             Show this help message
+  avanasec scan [options]      Scan project for security issues
+  avanasec install             Install Git pre-commit hooks
+  avanasec uninstall           Remove Git pre-commit hooks
+  avanasec troubleshoot        Run diagnostics and troubleshooting
+  avanasec doctor              Alias for troubleshoot
+  avanasec --help              Show this help message
 
 Scan Options:
   --path <path>            Path to scan (default: current directory)
@@ -138,34 +138,34 @@ Exit Codes:
   3                        Unexpected error occurred
 
 Examples:
-  avana-cli scan
-  avana-cli scan --path ./my-project
-  avana-cli scan --staged
-  avana-cli scan --verbose --debug
-  avana-cli scan --fail-on-high
-  avana-cli scan --max-memory 1000 --workers 4
-  avana-cli scan --ignore "**/*.md" --ignore "tests/**"
-  avana-cli install
-  avana-cli uninstall
-  avana-cli troubleshoot
+  avanasec scan
+  avanasec scan --path ./my-project
+  avanasec scan --staged
+  avanasec scan --verbose --debug
+  avanasec scan --fail-on-high
+  avanasec scan --max-memory 1000 --workers 4
+  avanasec scan --ignore "**/*.md" --ignore "tests/**"
+  avanasec install
+  avanasec uninstall
+  avanasec troubleshoot
 
 NPX Usage (recommended for trying out):
-  npx avana-cli scan
-  npx avana-cli --help
-  npx avana-cli scan --verbose
+  npx avanasec scan
+  npx avanasec --help
+  npx avanasec scan --verbose
 
 Global Installation (for shorter commands):
-  npm install -g avana-cli
-  avana scan  # after global install
-  avana --help
+  npm install -g avanasec
+  avanasec scan  # after global install
+  avanasec --help
 
 Troubleshooting:
-  If you're experiencing issues, run 'avana troubleshoot' for comprehensive
+  If you're experiencing issues, run 'avanasec troubleshoot' for comprehensive
   diagnostics and troubleshooting guidance.
 
 Support:
-  Documentation: https://github.com/innookeke/avana-cli#readme
-  Report Issues: https://github.com/innookeke/avana-cli/issues
+  Documentation: https://github.com/innookeke/avanasec#readme
+  Report Issues: https://github.com/innookeke/avanasec/issues
     `);
       process.exit(ExitCode.SUCCESS);
     } else {
