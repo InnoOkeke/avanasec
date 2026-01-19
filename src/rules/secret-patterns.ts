@@ -1319,14 +1319,6 @@ export const SECRET_PATTERNS: SecretPattern[] = [
     suggestion: 'Move to environment variable: GOOGLE_CLIENT_SECRET',
   },
   {
-    id: 'apple-app-id',
-    name: 'Apple App ID',
-    pattern: /[A-Z0-9]{10}\.[a-zA-Z0-9.-]+/g,
-    severity: 'medium',
-    description: 'Apple App ID detected',
-    suggestion: 'Move to environment variable: APPLE_APP_ID',
-  },
-  {
     id: 'apple-team-id',
     name: 'Apple Team ID',
     pattern: /(?:team[_-]?id|apple[_-]?team|TEAM_ID|APPLE_TEAM_ID)[\s=:'"]*([A-Z0-9]{10})\b/gi,
