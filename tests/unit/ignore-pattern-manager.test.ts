@@ -76,10 +76,10 @@ describe('IgnorePatternManager', () => {
     });
   });
 
-  describe('.avanaignore File Loading', () => {
-    it('should load patterns from .avanaignore file', () => {
-      const avanaIgnorePath = path.join(tempDir, '.avanaignore');
-      fs.writeFileSync(avanaIgnorePath, 'custom-dir/**\n*.custom\ntest-file.txt');
+  describe('.avanasecignore File Loading', () => {
+    it('should load patterns from .avanasecignore file', () => {
+      const avanasecIgnorePath = path.join(tempDir, '.avanasecignore');
+      fs.writeFileSync(avanasecIgnorePath, 'custom-dir/**\n*.custom\ntest-file.txt');
       
       ignoreManager.loadPatterns(tempDir);
       
@@ -88,9 +88,9 @@ describe('IgnorePatternManager', () => {
       expect(ignoreManager.shouldIgnore('test-file.txt')).toBe(true);
     });
 
-    it('should ignore empty lines in .avanaignore', () => {
-      const avanaIgnorePath = path.join(tempDir, '.avanaignore');
-      fs.writeFileSync(avanaIgnorePath, 'pattern1\n\n\npattern2\n\n');
+    it('should ignore empty lines in .avanasecignore', () => {
+      const avanasecIgnorePath = path.join(tempDir, '.avanasecignore');
+      fs.writeFileSync(avanasecIgnorePath, 'pattern1\n\n\npattern2\n\n');
       
       ignoreManager.loadPatterns(tempDir);
       const patterns = ignoreManager.getPatterns();
@@ -100,9 +100,9 @@ describe('IgnorePatternManager', () => {
       expect(customPatterns).toHaveLength(2);
     });
 
-    it('should ignore comment lines in .avanaignore', () => {
-      const avanaIgnorePath = path.join(tempDir, '.avanaignore');
-      fs.writeFileSync(avanaIgnorePath, '# This is a comment\npattern1\n# Another comment\npattern2');
+    it('should ignore comment lines in .avanasecignore', () => {
+      const avanasecIgnorePath = path.join(tempDir, '.avanasecignore');
+      fs.writeFileSync(avanasecIgnorePath, '# This is a comment\npattern1\n# Another comment\npattern2');
       
       ignoreManager.loadPatterns(tempDir);
       const patterns = ignoreManager.getPatterns();
@@ -113,7 +113,7 @@ describe('IgnorePatternManager', () => {
       expect(patterns).toContain('pattern2');
     });
 
-    it('should handle missing .avanaignore file gracefully', () => {
+    it('should handle missing .avanasecignore file gracefully', () => {
       expect(() => ignoreManager.loadPatterns(tempDir)).not.toThrow();
       
       // Should still have default patterns
@@ -122,8 +122,8 @@ describe('IgnorePatternManager', () => {
     });
 
     it('should trim whitespace from patterns', () => {
-      const avanaIgnorePath = path.join(tempDir, '.avanaignore');
-      fs.writeFileSync(avanaIgnorePath, '  pattern1  \n\t pattern2 \t\n');
+      const avanasecIgnorePath = path.join(tempDir, '.avanasecignore');
+      fs.writeFileSync(avanasecIgnorePath, '  pattern1  \n\t pattern2 \t\n');
       
       ignoreManager.loadPatterns(tempDir);
       
@@ -216,9 +216,9 @@ describe('IgnorePatternManager', () => {
 
   describe('Pattern Merging', () => {
     it('should merge default, file, and CLI patterns', () => {
-      // Create .avanaignore file
-      const avanaIgnorePath = path.join(tempDir, '.avanaignore');
-      fs.writeFileSync(avanaIgnorePath, 'file-pattern/**');
+      // Create .avanasecignore file
+      const avanasecIgnorePath = path.join(tempDir, '.avanasecignore');
+      fs.writeFileSync(avanasecIgnorePath, 'file-pattern/**');
       
       // Load file patterns
       ignoreManager.loadPatterns(tempDir);
@@ -309,8 +309,8 @@ describe('IgnorePatternManager', () => {
     });
 
     it('should return configuration breakdown', () => {
-      const avanaIgnorePath = path.join(tempDir, '.avanaignore');
-      fs.writeFileSync(avanaIgnorePath, 'file-pattern');
+      const avanasecIgnorePath = path.join(tempDir, '.avanasecignore');
+      fs.writeFileSync(avanasecIgnorePath, 'file-pattern');
       
       ignoreManager.loadPatterns(tempDir);
       ignoreManager.addPattern('cli-pattern');
@@ -318,8 +318,8 @@ describe('IgnorePatternManager', () => {
       const config = ignoreManager.getConfig();
       
       expect(config.defaultPatterns).toContain('node_modules/**');
-      expect(config.avanaIgnorePatterns).toContain('file-pattern');
-      expect(config.avanaIgnorePatterns).toContain('cli-pattern');
+      expect(config.avanasecIgnorePatterns).toContain('file-pattern');
+      expect(config.avanasecIgnorePatterns).toContain('cli-pattern');
     });
 
     it('should clear custom patterns', () => {

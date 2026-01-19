@@ -1,6 +1,6 @@
 /**
  * Ignore Pattern Manager
- * Manages file and directory ignore patterns from .avanaignore and CLI
+ * Manages file and directory ignore patterns from .avanasecignore and CLI
  */
 
 import * as fs from 'fs';
@@ -15,7 +15,7 @@ const { minimatch } = safeRequireWithError('minimatch', 'File pattern matching')
  */
 export interface IgnoreConfig {
   defaultPatterns: string[];
-  avanaIgnorePatterns: string[];
+  avanasecIgnorePatterns: string[];
   cliPatterns: string[];
 }
 
@@ -78,8 +78,9 @@ const DEFAULT_IGNORE_PATTERNS = [
   'tmp/**',
   'temp/**',
   
-  // Avana scan reports (avoid scanning own output)
+  // Avanasec scan reports (avoid scanning own output)
   'scan-reports/**',
+  '.avana-cache/**',
 ];
 
 /**
@@ -98,14 +99,14 @@ export class IgnorePatternManager {
   }
 
   /**
-   * Load patterns from .avanaignore file if it exists
+   * Load patterns from .avanasecignore file if it exists
    */
   public loadPatterns(projectPath: string): void {
-    const avanaIgnorePath = path.join(projectPath, '.avanaignore');
+    const avanasecIgnorePath = path.join(projectPath, '.avanasecignore');
     
-    if (fs.existsSync(avanaIgnorePath)) {
+    if (fs.existsSync(avanasecIgnorePath)) {
       try {
-        const content = fs.readFileSync(avanaIgnorePath, 'utf-8');
+        const content = fs.readFileSync(avanasecIgnorePath, 'utf-8');
         const filePatterns = content
           .split('\n')
           .map(line => line.trim())
@@ -114,11 +115,11 @@ export class IgnorePatternManager {
         this.patterns.push(...filePatterns);
         
         if (this.verbose) {
-          console.log(`Loaded ${filePatterns.length} patterns from .avanaignore`);
+          console.log(`Loaded ${filePatterns.length} patterns from .avanasecignore`);
         }
       } catch (error) {
         if (this.verbose) {
-          console.warn(`Warning: Could not read .avanaignore: ${error instanceof Error ? error.message : 'Unknown error'}`);
+          console.warn(`Warning: Could not read .avanasecignore: ${error instanceof Error ? error.message : 'Unknown error'}`);
         }
       }
     }
@@ -191,7 +192,7 @@ export class IgnorePatternManager {
   public getConfig(): IgnoreConfig {
     return {
       defaultPatterns: DEFAULT_IGNORE_PATTERNS,
-      avanaIgnorePatterns: this.patterns.filter(p => !DEFAULT_IGNORE_PATTERNS.includes(p)),
+      avanasecIgnorePatterns: this.patterns.filter(p => !DEFAULT_IGNORE_PATTERNS.includes(p)),
       cliPatterns: [], // Would need to track separately if needed
     };
   }
