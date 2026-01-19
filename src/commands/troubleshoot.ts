@@ -1,5 +1,5 @@
 /**
- * Avana CLI - Troubleshoot Command
+ * Avanasec CLI - Troubleshoot Command
  * Provides comprehensive troubleshooting information and diagnostics
  */
 
@@ -81,7 +81,7 @@ function checkAvanaInstallation() {
         packageInfo = {
           name: packageJson.name,
           version: packageJson.version,
-          isAvana: packageJson.name === 'avana-cli'
+          isAvanasec: packageJson.name === 'avanasec'
         };
       } catch (parseError) {
         packageInfo = { error: 'Could not parse package.json' };
@@ -91,7 +91,7 @@ function checkAvanaInstallation() {
     // Check global installation
     let globalInstallation = null;
     try {
-      const globalList = execSync('npm list -g avana-cli --depth=0', { 
+      const globalList = execSync('npm list -g avanasec --depth=0', { 
         encoding: 'utf-8',
         stdio: 'pipe'
       });
@@ -206,8 +206,8 @@ function displayAvanaDiagnostics() {
   const installation = checkAvanaInstallation();
   
   if (installation.packageInfo) {
-    if (installation.packageInfo.isAvana) {
-      console.log(`${colors.green}✅ Running from Avana source directory${colors.reset}`);
+    if (installation.packageInfo.isAvanasec) {
+      console.log(`${colors.green}✅ Running from Avanasec source directory${colors.reset}`);
       console.log(`${colors.blue}Version:${colors.reset} ${installation.packageInfo.version}`);
     } else if (installation.packageInfo.name) {
       console.log(`${colors.yellow}ℹ️  Running from ${installation.packageInfo.name} directory${colors.reset}`);
@@ -216,10 +216,10 @@ function displayAvanaDiagnostics() {
   
   if (installation.globalInstallation) {
     if (installation.globalInstallation.installed) {
-      console.log(`${colors.green}✅ Avana is installed globally${colors.reset}`);
+      console.log(`${colors.green}✅ Avanasec is installed globally${colors.reset}`);
     } else {
-      console.log(`${colors.yellow}ℹ️  Avana is not installed globally${colors.reset}`);
-      console.log(`${colors.blue}Install globally: npm install -g avana-cli${colors.reset}`);
+      console.log(`${colors.yellow}ℹ️  Avanasec is not installed globally${colors.reset}`);
+      console.log(`${colors.blue}Install globally: npm install -g avanasec${colors.reset}`);
     }
   }
   
@@ -279,9 +279,9 @@ function displayTroubleshootingSteps() {
   console.log(`${colors.cyan}${colors.bold}🔧 Common Troubleshooting Steps${colors.reset}`);
   console.log();
   
-  console.log(`${colors.blue}${colors.bold}1. Reinstall Avana CLI:${colors.reset}`);
-  console.log(`   npm uninstall -g avana-cli`);
-  console.log(`   npm install -g avana-cli`);
+  console.log(`${colors.blue}${colors.bold}1. Reinstall Avanasecsec CLI:${colors.reset}`);
+  console.log(`   npm uninstall -g avanasec`);
+  console.log(`   npm install -g avanasec`);
   console.log();
   
   console.log(`${colors.blue}${colors.bold}2. Clear npm cache:${colors.reset}`);
@@ -297,9 +297,9 @@ function displayTroubleshootingSteps() {
   console.log();
   
   console.log(`${colors.blue}${colors.bold}5. Check for conflicting installations:${colors.reset}`);
-  console.log(`   npm list -g avana-cli`);
-  console.log(`   which avana  # On Unix-like systems`);
-  console.log(`   where avana  # On Windows`);
+  console.log(`   npm list -g avanasec`);
+  console.log(`   which avanasec  # On Unix-like systems`);
+  console.log(`   where avanasec  # On Windows`);
   console.log();
   
   console.log(`${colors.blue}${colors.bold}6. Verify PATH environment variable:${colors.reset}`);
@@ -316,11 +316,11 @@ function displaySupportInfo() {
   console.log();
   
   console.log(`${colors.blue}${colors.bold}Documentation:${colors.reset}`);
-  console.log(`   https://github.com/innookeke/avana-cli#readme`);
+  console.log(`   https://github.com/innookeke/avanasec#readme`);
   console.log();
   
   console.log(`${colors.blue}${colors.bold}Report Issues:${colors.reset}`);
-  console.log(`   https://github.com/innookeke/avana-cli/issues`);
+  console.log(`   https://github.com/innookeke/avanasec/issues`);
   console.log();
   
   console.log(`${colors.blue}${colors.bold}When reporting issues, please include:${colors.reset}`);
@@ -332,7 +332,7 @@ function displaySupportInfo() {
   console.log();
   
   console.log(`${colors.blue}${colors.bold}Quick Test Command:${colors.reset}`);
-  console.log(`   avana --help`);
+  console.log(`   avanasec --help`);
   console.log();
 }
 
@@ -340,7 +340,7 @@ function displaySupportInfo() {
  * Main troubleshoot command
  */
 export async function troubleshootCommand(): Promise<void> {
-  console.log(`${colors.bold}${colors.cyan}🔍 Avana CLI Troubleshooting${colors.reset}`);
+  console.log(`${colors.bold}${colors.cyan}🔍 Avanasec CLI Troubleshooting${colors.reset}`);
   console.log();
   
   try {
