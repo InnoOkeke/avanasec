@@ -741,7 +741,7 @@ export const SECRET_PATTERNS: SecretPattern[] = [
   {
     id: 'generic-blockchain-private-key',
     name: 'Generic Blockchain Private Key',
-    pattern: /[a-fA-F0-9]{64}/g,
+    pattern: /(?:private[_-]?key|PRIVATE[_-]?KEY|secret[_-]?key|SECRET[_-]?KEY|priv[_-]?key)[\s=:'"]*([a-fA-F0-9]{64})\b/gi,
     severity: 'critical',
     description: 'Generic blockchain private key detected (64-character hex - Tron, Cosmos, Chainlink, etc.)',
     suggestion: 'Remove private key immediately and use secure key management',
@@ -773,7 +773,7 @@ export const SECRET_PATTERNS: SecretPattern[] = [
   {
     id: 'algorand-private-key',
     name: 'Algorand Private Key',
-    pattern: /[A-Z2-7]{88}/g,
+    pattern: /(?:algorand[_-]?key|ALGORAND[_-]?KEY|algo[_-]?private)[\s=:'"]*([A-Z2-7]{88})\b/gi,
     severity: 'critical',
     description: 'Algorand private key detected (base32 encoded)',
     suggestion: 'Remove private key immediately and use secure key management',
@@ -789,7 +789,7 @@ export const SECRET_PATTERNS: SecretPattern[] = [
   {
     id: 'ripple-private-key',
     name: 'Ripple (XRP) Private Key',
-    pattern: /[a-fA-F0-9]{66}/g,
+    pattern: /(?:ripple[_-]?key|xrp[_-]?key|XRP[_-]?KEY|RIPPLE[_-]?KEY)[\s=:'"]*([a-fA-F0-9]{66})\b/gi,
     severity: 'critical',
     description: 'Ripple (XRP) private key detected',
     suggestion: 'Remove private key immediately and use secure key management',
@@ -945,7 +945,7 @@ export const SECRET_PATTERNS: SecretPattern[] = [
   {
     id: 'binance-trading-key',
     name: 'Binance Trading API Key',
-    pattern: /[a-zA-Z0-9]{64}/g,
+    pattern: /(?:binance[_-]?key|BINANCE[_-]?KEY|binance[_-]?api)[\s=:'"]*([a-zA-Z0-9]{64})\b/gi,
     severity: 'critical',
     description: 'Binance trading API key detected',
     suggestion: 'Move to environment variable: BINANCE_API_KEY and restrict IP access',
