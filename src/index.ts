@@ -1,5 +1,5 @@
 /**
- * Avana - Core Engine
+ * Avanasec - Core Engine
  * Main entry point for security scanning functionality
  */
 
@@ -22,6 +22,8 @@ import { ProgressReporter } from './utils/progress-reporter';
 import { ResultCache } from './utils/result-cache';
 import { ParallelScanner } from './utils/parallel-scanner';
 import { JSONOutputFormatter } from './utils/json-output-formatter';
+import * as fs from 'fs';
+import * as path from 'path';
 
 /**
  * Main Avana Engine with robust file handling and performance optimization
@@ -229,6 +231,74 @@ export class Avana {
   }
 
   /**
+   * Collect all files to scan from a directory
+   */
+  private collectFiles(dirPath: string, options: ScanOptions): string[] {
+    const files: string[] = [];
+    const visitedPaths = new Set<string>();
+    const ignoreManager = new (require('./utils/ignore-pattern-manager').IgnorePatternManager)(options.verbose);
+    
+    // Load ignore patterns
+    ignoreManager.loadPatterns(dirPath);
+    if (options.config?.ignore) {
+      ignoreManager.addPatterns(options.config.ignore);
+    }
+
+    const collectDir = (currentPath: string) => {
+      // Get real path to detect circular links
+      let realPath: string;
+      try {
+        realPath = fs.realpathSync(currentPath);
+      } catch (error) {
+        return;
+      }
+
+      // Check for circular symbolic links
+      if (visitedPaths.has(realPath)) {
+        return;
+      }
+      visitedPaths.add(realPath);
+
+      let entries: fs.Dirent[];
+      try {
+        entries = fs.readdirSync(currentPath, { withFileTypes: true });
+      } catch (error) {
+        return;
+      }
+
+      entries.forEach(entry => {
+        const fullPath = path.join(currentPath, entry.name);
+        const relativePath = path.relative(dirPath, fullPath);
+
+        // Check if path should be ignored
+        if (ignoreManager.shouldIgnore(relativePath)) {
+          return;
+        }
+
+        try {
+          const stats = fs.lstatSync(fullPath);
+
+          if (stats.isSymbolicLink()) {
+            // Skip symbolic links for file collection
+            return;
+          } else if (stats.isDirectory()) {
+            collectDir(fullPath);
+          } else if (stats.isFile()) {
+            files.push(fullPath);
+          }
+        } catch (error) {
+          // Skip files we can't access
+        }
+      });
+
+      visitedPaths.delete(realPath);
+    };
+
+    collectDir(dirPath);
+    return files;
+  }
+
+  /**
    * Scan directory with robust handling and parallel processing
    */
   private async scanDirectoryRobust(dirPath: string, options: ScanOptions): Promise<{
@@ -241,11 +311,8 @@ export class Avana {
     let filesSkipped = 0;
 
     try {
-      // Get all files to scan (using existing directory traversal)
-      const tempIssues = this.secretScanner.scanDirectory(dirPath, options);
-      
-      // Extract unique file paths from issues
-      const filePaths = [...new Set(tempIssues.map(issue => issue.file))];
+      // Collect all files to scan first
+      const filePaths = this.collectFiles(dirPath, options);
       
       if (filePaths.length === 0) {
         return { issues: [], filesScanned: 0, filesSkipped: 0 };
